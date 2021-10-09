@@ -4,9 +4,12 @@ import React from 'react';
 import {css,jsx} from "@emotion/react"
 
 const CSS=css`    
-width: calc(100% -200px);
+top:0;
+left:0;
+width: calc(100% - 200px);
+min-height: 100%;
 padding: 20px;
-background: #142136;
+background: #0f0f26;
 `
 
 const Content=({children})=>{

@@ -5,9 +5,9 @@ import {css,jsx} from "@emotion/react"
 
 const CSS=css`
 width: 200px;
-height: 100%;
+min-height: 100vh;
 padding: 20px;
-background: #062557;
+background: #121233;
 `
 const SideBar=({children})=>{
     return(
