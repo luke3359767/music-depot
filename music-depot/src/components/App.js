@@ -1,8 +1,11 @@
-import './css/App.css';
+import './App.css';
+import MusicPlayer from './MusicPlayer';
 
 function App() {
   return (
-    <h1>123</h1>
+    <div>
+      <MusicPlayer />
+    </div>
   );
 }
 
