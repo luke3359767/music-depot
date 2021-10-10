@@ -19,7 +19,7 @@ const MusicPlayer=()=>{
     return(
         <div className="MusicPlayer"  css={CSS}>
             <TopBar/>
-            <SideBar></SideBar>
+            <SideBar/>
             <Content></Content>
             <PlayBar/>
         </div>
