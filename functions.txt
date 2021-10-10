@@ -1,0 +1,6 @@
+- music-visualization
+- account
+- upload music
+- search bar
+- playlists
+- random 
