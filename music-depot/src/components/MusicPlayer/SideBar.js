@@ -3,7 +3,11 @@
 import React,{useState} from 'react';
 import {css,jsx} from "@emotion/react"
 import logo from '../../image/logo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { AiOutlineHome,AiOutlineSearch,AiOutlineStar } from 'react-icons/ai';
+
+import {BiTimeFive} from 'react-icons/bi';
+import {FiRadio} from 'react-icons/fi';
+import {IoAddCircleOutline} from 'react-icons/io5';
 
 
 const CSS=css`
@@ -26,9 +30,10 @@ li{
     margin-bottom:10px;
     cursor:pointer;
     font-weight:500;
+    transition: active 3s ease;
      
 }
-li.Title{
+.Title{
     font-weight:300;
     font-size:10px;
     color:#999; 
@@ -39,8 +44,26 @@ li.Title{
 li.active{
     border-left:2px solid #0f7cf1;
     padding-left:18px;
-    background-image: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2))
+    background: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2))
 }
+
+.ll:hover{
+    background: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2))
+}
+
+.addList{
+    font-size: 14px;
+    padding-left: 20px;
+    text-transform:uppercase ;
+    cursor:pointer;
+    font-weight:500;
+    position:absolute;
+    bottom:100px;
+    margin-right: 10px;
+}
+.icon {
+    vertical-align: bottom;
+  }
 
 `
 const SideBar=({children})=>{
@@ -52,30 +75,45 @@ const SideBar=({children})=>{
             radio:null,
         },
         library:{
-            favorite:null
+            favorite:null,
+            recently:null,
         },
         playlist:{
             testlist:null,
         }
     })
+
+    const iconlist={
+        home:<AiOutlineHome/>,
+        browse:<AiOutlineSearch/>,
+        radio: <FiRadio/>,
+        favorite: <AiOutlineStar/>,
+        recently:<BiTimeFive />,
+        addList: <IoAddCircleOutline size={20} className="icon"/>,
+
+
+    }
+
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library)
     const playlists = Object.keys(state.playlist)
 
+    
     return(
         <div className="SideBar"  css={CSS}>
             <img src={logo}/>
             
             <ul className="mainList"> 
                 {mainLists.map(list => 
+                
                 <li 
-                keys={list} className={list===state.currentPlaylist?'active':''}
+                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
                 onClick={()=>{
                     setState({...state,currentPlaylist:list})
                 }} 
-                >{list}</li>)}
+                >{iconlist[list]} {list}</li>)}
+                
 
-                <i className="fas fa-home"></i>
 
 
             </ul>
@@ -84,24 +122,25 @@ const SideBar=({children})=>{
                 <li className="Title">Library</li>
                 {librarys.map(list => 
                 <li 
-                keys={list} className={list===state.currentPlaylist?'active':''}
+                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
                 onClick={()=>{
                     setState({...state,currentPlaylist:list})
                 }} 
-                >{list}</li>)}
+                >{iconlist[list]} {list}</li>)}
             </ul>
 
             <ul className="playlist">
                 <li className="Title">playlists</li>
                 {playlists.map(list => 
                 <li 
-                keys={list} className={list===state.currentPlaylist?'active':''}
+                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
                 onClick={()=>{
                     setState({...state,currentPlaylist:list})
                 }} 
-                >{list}</li>)}
+                >{iconlist[list]} {list}</li>)}
             </ul>
-
+            
+            <p className="addList">{iconlist["addList"]} Add New Playlist</p>
         </div>
     );
 }
