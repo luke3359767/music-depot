@@ -9,7 +9,7 @@ left:0;
 width: calc(100% - 200px);
 min-height: 100%;
 padding: 20px;
-background: #0f0f26;
+background: #191530;
 `
 
 const Content=({children})=>{

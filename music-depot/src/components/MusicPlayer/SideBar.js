@@ -13,7 +13,7 @@ import {IoAddCircleOutline} from 'react-icons/io5';
 const CSS=css`
 width: 200px;
 min-height: 100vh;
-background: #121233;
+background: #1f1a3a;
 
 img{
     height:50px;
@@ -24,12 +24,12 @@ ul{
 }
 
 li{
-    font-size: 13px;
+    font-size: 15px;
     padding-left: 20px;
     text-transform:capitalize ;
     margin-bottom:10px;
     cursor:pointer;
-    font-weight:500;
+    font-weight:400;
     transition: active 3s ease;
      
 }
@@ -53,13 +53,19 @@ li.active{
 
 .addList{
     font-size: 14px;
-    padding-left: 20px;
     text-transform:uppercase ;
     cursor:pointer;
-    font-weight:500;
+    font-weight:100;
     position:absolute;
     bottom:100px;
-    margin-right: 10px;
+    margin-left: 10px;
+    border: 1px solid #0f7cf1;
+    color:#0f7cf1;
+    padding:10px;
+    trasition:0.3s ease;
+}
+.addList:hover{
+    color:#fff;
 }
 .icon {
     vertical-align: bottom;

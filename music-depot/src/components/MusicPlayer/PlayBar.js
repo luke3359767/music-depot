@@ -11,7 +11,7 @@ width: 100%;
 height:75px;
 x-index:99;
 padding:20px;
-background:#18183d;
+background:#282248;
 `
 
 const PlayBar=({children})=>{

@@ -9,7 +9,7 @@ width: calc(100% - 200px);
 height:50px;
 left:200px;
 padding:20px;  
-background:#18183d;
+background:#191530;
 
 `
 
