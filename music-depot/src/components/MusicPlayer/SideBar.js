@@ -3,6 +3,8 @@
 import React,{useState} from 'react';
 import {css,jsx} from "@emotion/react"
 import logo from '../../image/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const CSS=css`
 width: 200px;
@@ -18,13 +20,20 @@ ul{
 }
 
 li{
-    font-size: 12px;
+    font-size: 13px;
     padding-left: 20px;
     text-transform:capitalize ;
     margin-bottom:10px;
     cursor:pointer;
-    font-weight:bold;
+    font-weight:500;
      
+}
+li.Title{
+    font-weight:300;
+    font-size:10px;
+    color:#999; 
+    text-transform:uppercase;
+    cursor:unset;
 }
 
 li.active{
@@ -36,21 +45,63 @@ li.active{
 `
 const SideBar=({children})=>{
     const [state,setState]=useState({
-        currentPlaylist:"home",
-        playlist:{
+        currentPlaylist:"",
+        mainList:{
             home:null,
+            browse:null,
+            radio:null,
+        },
+        library:{
             favorite:null
+        },
+        playlist:{
+            testlist:null,
         }
     })
-
+    const mainLists = Object.keys(state.mainList)
+    const librarys = Object.keys(state.library)
     const playlists = Object.keys(state.playlist)
 
     return(
         <div className="SideBar"  css={CSS}>
             <img src={logo}/>
-            <ul>
-                {playlists.map(list => <li keys={list} className={list===state.currentPlaylist?'active':''} >{list}</li>)}
+            
+            <ul className="mainList"> 
+                {mainLists.map(list => 
+                <li 
+                keys={list} className={list===state.currentPlaylist?'active':''}
+                onClick={()=>{
+                    setState({...state,currentPlaylist:list})
+                }} 
+                >{list}</li>)}
+
+                <i className="fas fa-home"></i>
+
+
             </ul>
+
+            <ul className="library">
+                <li className="Title">Library</li>
+                {librarys.map(list => 
+                <li 
+                keys={list} className={list===state.currentPlaylist?'active':''}
+                onClick={()=>{
+                    setState({...state,currentPlaylist:list})
+                }} 
+                >{list}</li>)}
+            </ul>
+
+            <ul className="playlist">
+                <li className="Title">playlists</li>
+                {playlists.map(list => 
+                <li 
+                keys={list} className={list===state.currentPlaylist?'active':''}
+                onClick={()=>{
+                    setState({...state,currentPlaylist:list})
+                }} 
+                >{list}</li>)}
+            </ul>
+
         </div>
     );
 }
