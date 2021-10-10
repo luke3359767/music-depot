@@ -30,7 +30,8 @@ li{
     margin-bottom:10px;
     cursor:pointer;
     font-weight:400;
-    transition: active 3s ease;
+    transition: border-left .3s ease;
+    
      
 }
 .Title{
@@ -62,10 +63,11 @@ li.active{
     border: 1px solid #0f7cf1;
     color:#0f7cf1;
     padding:10px;
-    trasition:0.3s ease;
+    transition:0.3s ease;
 }
 .addList:hover{
     color:#fff;
+    background-color:#0f7cf1;
 }
 .icon {
     vertical-align: bottom;
