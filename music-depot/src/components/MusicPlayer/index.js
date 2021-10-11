@@ -1,11 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React from 'react';
+import React,{useReducer,createContext} from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import PlayBar from './PlayBar';
 import Content from './Content';
 import {css,jsx} from "@emotion/react"
+
+export const StoreContext = createContext()
 
 const CSS=css`
 display:flex;
@@ -15,14 +17,47 @@ position: relative;
 color: #fff;
 `
 
+const DEFAULT_PLAYLIST='home';
+
+const initialState={
+    currentPlaylist:DEFAULT_PLAYLIST,
+    mainList:{
+        home:new Set(),
+        browse:new Set(),
+        radio:new Set(),
+    },
+    library:{
+        favorite:new Set(),
+        recently:new Set(),
+    },
+    playlist:{
+
+    }
+};
+
+const reducer= (state,action)=>{
+    // {type:'ADD_PLAYLIST',playlistItem:"Rock and Roll"}
+    switch(action.type){
+        case'ADD_PLAYLIST':
+            return {...state,playlist:{...state.playlist,[action.playlistItem]:new Set()}};
+        case'SET_PLAYLIST':
+            return {...state,currentPlaylist:action.playlistItem};
+        
+    }
+    return state
+}
+
 const MusicPlayer=()=>{
+    const [state,dispatch] =useReducer(reducer,initialState)
     return(
-        <div className="MusicPlayer"  css={CSS}>
-            <TopBar/>
-            <SideBar/>
-            <Content></Content>
-            <PlayBar/>
-        </div>
+       <StoreContext.Provider value={state,dispatch}>
+            <div className="MusicPlayer"  css={CSS}>
+                <TopBar/>
+                <SideBar/>
+                <Content></Content>
+                <PlayBar/>
+            </div>
+       </StoreContext.Provider>
     );
 }
 

@@ -1,7 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useState,useRef} from 'react';
+import React,{useState,useRef,useContext} from 'react';
 import {css,jsx} from "@emotion/react"
+import { StoreContext } from './index'
 import logo from '../../image/logo.png';
 import { AiOutlineHome,AiOutlineSearch,AiOutlineStar } from 'react-icons/ai';
 import {BiTimeFive} from 'react-icons/bi';
@@ -15,6 +16,113 @@ import {MdOutlineMusicNote} from 'react-icons/md';
 import Modal from "./Modal";
 import Toast from "./Toast";
 
+const SideBar=({children})=>{
+    const [sidebarState,setState]=useState({
+        modal:false,
+        toast:'',
+    })
+
+    
+    const iconlist={
+        home:<AiOutlineHome className="icon"/>,
+        browse:<AiOutlineSearch className="icon"/>,
+        radio: <FiRadio className="icon"/>,
+        favorite: <AiOutlineStar className="icon"/>,
+        recently:<BiTimeFive  className="icon"/>,
+        addList: <IoAddCircleOutline size={20} className="Big-icon"/>,
+        
+        
+    }
+    const { state, dispatch } = useContext(StoreContext)
+    
+    const mainLists = Object.keys(state.mainList)
+    const librarys = Object.keys(state.library)
+    const playlists = Object.keys(state.playlist)
+    
+    const playlistRef=useRef(null);
+    
+
+    const addPlaylist = e=>{
+        e.preventDefault()
+        const list=playlistRef.current.value
+        if(list in state.playlist){
+            
+            setState({...sidebarState,
+                modal:false,
+                toast:"Your playlist is ALREADY existed",
+            })
+            return;
+        }
+
+        dispatch({type:'ADD_PLAYLIST',playlistItem:list})
+        
+        setState({...sidebarState,
+        modal:false,
+        toast:"Your playlist was created successfully"
+        })
+        
+    }
+    const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
+    
+    return(
+        <div className="SideBar"  css={CSS}>
+            <img src={logo}/>
+            
+            <ul className="mainList"> 
+                {mainLists.map(list => 
+                
+                <li 
+                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
+                onClick={()=>{
+                    dispatch({type:'SET_PLAYLIST',playlistItem:list})
+                }} 
+                >{iconlist[list]} {list}</li>)}
+            </ul>
+
+            <ul className="library">
+                <li className="Title">Library</li>
+                {librarys.map(list => 
+                <li 
+                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
+                onClick={()=>{
+                    dispatch({type:'SET_PLAYLIST',playlistItem:list})
+                }} 
+                >{iconlist[list]} {list}</li>)}
+            </ul>
+
+            <ul className="playlist">
+                <li className="Title">playlists</li>
+                <div className="scrollList" >
+                {playlists.map(list => 
+                <li 
+                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
+                onClick={()=>{
+                    dispatch({type:'SET_PLAYLIST',playlistItem:list})
+                }} 
+                ><MdOutlineMusicNote className="icon"/> {list}</li>)}
+                </div>
+            </ul>
+
+            <p className="addList" onClick={()=>{setState({...state,modal:true})}} >{iconlist["addList"]} Add New Playlist</p>
+            
+            <Modal show={sidebarState.modal} close={handleModal}>
+                <form onSubmit={addPlaylist}>
+                    <div className="content-wrap">
+                    <div className="modalTitle">New Playlist</div>
+                        <input type="text" placeholder="My Playlist" required ref={playlistRef}/>
+                        <br/>
+                        <button type="submit" className="btn">Create</button>
+                    </div>
+                </form>
+            </Modal>
+
+            <Toast toast={sidebarState.toast} close={()=>setState({...sidebarState, toast: ''})}/>
+        </div>
+    );
+}
+
+
+export default SideBar;
 const CSS=css`
 width: 200px;
 min-height: 100vh;
@@ -136,118 +244,3 @@ form{
   }
 
 `
-const SideBar=({children})=>{
-    const [state,setState]=useState({
-        currentPlaylist:"",
-        modal:false,
-        toast:'',
-        mainList:{
-            home:new Set(),
-            browse:new Set(),
-            radio:new Set(),
-        },
-        library:{
-            favorite:new Set(),
-            recently:new Set(),
-        },
-        playlist:{
-
-        }
-    })
-
-    const iconlist={
-        home:<AiOutlineHome className="icon"/>,
-        browse:<AiOutlineSearch className="icon"/>,
-        radio: <FiRadio className="icon"/>,
-        favorite: <AiOutlineStar className="icon"/>,
-        recently:<BiTimeFive  className="icon"/>,
-        addList: <IoAddCircleOutline size={20} className="Big-icon"/>,
-
-
-    }
-
-    const mainLists = Object.keys(state.mainList)
-    const librarys = Object.keys(state.library)
-    const playlists = Object.keys(state.playlist)
-    const playlistRef=useRef(null);
-
-
-    const addPlaylist = e=>{
-        e.preventDefault()
-        const list=playlistRef.current.value
-        if(list in state.playlist){
-            
-            setState({...state,
-                modal:false,
-                toast:"Your playlist is ALREADY existed",
-            })
-            return;
-        }
-
-        setState({...state,
-        modal:false,
-        playlist:{...state.playlist,[list]:new Set()},
-        toast:"Your playlist was created successfully"
-        })
-
-    }
-    
-    return(
-        <div className="SideBar"  css={CSS}>
-            <img src={logo}/>
-            
-            <ul className="mainList"> 
-                {mainLists.map(list => 
-                
-                <li 
-                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
-                onClick={()=>{
-                    setState({...state,currentPlaylist:list})
-                }} 
-                >{iconlist[list]} {list}</li>)}
-            </ul>
-
-            <ul className="library">
-                <li className="Title">Library</li>
-                {librarys.map(list => 
-                <li 
-                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
-                onClick={()=>{
-                    setState({...state,currentPlaylist:list})
-                }} 
-                >{iconlist[list]} {list}</li>)}
-            </ul>
-
-            <ul className="playlist">
-                <li className="Title">playlists</li>
-                <div className="scrollList" >
-                {playlists.map(list => 
-                <li 
-                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
-                onClick={()=>{
-                    setState({...state,currentPlaylist:list})
-                }} 
-                ><MdOutlineMusicNote className="icon"/> {list}</li>)}
-                </div>
-            </ul>
-
-            <p className="addList" onClick={()=>{setState({...state,modal:true})}} >{iconlist["addList"]} Add New Playlist</p>
-            
-            <Modal show={state.modal} close={()=>{setState({...state,modal:false})}}>
-                <form onSubmit={addPlaylist}>
-                    <div className="content-wrap">
-                    <div className="modalTitle">New Playlist</div>
-                        <input type="text" placeholder="My Playlist" required ref={playlistRef}/>
-                        <br/>
-                        <button type="submit" className="btn">Create</button>
-                    </div>
-                </form>
-            </Modal>
-
-            <Toast toast={state.toast} close={()=>setState({...state, toast: ''})}/>
-        </div>
-    );
-}
-
-
-export default SideBar;
