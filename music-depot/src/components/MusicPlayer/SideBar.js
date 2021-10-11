@@ -7,6 +7,8 @@ import { AiOutlineHome,AiOutlineSearch,AiOutlineStar } from 'react-icons/ai';
 import {BiTimeFive} from 'react-icons/bi';
 import {FiRadio} from 'react-icons/fi';
 import {IoAddCircleOutline} from 'react-icons/io5';
+import {MdOutlineMusicNote} from 'react-icons/md';
+
 
 
 
@@ -27,13 +29,14 @@ ul{
 }
 
 li{
-    font-size: 15px;
+    font-size: 13px;
     padding-left: 20px;
     text-transform:capitalize ;
     margin-bottom:10px;
     cursor:pointer;
     font-weight:400;
-    transition: border-left .3s ease;
+    transition:all 0.3s ease;
+    
     
      
 }
@@ -47,12 +50,14 @@ li{
 
 li.active{
     border-left:2px solid #0f7cf1;
-    padding-left:18px;
-    background: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2))
+    background: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2));
+    box-shadow: 0 0 10px #0f7cf1;
+
+    
 }
 
 .ll:hover{
-    background: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2))
+    border-left:2px solid #0f7cf1;
 }
 
 .addList{
@@ -71,8 +76,12 @@ li.active{
 .addList:hover{
     color:#fff;
     background-color:#0f7cf1;
+    box-shadow: 0 0 10px #0f7cf1;
 }
-.icon {
+.icon{
+    vertical-align: -2px;
+}
+.Big-icon {
     vertical-align: bottom;
   }
 
@@ -109,6 +118,7 @@ form{
     
 }
 .scrollList{
+    padding-top:5px;
     height:130px;
     overflow-y:scroll;
 }
@@ -146,12 +156,12 @@ const SideBar=({children})=>{
     })
 
     const iconlist={
-        home:<AiOutlineHome/>,
-        browse:<AiOutlineSearch/>,
-        radio: <FiRadio/>,
-        favorite: <AiOutlineStar/>,
-        recently:<BiTimeFive />,
-        addList: <IoAddCircleOutline size={20} className="icon"/>,
+        home:<AiOutlineHome className="icon"/>,
+        browse:<AiOutlineSearch className="icon"/>,
+        radio: <FiRadio className="icon"/>,
+        favorite: <AiOutlineStar className="icon"/>,
+        recently:<BiTimeFive  className="icon"/>,
+        addList: <IoAddCircleOutline size={20} className="Big-icon"/>,
 
 
     }
@@ -217,7 +227,7 @@ const SideBar=({children})=>{
                 onClick={()=>{
                     setState({...state,currentPlaylist:list})
                 }} 
-                >{iconlist[list]} {list}</li>)}
+                ><MdOutlineMusicNote className="icon"/> {list}</li>)}
                 </div>
             </ul>
 

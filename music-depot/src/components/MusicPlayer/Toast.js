@@ -10,7 +10,7 @@ const Toast = ({ toast, close }) => {
       const closeToast = () => {
         setTimeout(() => {
           close()
-        }, 1500)
+        }, 1000)
       }
   
       closeToast()
@@ -28,8 +28,8 @@ const Toast = ({ toast, close }) => {
   }
   
   const CSS = css`
-    -webkit-animation: toast 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    animation: toast 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-animation: toast 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: toast 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     position: absolute;
     top: 0;
     left: calc(50% - 175px);
