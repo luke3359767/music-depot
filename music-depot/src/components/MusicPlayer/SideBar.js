@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import {css,jsx} from "@emotion/react"
 import logo from '../../image/logo.png';
 import { AiOutlineHome,AiOutlineSearch,AiOutlineStar } from 'react-icons/ai';
@@ -8,7 +8,9 @@ import {BiTimeFive} from 'react-icons/bi';
 import {FiRadio} from 'react-icons/fi';
 import {IoAddCircleOutline} from 'react-icons/io5';
 
+
 import Modal from "./Modal";
+import Toast from "./Toast";
 
 const CSS=css`
 width: 200px;
@@ -110,17 +112,17 @@ const SideBar=({children})=>{
     const [state,setState]=useState({
         currentPlaylist:"",
         modal:false,
+        toast:'',
         mainList:{
-            home:null,
-            browse:null,
-            radio:null,
+            home:new Set(),
+            browse:new Set(),
+            radio:new Set(),
         },
         library:{
-            favorite:null,
-            recently:null,
+            favorite:new Set(),
+            recently:new Set(),
         },
         playlist:{
-            testlist:null,
         }
     })
 
@@ -138,7 +140,28 @@ const SideBar=({children})=>{
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library)
     const playlists = Object.keys(state.playlist)
+    const playlistRef=useRef(null);
 
+
+    const addPlaylist = e=>{
+        e.preventDefault()
+        const list=playlistRef.current.value
+        if(list in state.playlist){
+            
+            setState({...state,
+                toast:"Your playlist is ALREADY existed",
+                modal:false,
+            })
+            return;
+        }
+
+        setState({...state,
+        modal:false,
+        playlist:{...state.playlist,[list]:new Set()},
+        toast:"Your playlist was created successfully"
+        })
+
+    }
     
     return(
         <div className="SideBar"  css={CSS}>
@@ -184,15 +207,17 @@ const SideBar=({children})=>{
             <p className="addList" onClick={()=>{setState({...state,modal:true})}} >{iconlist["addList"]} Add New Playlist</p>
             
             <Modal show={state.modal} close={()=>{setState({...state,modal:false})}}>
-                <form>
+                <form onSubmit={addPlaylist}>
                     <div className="content-wrap">
                     <div className="modalTitle">New Playlist</div>
-                        <input type="text" placeholder="My Playlist" required />
+                        <input type="text" placeholder="My Playlist" required ref={playlistRef}/>
                         <br/>
                         <button type="submit" className="btn">Create</button>
                     </div>
                 </form>
             </Modal>
+
+            <Toast toast={state.toast} close={()=>setState({...state, toast: ''})}/>
         </div>
     );
 }
