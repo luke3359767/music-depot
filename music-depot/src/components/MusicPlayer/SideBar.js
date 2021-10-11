@@ -4,11 +4,11 @@ import React,{useState} from 'react';
 import {css,jsx} from "@emotion/react"
 import logo from '../../image/logo.png';
 import { AiOutlineHome,AiOutlineSearch,AiOutlineStar } from 'react-icons/ai';
-
 import {BiTimeFive} from 'react-icons/bi';
 import {FiRadio} from 'react-icons/fi';
 import {IoAddCircleOutline} from 'react-icons/io5';
 
+import Modal from "./Modal";
 
 const CSS=css`
 width: 200px;
@@ -53,13 +53,13 @@ li.active{
 }
 
 .addList{
-    font-size: 14px;
+    font-size: 13px;
     text-transform:uppercase ;
     cursor:pointer;
     font-weight:100;
     position:absolute;
     bottom:100px;
-    margin-left: 10px;
+    margin-left: 15px;
     border: 1px solid #0f7cf1;
     color:#0f7cf1;
     padding:10px;
@@ -73,10 +73,43 @@ li.active{
     vertical-align: bottom;
   }
 
+form{
+    button{
+        background-color:#0f7cf1;
+        color:white;
+        padding:12.5px 30px;
+        border-radius:25px;
+        text-transform:uppercase;
+        font-weight:bold;
+        font-size:13px;
+        border:none;
+        cursor:pointer;
+    }
+    .modalTitle{
+        margin:0;
+        margin-bottom:35px;
+    }
+    input{
+        margin-bottom:20px;
+        height:35px;
+        padding-left:8px;
+        font-size:16px;
+        width:100%;
+        color:black;
+
+    }
+    .content-wrap{
+        margin:0 auto;
+        max-width:250px;
+        text-align:center;
+    }
+}
+
 `
 const SideBar=({children})=>{
     const [state,setState]=useState({
         currentPlaylist:"",
+        modal:false,
         mainList:{
             home:null,
             browse:null,
@@ -147,8 +180,19 @@ const SideBar=({children})=>{
                 }} 
                 >{iconlist[list]} {list}</li>)}
             </ul>
+
+            <p className="addList" onClick={()=>{setState({...state,modal:true})}} >{iconlist["addList"]} Add New Playlist</p>
             
-            <p className="addList">{iconlist["addList"]} Add New Playlist</p>
+            <Modal show={state.modal} close={()=>{setState({...state,modal:false})}}>
+                <form>
+                    <div className="content-wrap">
+                    <div className="modalTitle">New Playlist</div>
+                        <input type="text" placeholder="My Playlist" required />
+                        <br/>
+                        <button type="submit" className="btn">Create</button>
+                    </div>
+                </form>
+            </Modal>
         </div>
     );
 }

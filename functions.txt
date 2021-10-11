@@ -1,6 +1,7 @@
 - music-visualization
 - account
-- upload music
+- upload music (drag and drop)
 - search bar
 - playlists
 - random 
+- dragable list
