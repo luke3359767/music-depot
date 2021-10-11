@@ -9,6 +9,7 @@ import {FiRadio} from 'react-icons/fi';
 import {IoAddCircleOutline} from 'react-icons/io5';
 
 
+
 import Modal from "./Modal";
 import Toast from "./Toast";
 
@@ -60,7 +61,7 @@ li.active{
     cursor:pointer;
     font-weight:100;
     position:absolute;
-    bottom:100px;
+    bottom:90px;
     margin-left: 15px;
     border: 1px solid #0f7cf1;
     color:#0f7cf1;
@@ -105,7 +106,24 @@ form{
         max-width:250px;
         text-align:center;
     }
+    
 }
+.scrollList{
+    height:130px;
+    overflow-y:scroll;
+}
+.scrollList::-webkit-scrollbar {
+    width: 12px;              
+  }
+.scrollList::-webkit-scrollbar-track {
+    background: orange;        /* color of the tracking area */
+  }
+  
+.scrollList::-webkit-scrollbar-thumb {
+    background-color: blue;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid orange;  /* creates padding around scroll thumb */
+  }
 
 `
 const SideBar=({children})=>{
@@ -123,6 +141,13 @@ const SideBar=({children})=>{
             recently:new Set(),
         },
         playlist:{
+            fdsfs:new Set(),
+            fdksfs:new Set(),
+            fdjsfs:new Set(),
+            fdjsfs:new Set(),
+            fdslfs:new Set(),
+            fdslfs:new Set(),
+            fdlsfs:new Set(),
         }
     })
 
@@ -176,10 +201,6 @@ const SideBar=({children})=>{
                     setState({...state,currentPlaylist:list})
                 }} 
                 >{iconlist[list]} {list}</li>)}
-                
-
-
-
             </ul>
 
             <ul className="library">
@@ -195,6 +216,7 @@ const SideBar=({children})=>{
 
             <ul className="playlist">
                 <li className="Title">playlists</li>
+                <div className="scrollList" >
                 {playlists.map(list => 
                 <li 
                 keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
@@ -202,6 +224,7 @@ const SideBar=({children})=>{
                     setState({...state,currentPlaylist:list})
                 }} 
                 >{iconlist[list]} {list}</li>)}
+                </div>
             </ul>
 
             <p className="addList" onClick={()=>{setState({...state,modal:true})}} >{iconlist["addList"]} Add New Playlist</p>
