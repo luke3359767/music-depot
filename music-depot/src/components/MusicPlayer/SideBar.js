@@ -113,16 +113,16 @@ form{
     overflow-y:scroll;
 }
 .scrollList::-webkit-scrollbar {
-    width: 12px;              
+    width: 5px;              
   }
 .scrollList::-webkit-scrollbar-track {
-    background: orange;        /* color of the tracking area */
+    background: #rgb(255,255,255,0);        /* color of the tracking area */
   }
   
 .scrollList::-webkit-scrollbar-thumb {
     background-color: blue;    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid orange;  /* creates padding around scroll thumb */
+    border: 3px solid #282248;  /* creates padding around scroll thumb */
   }
 
 `
@@ -141,13 +141,7 @@ const SideBar=({children})=>{
             recently:new Set(),
         },
         playlist:{
-            fdsfs:new Set(),
-            fdksfs:new Set(),
-            fdjsfs:new Set(),
-            fdjsfs:new Set(),
-            fdslfs:new Set(),
-            fdsopilfs:new Set(),
-            fdlsfs:new Set(),
+
         }
     })
 
@@ -174,8 +168,8 @@ const SideBar=({children})=>{
         if(list in state.playlist){
             
             setState({...state,
-                toast:"Your playlist is ALREADY existed",
                 modal:false,
+                toast:"Your playlist is ALREADY existed",
             })
             return;
         }
