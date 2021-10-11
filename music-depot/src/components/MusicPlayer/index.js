@@ -19,7 +19,7 @@ color: #fff;
 
 const DEFAULT_PLAYLIST='home';
 
-const initialState={
+const initialState=({
     currentPlaylist:DEFAULT_PLAYLIST,
     mainList:{
         home:new Set(),
@@ -33,7 +33,7 @@ const initialState={
     playlist:{
 
     }
-};
+});
 
 const reducer= (state,action)=>{
     // {type:'ADD_PLAYLIST',playlistItem:"Rock and Roll"}
@@ -50,7 +50,7 @@ const reducer= (state,action)=>{
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
     return(
-       <StoreContext.Provider value={state,dispatch}>
+       <StoreContext.Provider value={{state,dispatch}}>
             <div className="MusicPlayer"  css={CSS}>
                 <TopBar/>
                 <SideBar/>
