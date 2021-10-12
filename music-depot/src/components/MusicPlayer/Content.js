@@ -21,10 +21,10 @@ background: #191530;
 
 `
 
-const Content=({children})=>{
+const Content=()=>{
     const {state,dispatch}=useContext(StoreContext);
     const memoryHistory = createMemoryHistory();
-
+    
     const switchPage=()=>{
         switch(state.currentPlaylist){
             case'home':
@@ -41,7 +41,6 @@ const Content=({children})=>{
             
         }
     }
-    const isCreated=(!state.currentPlaylist in state.mainList)&&(!state.currentPlaylist in state.library);
     return(
         <div className="Content" css={CSS}>
           {switchPage()}
