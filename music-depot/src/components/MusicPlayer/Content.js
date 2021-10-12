@@ -3,8 +3,6 @@
 import React,{useContext} from 'react';
 import {css,jsx} from "@emotion/react"
 import { StoreContext } from './index'
-import { createMemoryHistory } from 'history';
-import {Switch,Router,Route} from 'react-router-dom';
 import Browse from './Pages/Browse';
 import Home from './Pages/Home';
 import Library from './Pages/Library';
@@ -14,8 +12,10 @@ import Radio from './Pages/Radio';
 const CSS=css`    
 top:0;
 left:0;
-width: calc(100% - 200px);
-min-height: 100%;
+margin-top:50px;
+border:1px solid #fff;
+width: calc(100vw - 200px);
+height: calc(100vh - 125px);
 padding: 20px;
 background: #191530;
 
@@ -23,7 +23,6 @@ background: #191530;
 
 const Content=()=>{
     const {state,dispatch}=useContext(StoreContext);
-    const memoryHistory = createMemoryHistory();
     
     const switchPage=()=>{
         switch(state.currentPlaylist){
@@ -43,7 +42,7 @@ const Content=()=>{
     }
     return(
         <div className="Content" css={CSS}>
-          {switchPage()}
+          {(switchPage())}
         </div>
     );
 }
