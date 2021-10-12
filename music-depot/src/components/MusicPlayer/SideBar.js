@@ -9,7 +9,7 @@ import {BiTimeFive} from 'react-icons/bi';
 import {FiRadio} from 'react-icons/fi';
 import {IoAddCircleOutline} from 'react-icons/io5';
 import {MdOutlineMusicNote} from 'react-icons/md';
-
+import {useHistory} from 'react-router-dom'
 
 
 
@@ -17,6 +17,8 @@ import Modal from "./Modal";
 import Toast from "./Toast";
 
 const SideBar=({children})=>{
+    const history = useHistory();
+    
     const [sidebarState,setState]=useState({
         modal:false,
         toast:'',
