@@ -5,9 +5,4 @@
 The new age music player
 
 
-# Develop Log
-
-### Day 0: Oct. 13, 2021 
-
-**Today's Progress**: 
 
