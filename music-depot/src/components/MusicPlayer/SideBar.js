@@ -35,9 +35,7 @@ const SideBar=({children})=>{
         
         
     }
-    const { state, dispatch } = useContext(StoreContext)
-    console.log(state.mainList)
-    
+    const { state, dispatch } = useContext(StoreContext)    
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library)
     const playlists = Object.keys(state.playlist)
