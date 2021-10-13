@@ -96,7 +96,7 @@ const SideBar=({children})=>{
                 <div className="scrollList" >
                 {playlists.map(list => 
                 <li 
-                keys={list} className={list===state.currentPlaylist?'active ll':'ll'}
+                keys={list} className={list===state.currentPlaylist?'active ll pl':'ll pl'}
                 onClick={()=>{
                     dispatch({type:'SET_PLAYLIST',playlistItem:list})
                 }} 
@@ -140,14 +140,15 @@ ul{
 li{
     font-size: 13px;
     padding-left: 20px;
-    text-transform:capitalize ;
     margin-bottom:10px;
+    text-transform: capitalize;
     cursor:pointer;
     font-weight:400;
     transition:all 0.3s ease;
-    
-    
-     
+        
+}
+.pl{
+    text-transform: none;
 }
 .Title{
     font-weight:300;

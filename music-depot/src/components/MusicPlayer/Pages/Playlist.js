@@ -12,7 +12,7 @@ const CSS=css`
 const Playlist=()=>{
     const {state,dispatch}=useContext(StoreContext);
     return(
-        <h1>Pl</h1>
+        <h1>{state.currentPlaylist}</h1>
 
     );
 }
