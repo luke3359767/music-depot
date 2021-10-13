@@ -6,14 +6,15 @@ import { StoreContext } from '../index'
 
 
 const CSS=css`    
-
+.plTitle{
+    font-size: 30px;
+}
 `
 
 const Playlist=()=>{
     const {state,dispatch}=useContext(StoreContext);
     return(
-        <h1>{state.currentPlaylist}</h1>
-
+        <h1 className="plTitle">{state.currentPlaylist}</h1>
     );
 }
 

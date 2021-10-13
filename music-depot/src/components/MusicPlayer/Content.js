@@ -16,7 +16,7 @@ margin-top:50px;
 border:1px solid #fff;
 width: calc(100vw - 200px);
 height: calc(100vh - 125px);
-padding: 20px;
+padding: 0px;
 background: #191530;
 
 `
