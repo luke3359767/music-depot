@@ -13,7 +13,6 @@ const CSS=css`
 top:0;
 left:0;
 margin-top:50px;
-border:1px solid #fff;
 width: calc(100vw - 200px);
 height: calc(100vh - 125px);
 padding: 0px;
