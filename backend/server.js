@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000; //Line 3
 
 const testapiRouter=require("./routes/testapi")
 
-connectDB();
+// connectDB();
 app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`)); 
 
