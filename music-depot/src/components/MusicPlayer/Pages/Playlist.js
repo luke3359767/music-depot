@@ -20,11 +20,19 @@ const CSS = css`
     margin: 10px;
     display: flex;
   }
+  .Header-content{
+      margin-top:30px;
+  }
   h1 {
     font-size: 60px;
     padding: 0px;
     margin: 5px;
     font-weight: 300;
+  }
+  h4 {
+    padding:0px;
+    margin:5px;
+    margin-top:15px;
   }
   .buttons {
     display: flex;
@@ -82,17 +90,18 @@ const Playlist=()=>{
                 className="album"
             />
             <div className="Header-content">
+                <h4>whereIsPlaylist</h4>
                 <h1 className="plTitle">
                 {whereIsPlaylist === "library"
                     ? Capitalize(state.currentPlaylist)
                     : state.currentPlaylist}
                 </h1>
+            </div>
+            </div>
                 <div className="buttons">
                 <button className="btn">PLAY</button>
                 <button className="btn">Delete</button>
                 </div>
-            </div>
-            </div>
           <h1>1</h1>
           <h1>2</h1>
           <h1>3</h1>
