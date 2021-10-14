@@ -12,3 +12,4 @@ app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`)); 
 
 app.get('/', (req, res) => res.send('Hello world!'));
+app.use("/testapi",testapiRouter)
