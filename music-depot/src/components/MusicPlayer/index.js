@@ -1,11 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useReducer,createContext} from 'react';
+import React,{useReducer,createContext,useEffect} from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import PlayBar from './PlayBar';
 import Content from './Content';
 import {css,jsx} from "@emotion/react"
+import axios from 'axios';
 
 export const StoreContext = createContext()
 
@@ -49,6 +50,16 @@ const reducer= (state,action)=>{
 
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
+
+    useEffect(()=>{
+        axios.get("http://localhost:5000/testAPI")
+         .then((res) => {
+             console.log(typeof(res));
+             this.setState({ apiResponse: res.data });
+            })
+         .catch((err) => err);
+    },[])
+
     return(
        <StoreContext.Provider value={{state,dispatch}}>
             <div className="MusicPlayer"  css={CSS}>
