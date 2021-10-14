@@ -23,16 +23,28 @@ const DEFAULT_PLAYLIST='home';
 const initialState=({
     currentPlaylist:DEFAULT_PLAYLIST,
     mainList:{
-        home:new Set(),
-        browse:new Set(),
-        radio:new Set(),
+        home:{
+
+        },
+        browse:{
+
+        },
+        radio:{
+
+        },
     },
     library:{
-        favorite:new Set(),
-        recently:new Set(),
+        favorite:{
+            album:"favorite.png"
+        },
+        recently:{
+            album:"sampleAlbum.jpg"
+        },
     },
     playlist:{
-        testlist:new Set(),
+        testlist:{
+            album:"sampleAlbum.jpg"
+        },
     }
 });
 
@@ -40,7 +52,7 @@ const reducer= (state,action)=>{
     // {type:'ADD_PLAYLIST',playlistItem:"Rock and Roll"}
     switch(action.type){
         case'ADD_PLAYLIST':
-            return {...state,playlist:{...state.playlist,[action.playlistItem]:new Set()}};
+            return {...state,playlist:{...state.playlist,[action.playlistItem]:{}}};
         case'SET_PLAYLIST':
             return {...state,currentPlaylist:action.playlistItem};
         
