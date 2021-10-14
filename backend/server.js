@@ -5,7 +5,7 @@ const cors= require('cors');
 const app = express(); //Line 2
 const port = process.env.PORT || 5000; //Line 3
 
-const testapiRouter=require("./routes/api/testapi")
+const testapiRouter=require("./routes/testapi")
 
 connectDB();
 app.use(cors());

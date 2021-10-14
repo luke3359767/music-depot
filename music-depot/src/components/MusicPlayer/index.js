@@ -52,7 +52,7 @@ const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
 
     useEffect(()=>{
-        axios.get("http://localhost:5000/testAPI")
+        axios.get("http://localhost:5000/testapi")
          .then((res) => {
              console.log(typeof(res));
              this.setState({ apiResponse: res.data });
