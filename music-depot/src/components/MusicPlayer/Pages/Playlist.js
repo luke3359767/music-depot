@@ -20,56 +20,78 @@ const CSS = css`
     margin: 10px;
     display: flex;
   }
-  .Header-content{
-      margin-top:30px;
+  .Header-content {
+    margin-top: 60px;
+    margin-left: 10px;
   }
   h1 {
     font-size: 60px;
     padding: 0px;
     margin: 5px;
-    font-weight: 300;
+    font-weight: 500;
   }
   h4 {
-    padding:0px;
-    margin:5px;
-    margin-top:15px;
+    padding: 0px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    font-size: 10px;
   }
   .buttons {
     display: flex;
     margin-left: 5px;
+    margin-top: 20px;
+    padding-top: 25px;
+    padding-bottom: 75px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    height: 70px;
+  }
+  .right {
+    margin-left: auto;
+    margin-right: 0;
   }
   .btn {
     background-color: #0f7cf1;
     color: white;
-    padding: 7.5px 20px;
-    border-radius: 25px;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 13px;
     border: none;
     cursor: pointer;
+    height: 55px;
+    width: 55px;
+    margin-top: 0px;
     margin-left: 10px;
+    border-radius: 50%;
+  }
+  .D {
+    height: 40px;
+    width: 40px;
+    margin-left: 30px;
+    margin-top: 7.5px;
   }
   .album {
-    height: 150px;
+    height: 200px;
     margin-top: 20px;
   }
   .scrollList {
-    flex:0 0 100%;
+    flex: 0 0 100%;
     height: calc(100vh - 125px);
     overflow-y: scroll;
   }
   .scrollList::-webkit-scrollbar {
-    width: 5px;
+    width: 15px;
   }
   .scrollList::-webkit-scrollbar-track {
     background: #rgb(255, 255, 255, 0); /* color of the tracking area */
   }
 
   .scrollList::-webkit-scrollbar-thumb {
-    background-color: blue; /* color of the scroll thumb */
+    background-color: #282248; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid #282248; /* creates padding around scroll thumb */
+    border: 5px solid #282248; /* creates padding around scroll thumb */
   }
 `;
 
@@ -89,19 +111,25 @@ const Playlist=()=>{
                 }
                 className="album"
             />
-            <div className="Header-content">
-                <h4>whereIsPlaylist</h4>
-                <h1 className="plTitle">
-                {whereIsPlaylist === "library"
-                    ? Capitalize(state.currentPlaylist)
-                    : state.currentPlaylist}
-                </h1>
+              <div className="Header-content">
+                  <h4>{whereIsPlaylist}</h4>
+                  <h1 className="plTitle">
+                  {whereIsPlaylist === "library"
+                      ? Capitalize(state.currentPlaylist)
+                      : state.currentPlaylist}
+                  </h1>
+              </div>
             </div>
-            </div>
-                <div className="buttons">
-                <button className="btn">PLAY</button>
-                <button className="btn">Delete</button>
+              <div className="buttons">
+                <div className="left">
+                  <button className="btn Play">P</button>
+                  <button className="btn D">D</button>
                 </div>
+                <div className="right">
+                  <button className="btn Play">P</button>
+                  <button className="btn D">D</button>
+                </div>
+              </div>
           <h1>1</h1>
           <h1>2</h1>
           <h1>3</h1>

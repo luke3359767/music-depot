@@ -16,6 +16,9 @@ width: calc(100vw - 200px);
 height: calc(100vh - 125px);
 padding: 0px;
 background: #191530;
+.Content-in{
+    padding-left: 20px;
+}
 
 `
 
@@ -36,7 +39,9 @@ const Content=()=>{
     }
     return(
         <div className="Content" css={CSS}>
-          {(switchPage())}
+          <div className="Content-in">
+            {(switchPage())}
+          </div>
         </div>
     );
 }
