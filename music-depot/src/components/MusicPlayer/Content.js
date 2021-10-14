@@ -5,7 +5,6 @@ import {css,jsx} from "@emotion/react"
 import { StoreContext } from './index'
 import Browse from './Pages/Browse';
 import Home from './Pages/Home';
-import Library from './Pages/Library';
 import Playlist from './Pages/Playlist';
 import Radio from './Pages/Radio';
 
@@ -27,10 +26,6 @@ const Content=()=>{
         switch(state.currentPlaylist){
             case'home':
                 return <Home/>
-            case'favorite':
-                return <Library/>
-            case'recently':
-                return <Library/>
             case'radio':
                 return <Radio/>
             case'browse':
