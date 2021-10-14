@@ -55,7 +55,6 @@ const MusicPlayer=()=>{
         axios.get("http://localhost:5000/testapi")
          .then((res) => {
              console.log(typeof(res));
-             this.setState({ apiResponse: res.data });
             })
          .catch((err) => err);
     },[])
