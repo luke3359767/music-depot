@@ -7,9 +7,12 @@ const port = process.env.PORT || 5000; //Line 3
 
 const testapiRouter=require("./routes/testapi")
 const testdbapiRouter=require('./routes/testdbapi')
+
 connectDB();
 app.use(cors());
+app.use(express.json())
 app.use(morgan("dev"));
+
 app.listen(port, () =>
     console.log(`Listening on port ${port}`)); 
 

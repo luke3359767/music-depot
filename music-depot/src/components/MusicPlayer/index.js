@@ -66,7 +66,6 @@ const MusicPlayer=()=>{
     useEffect(()=>{
         axios.get("http://localhost:5000/testapi")
          .then((res) => {
-             console.log(res);
             })
          .catch((err) => err);
     },[])

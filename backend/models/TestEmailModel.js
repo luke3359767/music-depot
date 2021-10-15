@@ -8,7 +8,8 @@ let emailSchema= new mongoose.Schema({
         unique:true,
         lowercase:true,
         validate:(value)=>{return validator.isEmail(value)}
-    }
+    },
+    _id: String,
 })
 
 module.exports =mongoose.model('Email',emailSchema);

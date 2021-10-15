@@ -1,21 +1,21 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useContext} from 'react';
-import {css,jsx} from "@emotion/react"
-import { StoreContext } from '../index'
-import axios from 'axios';
+import React, { useContext, useState, useEffect } from "react";
+import { css, jsx } from "@emotion/react";
+import { StoreContext } from "../index";
+import axios from "axios";
 
 function importAll(r) {
   let images = {};
   r.keys().map((item, index) => {
-    images[item.replace('./', '')] = r(item); });
+    images[item.replace("./", "")] = r(item);
+  });
   return images;
 }
 
-const images = importAll(require
-  .context('../../../image', false, /\.(png|jpe?g|svg)$/));
-console.log(images)
-
+const images = importAll(
+  require.context("../../../image", false, /\.(png|jpe?g|svg)$/)
+);
 
 const CSS = css`
   .plHeaders {
@@ -97,54 +97,91 @@ const CSS = css`
   }
 `;
 
-const Playlist=()=>{
-    const Capitalize=(str)=>{return str.charAt(0).toUpperCase() + str.slice(1);}
-    const {state,dispatch}=useContext(StoreContext);
-    const whereIsPlaylist=(state.currentPlaylist==='favorite')||(state.currentPlaylist==='recently')?'library':'playlist';
-    console.log(images[state[whereIsPlaylist][state.currentPlaylist]["album"]].default);
-    return (
-      <div className="pl" css={CSS}>
-        <div className="scrollList">
-            <div className="plHeaders">
-            <img
-                src={
-                images[state[whereIsPlaylist][state.currentPlaylist]["album"]]
-                    .default
-                }
-                className="album"
-            />
-              <div className="Header-content">
-                  <h4>{whereIsPlaylist}</h4>
-                  <h1 className="plTitle">
-                  {whereIsPlaylist === "library"
-                      ? Capitalize(state.currentPlaylist)
-                      : state.currentPlaylist}
-                  </h1>
-              </div>
-            </div>
-              <div className="buttons">
-                <div className="left">
-                  <button className="btn Play">P</button>
-                  <button className="btn D">D</button>
-                </div>
-                <div className="right">
-                  <button className="btn Play">P</button>
-                  <button className="btn D">D</button>
-                </div>
-              </div>
-          <h1>1</h1>
-          <h1>2</h1>
-          <h1>3</h1>
-          <h1>4</h1>
-          <h1>5</h1>
-          <h1>6</h1>
-          <h1>7</h1>
-          <h1>8</h1>
-          <h1>9</h1>
-          <h1>10</h1>
+const Playlist = () => {
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+  const { state, dispatch } = useContext(StoreContext);
+  const whereIsPlaylist =
+    state.currentPlaylist === "favorite" || state.currentPlaylist === "recently"
+      ? "library"
+      : "playlist";
+
+
+
+  const [reademail,setreademail]=useState();
+  const [emailState, setEmail] = useState("99999@gmail.com");
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/testemail/read")
+    .then((response)=>{
+      setreademail(response['data'][1]['_id'])
+    })
+  }, []);
+
+  const updateEmail= (id) => {
+    axios.put("http://localhost:5000/testemail/update", {
+      id:id,
+      newemail: "new@gmail.com",
+    });
+  }
+
+  const sendEmail = () => {
+    axios
+      .post("http://localhost:5000/testemail/insert", {
+        email: emailState,
+      })
+      .then(console.log("SUCCESS POST"))
+      .catch((err) => {
+        console.error(`Unsuceess ${err}`);
+      });
+  };
+
+  return (
+    <div className="pl" css={CSS}>
+      <div className="scrollList">
+        <div className="plHeaders">
+          <img
+            src={
+              images[state[whereIsPlaylist][state.currentPlaylist]["album"]]
+                .default
+            }
+            className="album"
+          />
+          <div className="Header-content">
+            <h4>{whereIsPlaylist}</h4>
+            <h1 className="plTitle">
+              {whereIsPlaylist === "library"
+                ? Capitalize(state.currentPlaylist)
+                : state.currentPlaylist}
+            </h1>
+          </div>
         </div>
+        <div className="buttons">
+          <div className="left">
+            <button className="btn Play">P</button>
+            <button className="btn D">D</button>
+          </div>
+          <div className="right">
+            <button className="btn Play">P</button>
+            <button className="btn D">D</button>
+          </div>
+        </div>
+        <button onClick={sendEmail}>sendEmail</button>
+        <button onClick={updateEmail(reademail)}>updateEmail</button>
+        <h1>2</h1>
+        <h1>3</h1>
+        <h1>4</h1>
+        <h1>5</h1>
+        <h1>6</h1>
+        <h1>7</h1>
+        <h1>8</h1>
+        <h1>9</h1>
+        <h1>10</h1>
       </div>
-    );
-}
+    </div>
+  );
+};
 
 export default Playlist;
+// kl;
