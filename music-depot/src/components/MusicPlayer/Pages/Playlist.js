@@ -109,6 +109,8 @@ const Playlist = () => {
 
 
 
+      
+
   const [reademail,setreademail]=useState();
   const [emailState, setEmail] = useState("99999@gmail.com");
 
@@ -136,6 +138,10 @@ const Playlist = () => {
         console.error(`Unsuceess ${err}`);
       });
   };
+
+
+
+
 
   return (
     <div className="pl" css={CSS}>
@@ -167,8 +173,6 @@ const Playlist = () => {
             <button className="btn D">D</button>
           </div>
         </div>
-        <button onClick={sendEmail}>sendEmail</button>
-        <button onClick={updateEmail(reademail)}>updateEmail</button>
         <h1>2</h1>
         <h1>3</h1>
         <h1>4</h1>
