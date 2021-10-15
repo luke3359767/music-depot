@@ -6,11 +6,13 @@ const app = express(); //Line 2
 const port = process.env.PORT || 5000; //Line 3
 
 const testapiRouter=require("./routes/testapi")
-
-// connectDB();
+const testdbapiRouter=require('./routes/testdbapi')
+connectDB();
 app.use(cors());
 app.use(morgan("dev"));
-app.listen(port, () => console.log(`Listening on port ${port}`)); 
+app.listen(port, () =>
+    console.log(`Listening on port ${port}`)); 
 
 app.get('/', (req, res) => res.send('Hello world!'));
 app.use("/testapi",testapiRouter)
+app.use("/testemail",testdbapiRouter)

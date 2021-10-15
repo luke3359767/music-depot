@@ -7,13 +7,15 @@ import axios from 'axios';
 
 function importAll(r) {
   let images = {};
-  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  r.keys().map((item, index) => {
+    images[item.replace('./', '')] = r(item); });
   return images;
 }
 
-const images = importAll(require.context('../../../image', false, /\.(png|jpe?g|svg)$/));
-
+const images = importAll(require
+  .context('../../../image', false, /\.(png|jpe?g|svg)$/));
 console.log(images)
+
 
 const CSS = css`
   .plHeaders {
