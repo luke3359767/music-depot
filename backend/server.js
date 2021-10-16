@@ -4,6 +4,7 @@ const cors= require('cors');
 const morgan=require('morgan');
 const app = express(); //Line 2
 const port = process.env.PORT || 5000; //Line 3
+require('./models/User');
 
 const testapiRouter=require("./routes/testapi")
 const testdbapiRouter=require('./routes/testdbapi')

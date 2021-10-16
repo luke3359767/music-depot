@@ -95,6 +95,27 @@ const CSS = css`
     border-radius: 20px; /* roundness of the scroll thumb */
     border: 5px solid #282248; /* creates padding around scroll thumb */
   }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5px;
+    font-size: initial;
+  }
+
+  table tr {
+    border-bottom: 1px solid #282828;
+  }
+
+  table td {
+    padding-left: 10px;
+  }
+  .number {
+    width: 1x;
+  }
+  thead {
+  }
+  border-spacing: 10px;
 `;
 
 const Playlist = () => {
@@ -168,20 +189,24 @@ const Playlist = () => {
             <button className="btn Play">P</button>
             <button className="btn D">D</button>
           </div>
-          <div className="right">
+          {/* <div className="right">
             <button className="btn Play">P</button>
             <button className="btn D">D</button>
-          </div>
+          </div> */}
         </div>
-        <h1>2</h1>
-        <h1>3</h1>
-        <h1>4</h1>
-        <h1>5</h1>
-        <h1>6</h1>
-        <h1>7</h1>
-        <h1>8</h1>
-        <h1>9</h1>
-        <h1>10</h1>
+         <table>
+          <thead>
+            <tr>
+              <td className="number">#</td>
+              <td>Title</td>
+              <td>Artist</td>
+              <td>Length</td>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+         </table>
       </div>
     </div>
   );

@@ -1165,6 +1165,21 @@
   dependencies:
     "p-locate" "^4.1.0"
 
+"lodash.foreach@^4.1.0":
+  "integrity" "sha1-Gmo16s5AEoDH8G3d7DUWWrJ+PlM="
+  "resolved" "https://registry.npmjs.org/lodash.foreach/-/lodash.foreach-4.5.0.tgz"
+  "version" "4.5.0"
+
+"lodash.get@^4.0.2":
+  "integrity" "sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk="
+  "resolved" "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz"
+  "version" "4.4.2"
+
+"lodash.merge@^4.6.2":
+  "integrity" "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ=="
+  "resolved" "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
+  "version" "4.6.2"
+
 "lowercase-keys@^1.0.0", "lowercase-keys@^1.0.1":
   "integrity" "sha512-G2Lj61tXDnVFFOi8VZds+SoQjtQC3dgokKdDG2mTm1tx4m50NUHBOZSBwQQHyy0V12A0JTG4icfZQH+xPyh8VA=="
   "resolved" "https://registry.npmjs.org/lowercase-keys/-/lowercase-keys-1.0.1.tgz"
@@ -1275,7 +1290,16 @@
   optionalDependencies:
     "saslprep" "^1.0.3"
 
-"mongoose@^6.0.10":
+"mongoose-unique-validator@^3.0.0":
+  "integrity" "sha512-WwC09CN2OQ39ONCEN2quR2L5CLHau3p2VYegRMitoVwdKA738uuJRlrTHXt5J6WyJBSloCILxwDZ5qbu4yEXcA=="
+  "resolved" "https://registry.npmjs.org/mongoose-unique-validator/-/mongoose-unique-validator-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "lodash.foreach" "^4.1.0"
+    "lodash.get" "^4.0.2"
+    "lodash.merge" "^4.6.2"
+
+"mongoose@^6.0.0", "mongoose@^6.0.10":
   "integrity" "sha512-p/wiEDUXoQuyb/xQx8QW/YGN92ZsojJ5E/DDgMCUU0WOGxc5uhcWoZ7ijLu6Ssjq8UkwVSv+jzkYp4Wbr+NqBg=="
   "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.0.10.tgz"
   "version" "6.0.10"
