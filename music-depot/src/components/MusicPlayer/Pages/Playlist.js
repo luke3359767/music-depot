@@ -126,7 +126,7 @@ const Playlist = () => {
   const whereIsPlaylist =
     state.currentPlaylist === "favorite" || state.currentPlaylist === "recently"
       ? "library"
-      : "playlist";
+      : "mySongList";
 
 
 
@@ -176,7 +176,7 @@ const Playlist = () => {
             className="album"
           />
           <div className="Header-content">
-            <h4>{whereIsPlaylist}</h4>
+            <h4>{whereIsPlaylist=='mySongList'?'playlist':'library'}</h4>
             <h1 className="plTitle">
               {whereIsPlaylist === "library"
                 ? Capitalize(state.currentPlaylist)

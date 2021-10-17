@@ -20,39 +20,80 @@ color: #fff;
 
 const DEFAULT_PLAYLIST='home';
 
-const initialState=({
-    currentPlaylist:DEFAULT_PLAYLIST,
-    mainList:{
-        home:{
 
-        },
-        browse:{
+const initialState = {
+  currentPlaylist: DEFAULT_PLAYLIST,
+  mainList: {
+    home: {},
+    browse: {},
+    radio: {},
+  },
 
-        },
-        radio:{
-
-        },
+  userID: "luke3359767",
+  library:{
+      favorite: {
+        album: "favorite.png",
+        songs: ["1111"],
+      },
+      recently: {
+        album: "sampleAlbum.jpg",
+        songs: ["1111"],
+      },
+  },
+  mySongList: {
+    TestList1: {
+      album: "sampleAlbum.jpg",
+      songs: ["1111"],
     },
-    library:{
-        favorite:{
-            album:"favorite.png"
-        },
-        recently:{
-            album:"sampleAlbum.jpg"
-        },
+    TestList2: {
+      album: "sampleAlbum.jpg",
+      songs: ["1111"],
     },
-    playlist:{
-        testlist:{
-            album:"sampleAlbum.jpg"
-        },
-    }
-});
+  },
+};
+
+// const initialState=({
+//     currentPlaylist:DEFAULT_PLAYLIST,
+//     mainList:{
+//         home:{
+
+//         },
+//         browse:{
+
+//         },
+//         radio:{
+
+//         },
+//     },
+//     library:{
+//         favorite:{
+//             album:"favorite.png"
+//         },
+//         recently:{
+//             album:"sampleAlbum.jpg"
+//         },
+//     },
+//     playlist:{
+//         testlist:{
+//             album:"sampleAlbum.jpg"
+//         },
+//     }
+// });
 
 const reducer= (state,action)=>{
     // {type:'ADD_PLAYLIST',playlistItem:"Rock and Roll"}
     switch(action.type){
         case'ADD_PLAYLIST':
-            return {...state,playlist:{...state.playlist,[action.playlistItem]:{}}};
+            return {
+              ...state,
+              mySongList: {
+                ...state.mySongList,
+                [action.playlistItem]: {
+                  album: "sampleAlbum.jpg",
+                  songs: [],
+                },
+              },
+            };
         case'SET_PLAYLIST':
             return {...state,currentPlaylist:action.playlistItem};
         
