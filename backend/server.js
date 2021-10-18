@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000; //Line 3
 
 const testapiRouter=require("./routes/testapi")
 const testdbapiRouter=require('./routes/testdbapi')
-
+const UserAPIRouter=require('./routes/userAPI')
 connectDB();
 app.use(cors());
 app.use(express.json())
@@ -28,13 +28,13 @@ const users = [
   {
     id: "1",
     username: "John123",
-    password: "jifjsldfjks@!#@12",
+    password: "john0123",
     isAdmin: true,
   },
   {
     id: "2",
-    username: "Jane",
-    password: "jjj@!#@12",
+    username: "luke",
+    password: "luke0123",
     isAdmin: false,
   },
 ];
@@ -53,14 +53,18 @@ app.post("/api/refresh",(req,res)=>{
     err && console.log(err);
     refreshTokens=refreshTokens.filter(token=>token!==refreshToken);
     const newAccessToken=generateAccessToken(user)
-    const newAccessToken=generateAccessToken(user)
+    const newRefreshToken=generateRefreshToken(user)
+    refreshTokens.push(newRefreshToken);
+    res.status(200).json({
+      accessToken:newAccessToken,refreshToken :newRefreshToken
+    })
   });
 
   //if everything is ok, create a new one, refresh
 })
 
 const generateAccessToken=(user)=>{
-    return jwt.sign({id:user.id,isAdmin:user.isAdmin},"mySecretKey",{expiresIn:"15m"})
+    return jwt.sign({id:user.id,isAdmin:user.isAdmin},"mySecretKey",{expiresIn:"30s"})
          
 }
 
@@ -71,6 +75,7 @@ const generateRefreshToken=(user)=>{
           );
          
 }
+
 
 app.post("/api/login",(req, res)=>{
     const {username,password}=req.body;
@@ -85,6 +90,7 @@ app.post("/api/login",(req, res)=>{
          username: user.username,
          isAdmin: user.isAdmin,
          accessToken,
+         refreshToken
        });
     }else{
         res.status(400).json("Username or password incorrect")
@@ -109,6 +115,13 @@ const verify=(req,res,next)=>{
     res.status(401).json("not auth");
   }
 }
+
+app.post("/api/logout", verify, (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokens = refreshTokens.filter((token)=>{token !== refreshToken});
+  res.status(200).json("You logout successfully");
+});
+
 
 app.delete("/api/users/:userId",verify,(req, res)=>{
   if(req.user.id===req.params.userId || req.user.isAdmin){
@@ -139,3 +152,4 @@ app.listen(port, () =>
 app.get('/', (req, res) => res.send('Hello world!'));
 app.use("/testapi",testapiRouter)
 app.use("/testemail",testdbapiRouter)
+app.use("/userapi",UserAPIRouter)
