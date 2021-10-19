@@ -3,43 +3,72 @@
 import React,{useState} from 'react'
 import { Global, css, jsx } from '@emotion/react'
 import { useHistory,Link } from "react-router-dom";
+import './registerPage.css'
+import logo from "../image/logo.png"
 
 const Register = () => {
   return (
-    <div className="register" css={CSS}>
-        <form action="null">
-            <div class="container">
-                <h1>Register</h1>
-                <p>Please fill in this form to create an account.</p>
-                <hr/>
+    <div className="wole-container">
+      <img src={logo} alt="no"/> 
 
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" id="username" required/>
+      <div className="form_wrapper">
+    <div className="form_container">
+      <div className="title_container">
+        <h2>Sign Up</h2>
+      </div>
+      <div className="row clearfix">
+        <div className="">
+          <form>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required/>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id="psw" required/>
-
-                <label for="psw-repeat"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required/>
-                <hr/>
-
-                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                <button type="submit" class="registerbtn">Register</button>
+            <div className="input_field"> <span><i aria-hidden="true" className="fa fa-envelope"></i></span>
+              <input type="username" name="username" placeholder="Username" required />
             </div>
 
-            <div class="container signin">
-                <p>Already have an account? <Link to="/login">Sign in</Link>.</p>
+            <div className="input_field"> <span><i aria-hidden="true" className="fa fa-envelope"></i></span>
+              <input type="email" name="email" placeholder="Email" required />
             </div>
-        </form>
+            <div className="input_field"> <span><i aria-hidden="true" className="fa fa-lock"></i></span>
+              <input type="password" name="password" placeholder="Password" required />
+            </div>
+            <div className="input_field"> <span><i aria-hidden="true" className="fa fa-lock"></i></span>
+              <input type="password" name="password" placeholder="Re-type Password" required />
+            </div>
+            <div className="row clearfix">
+              <div className="col_half">
+                <div className="input_field"> <span><i aria-hidden="true" className="fa fa-user"></i></span>
+                  <input type="text" name="name" placeholder="First Name" />
+                </div>
+              </div>
+              <div className="col_half">
+                <div className="input_field"> <span><i aria-hidden="true" className="fa fa-user"></i></span>
+                  <input type="text" name="name" placeholder="Last Name" required />
+                </div>
+              </div>
+            </div>
+                <div className="input_field radio_option">
+                <input type="radio" name="radiogroup1" id="rd1"/>
+                <label for="rd1">Male</label>
+                <input type="radio" name="radiogroup1" id="rd2"/>
+                <label for="rd2">Female</label>
+                </div>
+          
+              <div className="input_field checkbox_option">
+                <input type="checkbox" id="cb1"/>
+            <label for="cb1">I agree with terms and conditions</label>
+              </div>
+              <div className="input_field checkbox_option">
+                <input type="checkbox" id="cb2"/>
+            <label for="cb2">I want to receive the newsletter</label>
+              </div>
+            <input className="button" type="submit" value="Register" />
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
   );
 };
-
-CSS=css`
-
-`
 
 export default Register;
