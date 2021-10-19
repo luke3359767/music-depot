@@ -155,125 +155,123 @@ const SideBar=({children})=>{
 
 
 export default SideBar;
-const CSS=css`
-width: 200px;
-min-height: 100vh;
-background: #1f1a3a;
+const CSS = css`
+  width: 200px;
+  min-height: 100vh;
+  background: #1f1a3a;
 
-img{
-    height:50px;
-    margin-top:10px;
-}
-ul{
+  img {
+    height: 50px;
+    margin-top: 10px;
+  }
+  ul {
     margin-top: 20px;
-}
+  }
 
-li{
+  li {
     font-size: 13px;
     padding-left: 20px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     text-transform: capitalize;
-    cursor:pointer;
-    font-weight:400;
-    transition:all 0.3s ease;
-        
-}
-.pl{
+    cursor: pointer;
+    font-weight: 400;
+    transition: all 0.3s ease;
+  }
+  .pl {
     text-transform: none;
-}
-.Title{
-    font-weight:300;
-    font-size:10px;
-    color:#999; 
-    text-transform:uppercase;
-    cursor:unset;
-}
+  }
+  .Title {
+    font-weight: 300;
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    cursor: unset;
+  }
 
-li.active{
-    border-left:2px solid #0f7cf1;
-    background: linear-gradient(to left, rgba(15,124,241,0), rgba(15,124,241,0.2));
+  li.active {
+    border-left: 2px solid #0f7cf1;
+    background: linear-gradient(
+      to left,
+      rgba(15, 124, 241, 0),
+      rgba(15, 124, 241, 0.2)
+    );
     box-shadow: 0 0 10px #0f7cf1;
+  }
 
-    
-}
+  .ll:hover {
+    border-left: 2px solid #0f7cf1;
+  }
 
-.ll:hover{
-    border-left:2px solid #0f7cf1;
-}
-
-.addList{
+  .addList {
     font-size: 13px;
-    text-transform:uppercase ;
-    cursor:pointer;
-    font-weight:100;
-    position:absolute;
-    bottom:90px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 100;
+    position: absolute;
+    bottom: 90px;
     margin-left: 15px;
     border: 1px solid #0f7cf1;
-    color:#0f7cf1;
-    padding:10px;
-    transition:0.3s ease;
-}
-.addList:hover{
-    color:#fff;
-    background-color:#0f7cf1;
+    color: #0f7cf1;
+    padding: 10px;
+    transition: 0.3s ease;
+  }
+  .addList:hover {
+    color: #fff;
+    background-color: #0f7cf1;
     box-shadow: 0 0 10px #0f7cf1;
-}
-.icon{
+  }
+  .icon {
     vertical-align: -2px;
-}
-.Big-icon {
+  }
+  .Big-icon {
     vertical-align: bottom;
   }
 
-form{
-    button{
-        background-color:#0f7cf1;
-        color:white;
-        padding:12.5px 30px;
-        border-radius:25px;
-        text-transform:uppercase;
-        font-weight:bold;
-        font-size:13px;
-        border:none;
-        cursor:pointer;
+  form {
+    button {
+      background-color: #0f7cf1;
+      color: white;
+      padding: 12.5px 30px;
+      border-radius: 25px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
     }
-    .modalTitle{
-        margin:0;
-        margin-bottom:35px;
+    .modalTitle {
+      margin: 0;
+      margin-bottom: 35px;
     }
-    input{
-        margin-bottom:20px;
-        height:35px;
-        padding-left:8px;
-        font-size:16px;
-        width:100%;
-        color:black;
-
+    input {
+      margin-bottom: 20px;
+      height: 35px;
+      padding-left: 8px;
+      font-size: 16px;
+      width: 100%;
+      color: black;
     }
-    .content-wrap{
-        margin:0 auto;
-        max-width:250px;
-        text-align:center;
+    .content-wrap {
+      margin: 0 auto;
+      max-width: 250px;
+      text-align: center;
     }
-    
-}
-.scrollList{
-    padding-top:5px;
-    height:130px;
-    overflow-y:scroll;
-}
-.scrollList::-webkit-scrollbar {
-    width: 5px;              
   }
-.scrollList::-webkit-scrollbar-track {
-    background: #rgb(255,255,255,0);        /* color of the tracking area */
+  .scrollList {
+    padding-top: 5px;
+    height: 130px;
+    overflow-y: scroll;
   }
-  
-.scrollList::-webkit-scrollbar-thumb {
-    background-color: blue;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #282248;  /* creates padding around scroll thumb */
+  .scrollList::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scrollList::-webkit-scrollbar-track {
+    background: #rgb(255, 255, 255, 0); /* color of the tracking area */
   }
 
-`
+  .scrollList::-webkit-scrollbar-thumb {
+    background-color: blue; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid #282248; /* creates padding around scroll thumb */
+  }
+`;
