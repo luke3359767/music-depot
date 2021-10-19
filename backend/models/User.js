@@ -6,14 +6,30 @@ const secret = "luke3359767";
 
 // https://thinkster.io/tutorials/node-json-api/creating-the-user-model
 
-let UserSchema = new mongoose.Schema({
-    username: {type: String, required: [true, "Username can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
-    email: {type: String, lowercase: true, required: [true, "Email can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
+let UserSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: [true, "Username can't be blank"],
+      match: [/^[a-zA-Z0-9]+$/, "is invalid"],
+      index: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      required: [true, "Email can't be blank"],
+      match: [/\S+@\S+\.\S+/, "is invalid"],
+      index: true,
+      unique: true,
+    },
     bio: String,
     image: String,
     hash: String,
-    salt: String
-},{timestamps: true, collection:"users"})
+    salt: String,
+  },
+  { timestamps: true, collection: "users" }
+);
 
 UserSchema.methods.setPassword = function(password){
     this.salt = crypto.randomBytes(16).toString('hex');
@@ -47,6 +63,6 @@ UserSchema.methods.generateJWT = function() {
           };
         };
 
-UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
+UserSchema.plugin(uniqueValidator, { message: "username or email is already taken." });
 
 module.exports = User =mongoose.model('User',UserSchema);
