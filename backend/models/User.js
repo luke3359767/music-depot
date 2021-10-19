@@ -63,6 +63,6 @@ UserSchema.methods.generateJWT = function() {
           };
         };
 
-UserSchema.plugin(uniqueValidator, { message: "username or email is already taken." });
+UserSchema.plugin(uniqueValidator,{message: 'Error, {PATH} has been used.'});
 
 module.exports = User =mongoose.model('User',UserSchema);
