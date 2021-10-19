@@ -26,8 +26,7 @@ router.post('/register',(req, res) => {
     .not()
     .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
   if(!passValidate.validate(req.body.registerInfo.password)){
-    res.status(403).json({passwordValidateErr:passValidate.validate(req.body.registerInfo.password,{list:true})});
-    res.end()
+    return res.status(403).json({passwordValidateErr:passValidate.validate(req.body.registerInfo.password,{list:true})});
   }
   
     const newUser = new User(registerInfo);
