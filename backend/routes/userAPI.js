@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/User.js");
 const passwordValidator = require("password-validator");
 
-router.post('/register',(req, res) => {
+router.post("/register", (req, res) => {
   const registerInfo = req.body.registerInfo;
   const passValidate = new passwordValidator();
   passValidate
@@ -25,11 +25,18 @@ router.post('/register',(req, res) => {
     .is()
     .not()
     .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
-  if(!passValidate.validate(req.body.registerInfo.password)){
-    return res.status(403).json({passwordValidateErr:passValidate.validate(req.body.registerInfo.password,{list:true})});
+  if (!passValidate.validate(req.body.registerInfo.password)) {
+    return res
+      .status(403)
+      .json({
+        passwordValidateErr: passValidate.validate(
+          req.body.registerInfo.password,
+          { list: true }
+        ),
+      });
   }
-  
-    const newUser = new User(registerInfo);
+
+  const newUser = new User(registerInfo);
   newUser.setPassword(req.body.registerInfo.password);
   try {
     newUser.save((err, user) => {
@@ -47,4 +54,20 @@ router.post('/register',(req, res) => {
   }
 });
 
-module.exports = router
+
+
+router.post("/login", (req, res) => {
+   User.findOne({ username: req.body.username }, function (err, user) {
+     if (!user) {
+         res.status(404).json("Invalid username or password(user)");
+     } else {
+       if (user.validPassword(req.body.password)) {
+         res.status(200).json("login successfully");
+       } else {
+         res.status(404).json("Invalid username or password");
+       }
+     }
+   });
+});
+
+module.exports = router;
