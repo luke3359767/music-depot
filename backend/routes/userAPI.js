@@ -62,7 +62,9 @@ router.post("/login", (req, res) => {
          res.status(404).json("Invalid username or password(user)");
      } else {
        if (user.validPassword(req.body.password)) {
-         res.status(200).json("login successfully");
+          const accessToken = user.generateJWT();  //send to cookie
+          const refreshToken = user.generateRefreshJWT();  //send to memory
+         return res.status(200).json(user.toAuthJSON());
        } else {
          res.status(404).json("Invalid username or password");
        }

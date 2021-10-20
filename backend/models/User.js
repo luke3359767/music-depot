@@ -3,6 +3,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const secret = "luke3359767";
+const refreshSecret = "luke0123";
 
 // https://thinkster.io/tutorials/node-json-api/creating-the-user-model
 
@@ -42,16 +43,25 @@ UserSchema.methods.validPassword = function(password) {
 };
 
 UserSchema.methods.generateJWT = function() {
-      let today = new Date();
-      let exp = new Date(today);
-      exp.setDate(today.getDate() + 60);
-    
-      return jwt.sign({
-        id: this._id,
-        username: this.username,
-        exp: parseInt(exp.getTime() / 1000),
-      }, secret);
+      return jwt.sign(
+        {
+          id: this._id,
+          username: this.username,
+        },
+        secret,
+        { expiresIn: "15m" }
+      );
     };
+UserSchema.methods.generateRefreshJWT = function () {
+  return jwt.sign(
+    {
+      id: this._id,
+      username: this.username,
+    },
+    refreshSecret,
+    { expiresIn: "1m" }
+  );
+};
 
     UserSchema.methods.toAuthJSON = function(){
           return {
