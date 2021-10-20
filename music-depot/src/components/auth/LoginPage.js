@@ -4,6 +4,7 @@ import { Global, css, jsx } from "@emotion/react";
 import axios from "axios";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
+import Cookies from "universal-cookie";
 
 const CSS = css`
   .container {
@@ -98,6 +99,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const cookies = new Cookies();
 
   const refreshToken = async () => {
     try {
