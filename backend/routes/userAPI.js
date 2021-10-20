@@ -62,8 +62,8 @@ router.post("/login", (req, res) => {
          res.status(404).json("Invalid username or password(user)");
      } else {
        if (user.validPassword(req.body.password)) {
-          const accessToken = user.generateJWT();  //send to cookie
-          const refreshToken = user.generateRefreshJWT();  //send to memory
+        //   const accessToken = user.generateJWT();  //send to cookie
+        //   const refreshToken = user.generateRefreshJWT();  //send to memory
          return res.status(200).json(user.toAuthJSON());
        } else {
          res.status(404).json("Invalid username or password");
@@ -71,5 +71,26 @@ router.post("/login", (req, res) => {
      }
    });
 });
+
+const secret = "musicdepot";
+const refreshSecret = "topedcisum";
+
+const verify=(req, res,next)=>{
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, secret, (err, user) => {
+      if (err) {
+        return res.status(403).json("Token is not valid");
+      }
+
+      req.user = user;
+      console.log("this is the user: ", user);
+      next();
+    });
+  } else {
+    res.status(401).json("not auth");
+  } 
+}
 
 module.exports = router;

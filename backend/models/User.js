@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const secret = "luke3359767";
-const refreshSecret = "luke0123";
+const secret = "musicdepot";
+const refreshSecret = "topedcisum";
 
 // https://thinkster.io/tutorials/node-json-api/creating-the-user-model
 
@@ -68,6 +68,7 @@ UserSchema.methods.generateRefreshJWT = function () {
             username: this.username,
             email: this.email,
             token: this.generateJWT(),
+            refreshToken:this.generateRefreshJWT(),
             bio: this.bio,
             image: this.image
           };
