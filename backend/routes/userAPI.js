@@ -27,7 +27,7 @@ router.post("/register", (req, res) => {
     .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
   if (!passValidate.validate(req.body.registerInfo.password)) {
     return res
-      .status(403)
+      .status(405)
       .json({
         passwordValidateErr: passValidate.validate(
           req.body.registerInfo.password,

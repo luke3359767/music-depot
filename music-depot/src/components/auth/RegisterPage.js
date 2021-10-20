@@ -3,6 +3,8 @@
 import React,{useState} from 'react'
 import { Global, css, jsx } from '@emotion/react'
 import { useHistory,Link } from "react-router-dom";
+import axios from "axios";
+
 import './registerPage.css'
 import logo from "../../image/logo.png"
 
@@ -10,9 +12,11 @@ const Register = () => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const [email, setEmail] = useState("");
+   let history = useHistory();
 
    const handleSubmit = async (e) => {
      e.preventDefault();
+     
      try {
        const res = await axios.post("http://localhost:5000/userapi/register", {
         registerInfo:{
@@ -20,7 +24,7 @@ const Register = () => {
          email:email,
          password:password,}
        });
-       setUser(res.data);
+       history.push("/home");
      } catch (err) {
        console.log(err);
      }
