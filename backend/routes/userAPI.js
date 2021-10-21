@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User.js");
 const passwordValidator = require("password-validator");
+const jwt = require('jsonwebtoken');
 
 router.post("/register", (req, res) => {
   const registerInfo = req.body.registerInfo;
@@ -92,5 +93,43 @@ const verify=(req, res,next)=>{
     res.status(401).json("not auth");
   } 
 }
+
+const generateRefreshJWT =(user)=>{
+  return jwt.sign(
+    {
+      id: user._id,
+      username: user.username,
+    },
+    refreshSecret,
+    { expiresIn: "30d" }
+  )};
+const generateJWT = function (user) {
+  return jwt.sign(
+    {
+      id: user._id,
+      username: user.username,
+    },
+    secret,
+    { expiresIn: "15m" }
+  );
+};
+router.post("/refresh", (req, res) => {
+  //take the refresh token from user
+  const refreshToken = req.body.token
+  //send error if there is no tocken or its invalid
+  if (!refreshToken) return res.status(401).json("You are not auth !!!")
+
+  jwt.verify(refreshToken, refreshSecret, (err, user) => {
+    err && console.log(err);
+    const newAccessToken = generateJWT(user)
+    const newRefreshToken = generateRefreshJWT(user)
+    res.status(200).json({
+      accessToken: newAccessToken, refreshToken: newRefreshToken
+    })
+  })});
+
+router.post("/testToken",verify, (req, res)=>{
+  res.status(200).json("success test token");
+})
 
 module.exports = router;

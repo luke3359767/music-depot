@@ -59,7 +59,7 @@ UserSchema.methods.generateRefreshJWT = function () {
       username: this.username,
     },
     refreshSecret,
-    { expiresIn: "1m" }
+    { expiresIn: "30d" }
   );
 };
 
