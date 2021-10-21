@@ -146,7 +146,7 @@ router.post("/testToken",verify, (req, res)=>{
 
 router.post("/logout", verify, (req, res)=>{
   try{
-    res.status(202).clearCookie("refreshToken").json("logout successfully").next();
+    res.status(202).clearCookie("refreshToken").json("logout successfully");
   }catch(err){
     res.status(404).json(err);
   }
