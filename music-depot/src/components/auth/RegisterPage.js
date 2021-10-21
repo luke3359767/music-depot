@@ -17,17 +17,22 @@ const Register = () => {
    const handleSubmit = async (e) => {
      e.preventDefault();
      
-     try {
+    
        const res = await axios.post("http://localhost:5000/userapi/register", {
         registerInfo:{
          username:username,
          email:email,
          password:password,}
-       });
-       history.push("/home");
-     } catch (err) {
-       console.log(err);
-     }
+       }).then((res) => console.log(res))
+         .catch((err) => { if (err.response){
+           if(err.response.status==405){
+             console.log("Password is too weak, it should contains at least 1 uppercase, 1 lowercase, 1 symbol, and 1 digit")
+           } else if (err.response.status == 403){
+             Object.keys(err.response.data).map((key) => console.log(err.response.data[key]))
+           }
+         } console.log(err.response.data)});
+      //  history.push("/");
+
    };
   return (
     <div className="wole-container">
