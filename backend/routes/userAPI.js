@@ -144,4 +144,12 @@ router.post("/testToken",verify, (req, res)=>{
   res.status(200).json("success test token");
 })
 
+router.post("/logout", verify, (req, res)=>{
+  try{
+    res.status(202).clearCookie("refreshToken").json("logout successfully").next();
+  }catch(err){
+    res.status(404).json(err);
+  }
+})
+
 module.exports = router;
