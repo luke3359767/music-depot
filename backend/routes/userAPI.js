@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User.js");
 const passwordValidator = require("password-validator");
 const jwt = require('jsonwebtoken');
+const cookie = require('cookie');
 
 router.post("/register", (req, res) => {
   const registerInfo = req.body.registerInfo;
@@ -113,9 +114,11 @@ const generateJWT = function (user) {
     { expiresIn: "15m" }
   );
 };
+
 router.post("/refresh", (req, res) => {
   //take the refresh token from user
-  const refreshToken = req.body.token
+  const refreshToken = req.cookies['refreshToken']
+  console.log(refreshToken)
   //send error if there is no tocken or its invalid
   if (!refreshToken) return res.status(401).json("You are not auth !!!")
 
@@ -123,6 +126,12 @@ router.post("/refresh", (req, res) => {
     err && console.log(err);
     const newAccessToken = generateJWT(user)
     const newRefreshToken = generateRefreshJWT(user)
+    res.status(200).cookie('refreshToken', newRefreshToken,{
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000*30),
+      secure: false, // set to true if your using https
+      httpOnly: true,
+      SameSite:"strict",
+    })
     res.status(200).json({
       accessToken: newAccessToken, refreshToken: newRefreshToken
     })
