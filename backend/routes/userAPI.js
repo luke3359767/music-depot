@@ -66,7 +66,12 @@ router.post("/login", (req, res) => {
        if (user.validPassword(req.body.password)) {
         //   const accessToken = user.generateJWT();  //send to cookie
         //   const refreshToken = user.generateRefreshJWT();  //send to memory
-         return res.status(200).json(user.toAuthJSON());
+         res.status(200).cookie('refreshToken', user.toAuthJSON().refreshToken, {
+           expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 30),
+           secure: false, // set to true if your using https
+           httpOnly: true,
+           SameSite: "strict",
+         }).json(user.toAuthJSON());
        } else {
          res.status(404).json("Invalid username or password");
        }
@@ -131,10 +136,8 @@ router.post("/refresh", (req, res) => {
       secure: false, // set to true if your using https
       httpOnly: true,
       SameSite:"strict",
-    })
-    res.status(200).json({
-      accessToken: newAccessToken, refreshToken: newRefreshToken
-    })
+    }).json({newAccessToken:newAccessToken})
+  
   })});
 
 router.post("/testToken",verify, (req, res)=>{
