@@ -7,16 +7,28 @@ import axios from "axios";
 
 import './registerPage.css'
 import logo from "../../image/logo.png"
+import {BsFillPersonFill} from 'react-icons/bs';
+import { IoMdMail} from 'react-icons/io';
+import { RiLockPasswordFill} from 'react-icons/ri';
 
 const Register = () => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
+   const [rePassword, setRePassword] = useState("");
    const [email, setEmail] = useState("");
+
+  const [diffPassword, setDiffPassword]= useState(false);
+  const [passwordErr, setPasswordErr]= useState(false);
+  const [usedErr, setUsedErr]= useState(false);
+
    let history = useHistory();
 
    const handleSubmit = async (e) => {
      e.preventDefault();
-     
+     if(password!==rePassword || rePassword==""){
+       diffPassword=true;
+       return;
+     }
     
        const res = await axios.post("http://localhost:5000/userapi/register", {
         registerInfo:{
@@ -27,13 +39,19 @@ const Register = () => {
          .catch((err) => { if (err.response){
            if(err.response.status==405){
              console.log("Password is too weak, it should contains at least 1 uppercase, 1 lowercase, 1 symbol, and 1 digit")
+             passwordErr=true;
            } else if (err.response.status == 403){
+             usedErr=true;
              Object.keys(err.response.data).map((key) => console.log(err.response.data[key]))
            }
          } console.log(err.response.data)});
       //  history.push("/");
-
    };
+
+   const diffPassRender=(d)=>{
+    console.log("render diffpass")
+    return d?(<p>Passwords are not matched.</p>):null
+   }
   return (
     <div className="wole-container">
       <img src={logo} alt="no" />
@@ -49,7 +67,7 @@ const Register = () => {
                 <div className="input_field">
                   {" "}
                   <span>
-                    <i aria-hidden="true" className="fa fa-envelope"></i>
+                     <BsFillPersonFill className="icon"/>
                   </span>
                   <input
                     type="username"
@@ -63,7 +81,7 @@ const Register = () => {
                 <div className="input_field">
                   {" "}
                   <span>
-                    <i aria-hidden="true" className="fa fa-envelope"></i>
+                    <IoMdMail className="icon"/>
                   </span>
                   <input
                     type="email"
@@ -76,7 +94,7 @@ const Register = () => {
                 <div className="input_field">
                   {" "}
                   <span>
-                    <i aria-hidden="true" className="fa fa-lock"></i>
+                    <RiLockPasswordFill className="icon"/>
                   </span>
                   <input
                     type="password"
@@ -89,21 +107,33 @@ const Register = () => {
                 <div className="input_field">
                   {" "}
                   <span>
-                    <i aria-hidden="true" className="fa fa-lock"></i>
+                    <RiLockPasswordFill className="icon"/>
                   </span>
                   <input
-                    type="password"
-                    name="password"
+                    className={password!==rePassword? "diffPassword":""}
+                    type="rePassword"
+                    name="rePassword"
                     placeholder="Re-type Password"
                     required
+                    onChange={(e) => {
+                      setRePassword(e.target.value)
+                      if (password !== e.target.value){
+                        setDiffPassword(true);
+                        console.log(password, e.target.value)
+                      }else{
+                        setDiffPassword(false);
+                      }
+                    }}
                   />
                 </div>
+                  {diffPassRender(diffPassword)}
                 <div className="row clearfix">
                   <div className="col_half">
                     <div className="input_field">
                       {" "}
                       <span>
-                        <i aria-hidden="true" className="fa fa-user"></i>
+                        <BsFillPersonFill className="icon"/>
+
                       </span>
                       <input type="text" name="name" placeholder="First Name" />
                     </div>
@@ -112,7 +142,7 @@ const Register = () => {
                     <div className="input_field">
                       {" "}
                       <span>
-                        <i aria-hidden="true" className="fa fa-user"></i>
+                        <BsFillPersonFill className="icon"/>
                       </span>
                       <input
                         type="text"
