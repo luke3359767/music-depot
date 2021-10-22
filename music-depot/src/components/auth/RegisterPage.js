@@ -26,7 +26,7 @@ const Register = () => {
    const handleSubmit = async (e) => {
      e.preventDefault();
      if(password!==rePassword || rePassword==""){
-       diffPassword=true;
+       setDiffPassword(true);
        return;
      }
     
@@ -39,9 +39,9 @@ const Register = () => {
          .catch((err) => { if (err.response){
            if(err.response.status==405){
              console.log("Password is too weak, it should contains at least 1 uppercase, 1 lowercase, 1 symbol, and 1 digit")
-             passwordErr=true;
+             setPasswordErr(true);
            } else if (err.response.status == 403){
-             usedErr=true;
+             setUsedErr(true);
              Object.keys(err.response.data).map((key) => console.log(err.response.data[key]))
            }
          } console.log(err.response.data)});
@@ -49,10 +49,10 @@ const Register = () => {
    };
 
    const diffPassRender=(d)=>{
-    console.log("render diffpass")
     return d?(<p>Passwords are not matched.</p>):null
    }
-  return (
+ 
+   return (
     <div className="wole-container">
       <img src={logo} alt="no" />
 
