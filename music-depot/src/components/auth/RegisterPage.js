@@ -1,58 +1,84 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { Global, css, jsx } from '@emotion/react'
-import { useHistory,Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 import './registerPage.css'
 import logo from "../../image/logo.png"
-import {BsFillPersonFill} from 'react-icons/bs';
-import { IoMdMail} from 'react-icons/io';
-import { RiLockPasswordFill} from 'react-icons/ri';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { IoMdMail } from 'react-icons/io';
+import { RiLockPasswordFill } from 'react-icons/ri';
 
 const Register = () => {
-   const [username, setUsername] = useState("");
-   const [password, setPassword] = useState("");
-   const [rePassword, setRePassword] = useState("");
-   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [diffPassword, setDiffPassword]= useState(false);
-  const [passwordErr, setPasswordErr]= useState(false);
-  const [usedErr, setUsedErr]= useState(false);
+  const [diffPassword, setDiffPassword] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
+  const [passwordErrList, setPasswordErrList] = useState([]);
+  const [usedUserErr, setUsedUserErr] = useState(false);
+  const [usedEmailErr, setUsedEmailErr] = useState(false);
 
-   let history = useHistory();
+  let history = useHistory();
 
-   const handleSubmit = async (e) => {
-     e.preventDefault();
-     if(password!==rePassword || rePassword==""){
-       setDiffPassword(true);
-       return;
-     }
-    
-       const res = await axios.post("http://localhost:5000/userapi/register", {
-        registerInfo:{
-         username:username,
-         email:email,
-         password:password,}
-       }).then((res) => console.log(res))
-         .catch((err) => { if (err.response){
-           if(err.response.status==405){
-             console.log("Password is too weak, it should contains at least 1 uppercase, 1 lowercase, 1 symbol, and 1 digit")
-             setPasswordErr(true);
-           } else if (err.response.status == 403){
-             setUsedErr(true);
-             Object.keys(err.response.data).map((key) => console.log(err.response.data[key]))
-           }
-         } console.log(err.response.data)});
-      //  history.push("/");
-   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== rePassword || rePassword == "") {
+      setDiffPassword(true);
+      return;
+    }
 
-   const diffPassRender=(d)=>{
-    return d?(<p>Passwords are not matched.</p>):null
-   }
- 
-   return (
+    const res = await axios.post("http://localhost:5000/userapi/register", {
+      registerInfo: {
+        username: username,
+        email: email,
+        password: password,
+      }
+    }).then((res) => console.log(res))
+      .catch((err) => {
+        if (err.response) {
+          if (err.response.status == 405) {
+            console.log("Password is too weak, it should contains at least 1 uppercase, 1 lowercase, 1 symbol, and 1 digit")
+            console.log(err.response.data)
+            setPasswordErr(true);
+            setPasswordErrList(err.response.data.passwordValidateErr);
+
+          } else if (err.response.status == 403) {
+            console.log(err.response.data)
+            setPasswordErr(false);
+            if (err.response.data.emailErr!==null) { setUsedEmailErr(true) } else { setUsedEmailErr(false)}
+            if (err.response.data.userErr !== null) { setUsedUserErr(true) } else { setUsedUserErr(false)}
+            // Object.keys(err.response.data).map((key) => key == "emailErr" ?: setUsedUserErr(true))
+          }
+        }
+      });
+    //  history.push("/");
+  };
+
+  const diffPassRender = (d) => {
+    return d ? (<p className="warning">Passwords are not matched.</p>) : null
+  }
+  const passwordErrRender = (d) => {
+    return d ? (passwordErrList.map((key) => {
+      if (key == 'min') return (<p className="warning">The password should have at least 8 letters</p>)
+      if (key == 'max') return (<p className="warning">The password should less than 20 letters</p>)
+      if (key == 'uppercase') return (<p className="warning">The password should have at least 1 uppercase</p>)
+      if (key == 'symbols') return (<p className="warning">The password should have at least 1 symbol</p>)
+      if (key == 'digits') return (<p className="warning">The password should have at least 1 digit</p>)
+    })) : null
+  }
+  const usedUserErrRender=(d)=>{
+    return d ? (<p className="warning">The username is invalid</p>) : null
+  }
+  const usedEmailErrRender=(d)=>{
+    return d ? (<p className="warning">The email has been used. Alrealy register? <Link to="/login">Log In</Link></p>) : null
+  }
+
+  return (
     <div className="wole-container">
       <img src={logo} alt="no" />
 
@@ -67,7 +93,7 @@ const Register = () => {
                 <div className="input_field">
                   {" "}
                   <span>
-                     <BsFillPersonFill className="icon"/>
+                    <BsFillPersonFill className="icon" />
                   </span>
                   <input
                     type="username"
@@ -77,11 +103,11 @@ const Register = () => {
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-
+                {usedUserErrRender(usedUserErr)}
                 <div className="input_field">
                   {" "}
                   <span>
-                    <IoMdMail className="icon"/>
+                    <IoMdMail className="icon" />
                   </span>
                   <input
                     type="email"
@@ -91,10 +117,11 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
+                  {usedEmailErrRender(usedEmailErr)}
                 <div className="input_field">
                   {" "}
                   <span>
-                    <RiLockPasswordFill className="icon"/>
+                    <RiLockPasswordFill className="icon" />
                   </span>
                   <input
                     type="password"
@@ -104,35 +131,35 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+                {passwordErrRender(passwordErr)}
                 <div className="input_field">
                   {" "}
                   <span>
-                    <RiLockPasswordFill className="icon"/>
+                    <RiLockPasswordFill className="icon" />
                   </span>
                   <input
-                    className={password!==rePassword? "diffPassword":""}
-                    type="rePassword"
+                    className={password !== rePassword ? "diffPassword" : ""}
+                    type="Password"
                     name="rePassword"
                     placeholder="Re-type Password"
                     required
                     onChange={(e) => {
                       setRePassword(e.target.value)
-                      if (password !== e.target.value){
+                      if (password !== e.target.value) {
                         setDiffPassword(true);
-                        console.log(password, e.target.value)
-                      }else{
+                      } else {
                         setDiffPassword(false);
                       }
                     }}
                   />
                 </div>
-                  {diffPassRender(diffPassword)}
+                {diffPassRender(diffPassword)}
                 <div className="row clearfix">
                   <div className="col_half">
                     <div className="input_field">
                       {" "}
                       <span>
-                        <BsFillPersonFill className="icon"/>
+                        <BsFillPersonFill className="icon" />
 
                       </span>
                       <input type="text" name="name" placeholder="First Name" />
@@ -142,7 +169,7 @@ const Register = () => {
                     <div className="input_field">
                       {" "}
                       <span>
-                        <BsFillPersonFill className="icon"/>
+                        <BsFillPersonFill className="icon" />
                       </span>
                       <input
                         type="text"
@@ -154,14 +181,14 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="input_field radio_option">
-                  <input type="radio" name="radiogroup1" id="rd1" />
+                  <input type="radio" name="radiogroup1" id="rd1" required />
                   <label for="rd1">Male</label>
                   <input type="radio" name="radiogroup1" id="rd2" />
                   <label for="rd2">Female</label>
                 </div>
 
                 <div className="input_field checkbox_option">
-                  <input type="checkbox" id="cb1" />
+                  <input type="checkbox" id="cb1" required/>
                   <label for="cb1">I agree with terms and conditions</label>
                 </div>
                 <div className="input_field checkbox_option">
@@ -170,6 +197,7 @@ const Register = () => {
                 </div>
                 <input className="button" type="submit" value="Register" />
               </form>
+              <p>Already have an account? <Link to="/login">Log In</Link></p>
             </div>
           </div>
         </div>

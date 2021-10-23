@@ -8,7 +8,7 @@ body {
     margin-left:auto;
     margin-right:auto;
     margin-top: 20px;
-    width:30%;
+    min-width:30%;
     display:block;
 }
 
@@ -274,6 +274,11 @@ body {
 .icon{
 	vertical-align: -12px;
 }
+
+.warning{
+	color: #cc3300;
+}
+
  @-webkit-keyframes check {
 	 0% {
 		 height: 0;
