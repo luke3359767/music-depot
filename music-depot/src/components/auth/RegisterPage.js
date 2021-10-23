@@ -24,6 +24,8 @@ const Register = () => {
   const [passwordErrList, setPasswordErrList] = useState([]);
   const [usedUserErr, setUsedUserErr] = useState(false);
   const [usedEmailErr, setUsedEmailErr] = useState(false);
+  const [createSuccess, setcreateSuccess] = useState(false);
+
 
   let history = useHistory();
 
@@ -43,7 +45,7 @@ const Register = () => {
         gender:gender,
 
       }
-    }).then((res) => console.log(res))
+    }).then((res) => setcreateSuccess(true))
       .catch((err) => {
         if (err.response) {
           if (err.response.status == 405) {
@@ -83,6 +85,109 @@ const Register = () => {
     return d ? (<p className="warning">The email has been used. Alrealy register? <Link to="/login">Log In</Link></p>) : null
   }
 
+  const successfullyCreated=(d)=>{
+    return (d) ? (<h1>Created Account Successfully. Please <Link to="/login">Log In</Link></h1>) : (<div className="row clearfix">
+      <div className="">
+        <form onSubmit={handleSubmit}>
+          <div className="input_field">
+            {" "}
+            <span>
+              <BsFillPersonFill className="icon" />
+            </span>
+            <input
+              type="username"
+              name="username"
+              placeholder="Username"
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          {usedUserErrRender(usedUserErr)}
+          <div className="input_field">
+            {" "}
+            <span>
+              <IoMdMail className="icon" />
+            </span>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          {usedEmailErrRender(usedEmailErr)}
+          <div className="input_field">
+            {" "}
+            <span>
+              <RiLockPasswordFill className="icon" />
+            </span>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          {passwordErrRender(passwordErr)}
+          <div className="input_field">
+            {" "}
+            <span>
+              <RiLockPasswordFill className="icon" />
+            </span>
+            <input
+              className={password !== rePassword ? "diffPassword" : ""}
+              type="Password"
+              name="rePassword"
+              placeholder="Re-type Password"
+              required
+              onChange={(e) => {
+                setRePassword(e.target.value)
+                if (password !== e.target.value) {
+                  setDiffPassword(true);
+                } else {
+                  setDiffPassword(false);
+                }
+              }}
+            />
+          </div>
+          {diffPassRender(diffPassword)}
+          <div className="row clearfix">
+            <div className="col_half">
+              <div className="input_field">
+                {" "}
+                <span>
+                  <BsFillPersonFill className="icon" />
+                </span>
+                <input type="text" name="name" placeholder="What do you want to be called?" required onChange={(e) => { setNickname(e.target.value) }} />
+              </div>
+            </div>
+          </div>
+          <div className="input_field radio_option">
+            <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
+            <label for="Male">Male</label>
+            <input type="radio" name="radiogroup1" id="Female" onChange={(e) => { setGender(e.target.id) }} />
+            <label for="Female">Female</label>
+            <input type="radio" name="radiogroup1" id="Other" onChange={(e) => { setGender(e.target.id) }} />
+            <label for="Other">Other</label>
+          </div>
+
+          <div className="input_field checkbox_option">
+            <input type="checkbox" id="cb1" required />
+            <label for="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
+          </div>
+          <div className="input_field checkbox_option">
+            <input type="checkbox" id="cb2" />
+            <label for="cb2">I want to receive the newsletter</label>
+          </div>
+          <input className="button" type="submit" value="Register" />
+        </form>
+        <p>Already have an account? <Link to="/login">Log In</Link></p>
+      </div>
+    </div>)
+  }
+
   return (
     <div className="wole-container">
       <img src={logo} alt="no" />
@@ -92,7 +197,10 @@ const Register = () => {
           <div className="title_container">
             <h2>Sign Up</h2>
           </div>
-          <div className="row clearfix">
+          {
+            successfullyCreated(createSuccess)
+          }
+          {/* <div className="row clearfix">
             <div className="">
               <form onSubmit={handleSubmit}>
                 <div className="input_field">
@@ -171,12 +279,12 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="input_field radio_option">
-                  <input type="radio" name="radiogroup1" id="rd1" required onChange={(e) => { setGender(e.target.value) }} />
-                  <label for="rd1">Male</label>
-                  <input type="radio" name="radiogroup1" id="rd2" onChange={(e) => { setGender(e.target.value) }} />
-                  <label for="rd2">Female</label>
-                  <input type="radio" name="radiogroup1" id="rd3" onChange={(e) => { setGender(e.target.value) }} />
-                  <label for="rd3">Other</label>
+                  <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
+                  <label for="Male">Male</label>
+                  <input type="radio" name="radiogroup1" id="Female" onChange={(e) => { setGender(e.target.id) }} />
+                  <label for="Female">Female</label>
+                  <input type="radio" name="radiogroup1" id="Other" onChange={(e) => { setGender(e.target.id) }} />
+                  <label for="Other">Other</label>
                 </div>
 
                 <div className="input_field checkbox_option">
@@ -191,7 +299,7 @@ const Register = () => {
               </form>
               <p>Already have an account? <Link to="/login">Log In</Link></p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
