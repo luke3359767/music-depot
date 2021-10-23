@@ -79,7 +79,8 @@ const Login = () => {
                 </div>
                 <input className="button" type="submit" value="Register" />
               </form>
-              <p><Link to="/reset">forget password</Link></p>
+              <p>Forget password?  <Link to="/reset">Reset</Link></p>
+              <p>Do not have an account?  <Link to="/register">Register</Link></p>
             </div>
           </div>
         </div>
