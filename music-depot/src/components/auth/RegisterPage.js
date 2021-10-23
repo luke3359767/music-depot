@@ -16,6 +16,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [gender, setGender] = useState("");
 
   const [diffPassword, setDiffPassword] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
@@ -37,6 +39,9 @@ const Register = () => {
         username: username,
         email: email,
         password: password,
+        nickname: nickname,
+        gender:gender,
+
       }
     }).then((res) => console.log(res))
       .catch((err) => {
@@ -160,36 +165,23 @@ const Register = () => {
                       {" "}
                       <span>
                         <BsFillPersonFill className="icon" />
-
                       </span>
-                      <input type="text" name="name" placeholder="First Name" />
-                    </div>
-                  </div>
-                  <div className="col_half">
-                    <div className="input_field">
-                      {" "}
-                      <span>
-                        <BsFillPersonFill className="icon" />
-                      </span>
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Last Name"
-                        required
-                      />
+                      <input type="text" name="name" placeholder="What do you want to be called?" required onChange={(e) => { setNickname(e.target.value)}} />
                     </div>
                   </div>
                 </div>
                 <div className="input_field radio_option">
-                  <input type="radio" name="radiogroup1" id="rd1" required />
+                  <input type="radio" name="radiogroup1" id="rd1" required onChange={(e) => { setGender(e.target.value) }} />
                   <label for="rd1">Male</label>
-                  <input type="radio" name="radiogroup1" id="rd2" />
+                  <input type="radio" name="radiogroup1" id="rd2" onChange={(e) => { setGender(e.target.value) }} />
                   <label for="rd2">Female</label>
+                  <input type="radio" name="radiogroup1" id="rd3" onChange={(e) => { setGender(e.target.value) }} />
+                  <label for="rd3">Other</label>
                 </div>
 
                 <div className="input_field checkbox_option">
                   <input type="checkbox" id="cb1" required/>
-                  <label for="cb1">I agree with terms and conditions</label>
+                  <label for="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
                 </div>
                 <div className="input_field checkbox_option">
                   <input type="checkbox" id="cb2" />

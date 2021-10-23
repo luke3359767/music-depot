@@ -26,6 +26,8 @@ let UserSchema = new mongoose.Schema(
     },
     bio: String,
     image: String,
+    nickname: String,
+    gender: String,
     hash: String,
     salt: String,
   },
@@ -70,7 +72,9 @@ UserSchema.methods.generateRefreshJWT = function () {
             token: this.generateJWT(),
             refreshToken:this.generateRefreshJWT(),
             bio: this.bio,
-            image: this.image
+            image: this.image,
+            nickname:this.nickname,
+            gender:this.gender
           };
         };
 
