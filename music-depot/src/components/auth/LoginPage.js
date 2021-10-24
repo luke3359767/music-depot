@@ -16,8 +16,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [expiredDay, setExpiredDay]= useState(1);
-  // const [cookies, setCookie, removeCookie] = useCookies(['refreshToken'])
+  const [expiredDay, setExpiredDay]= useState(1);
 
 
   const [loginErr, setloginErr] = useState(false);
@@ -29,12 +28,10 @@ const Login = () => {
     e.preventDefault();
     const res = await axios.post("http://localhost:5000/userapi/login", {
       username: username,
-      password: password
+      password: password,
+      expiredDay:expiredDay,
     }, {withCredentials:true}).then((res) => {
       console.log(res)
-      // let expires = new Date()
-      // expires.setTime(expires.getTime() + (expiredDay*24*60*60*1000))
-      // setCookie('refreshToken', res.data.refreshToken, { path: '/', expires,httpOnly:true, })
 
       
     })
@@ -90,7 +87,7 @@ const Login = () => {
 
                 <div className="input_field checkbox_option">
                   <input type="checkbox" id="cb1" onChange={(e)=>{
-                    // e === true ? setExpiredDay(30) : setExpiredDay(3)
+                    e.target.checked === true ? setExpiredDay(30) : setExpiredDay(1)
                   }}/>
                   <label for="cb1">Remember me</label>
                 </div>

@@ -67,7 +67,7 @@ router.post("/login", (req, res) => {
         //   const accessToken = user.generateJWT();  //send to cookie
         //   const refreshToken = user.generateRefreshJWT();  //send to memory
          res.status(200).cookie('refreshToken', user.toAuthJSON().refreshToken, {
-           expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 30),
+           expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * req.body.expiredDay ),
            secure: false, // set to true if your using https
            httpOnly: true,
            SameSite: "strict",
