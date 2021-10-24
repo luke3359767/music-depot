@@ -29,7 +29,9 @@ const initialState = {
     radio: {},
   },
 
-  userID: "luke3359767",
+  user: {
+    
+  },
   library:{
       favorite: {
         album: "favorite.png",

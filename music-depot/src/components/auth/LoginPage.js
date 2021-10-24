@@ -1,14 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useState } from 'react'
-import { Global, css, jsx } from '@emotion/react'
+import { useState } from 'react'
+import { jsx } from '@emotion/react'
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 import './LoginPage.css'
 import logo from "../../image/logo.png"
 import { BsFillPersonFill } from 'react-icons/bs';
-import { IoMdMail } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
 
 const Login = () => {
@@ -18,19 +17,26 @@ const Login = () => {
 
 
   const [loginErr, setloginErr] = useState(false);
-  const [usedEmailErr, setUsedEmailErr] = useState(false);
-  const [createSuccess, setcreateSuccess] = useState(false);
 
 
   let history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const res = await axios.post("http://localhost:5000/userapi/login", {
+      username: username,
+      password: password
+    }).then((res) => {
+      console.log(res)
+    })
+      .catch((err) => {
+        setloginErr(true);
+        console.log(err.response.data)
+      })
   };
 
   const loginErrRender = (d) => {
-    return d ? (<p>Username or Password in incorrect</p>) : null
+    return d ? (<p className="warning">Username or Password incorrect</p>) : null
   }
 
   return (
