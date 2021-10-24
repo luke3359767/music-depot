@@ -4,16 +4,20 @@ import { useState } from 'react'
 import { jsx } from '@emotion/react'
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
+import { useCookies} from "react-cookie";
+
 
 import './LoginPage.css'
 import logo from "../../image/logo.png"
 import { BsFillPersonFill } from 'react-icons/bs';
 import { RiLockPasswordFill } from 'react-icons/ri';
 
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  // const [expiredDay, setExpiredDay]= useState(1);
+  // const [cookies, setCookie, removeCookie] = useCookies(['refreshToken'])
 
 
   const [loginErr, setloginErr] = useState(false);
@@ -26,12 +30,17 @@ const Login = () => {
     const res = await axios.post("http://localhost:5000/userapi/login", {
       username: username,
       password: password
-    }).then((res) => {
+    }, {withCredentials:true}).then((res) => {
       console.log(res)
+      // let expires = new Date()
+      // expires.setTime(expires.getTime() + (expiredDay*24*60*60*1000))
+      // setCookie('refreshToken', res.data.refreshToken, { path: '/', expires,httpOnly:true, })
+
+      
     })
       .catch((err) => {
         setloginErr(true);
-        console.log(err.response.data)
+        console.log(err.response)
       })
   };
 
@@ -80,7 +89,9 @@ const Login = () => {
                 {loginErrRender(loginErr)}
 
                 <div className="input_field checkbox_option">
-                  <input type="checkbox" id="cb1" />
+                  <input type="checkbox" id="cb1" onChange={(e)=>{
+                    // e === true ? setExpiredDay(30) : setExpiredDay(3)
+                  }}/>
                   <label for="cb1">Remember me</label>
                 </div>
                 <input className="button" type="submit" value="Register" />

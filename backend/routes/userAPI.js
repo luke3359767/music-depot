@@ -71,7 +71,7 @@ router.post("/login", (req, res) => {
            secure: false, // set to true if your using https
            httpOnly: true,
            SameSite: "strict",
-         }).json(user.toAuthJSON());
+         }).set("123","456").json(user.toAuthJSON());
        } else {
          res.status(404).json("Invalid username or password");
        }
