@@ -36,7 +36,7 @@ const Register = () => {
       return;
     }
 
-    const res = await axios.post("http://localhost:5000/userapi/register", {
+    const res = await axios.post("http://0.0.0.0:5000/userapi/register", {
       registerInfo: {
         username: username,
         email: email,
