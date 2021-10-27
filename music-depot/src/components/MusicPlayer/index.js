@@ -107,7 +107,7 @@ const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
 
     useEffect(()=>{
-        axios.get("http://localhost:5000/testapi")
+        axios.get("https://music-depot.tech/api/")
          .then((res) => {
             })
          .catch((err) => err);
