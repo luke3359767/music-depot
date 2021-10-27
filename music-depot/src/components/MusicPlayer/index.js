@@ -109,7 +109,8 @@ const MusicPlayer=()=>{
     useEffect(()=>{
         axios.get("https://music-depot.tech/api/")
          .then((res) => {
-            })
+        console.log("connect to server!")    
+        })
          .catch((err) => err);
     },[])
 
