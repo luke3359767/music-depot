@@ -89,7 +89,7 @@ const Login = () => {
                   <input type="checkbox" id="cb1" onChange={(e)=>{
                     e.target.checked === true ? setExpiredDay(30) : setExpiredDay(1)
                   }}/>
-                  <label for="cb1">Remember me</label>
+                  <label htmlFor="cb1">Remember me</label>
                 </div>
                 <input className="button" type="submit" value="Register" />
               </form>

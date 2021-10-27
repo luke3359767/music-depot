@@ -166,20 +166,20 @@ const Register = () => {
           </div>
           <div className="input_field radio_option">
             <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
-            <label for="Male">Male</label>
+            <label htmlFor="Male">Male</label>
             <input type="radio" name="radiogroup1" id="Female" onChange={(e) => { setGender(e.target.id) }} />
-            <label for="Female">Female</label>
+            <label htmlFor="Female">Female</label>
             <input type="radio" name="radiogroup1" id="Other" onChange={(e) => { setGender(e.target.id) }} />
-            <label for="Other">Other</label>
+            <label htmlFor="Other">Other</label>
           </div>
 
           <div className="input_field checkbox_option">
             <input type="checkbox" id="cb1" required />
-            <label for="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
+            <label htmlFor="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
           </div>
           <div className="input_field checkbox_option">
             <input type="checkbox" id="cb2" />
-            <label for="cb2">I want to receive the newsletter</label>
+            <label htmlFor="cb2">I want to receive the newsletter</label>
           </div>
           <input className="button" type="submit" value="Register" />
         </form>
@@ -280,20 +280,20 @@ const Register = () => {
                 </div>
                 <div className="input_field radio_option">
                   <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
-                  <label for="Male">Male</label>
+                  <label htmlFor="Male">Male</label>
                   <input type="radio" name="radiogroup1" id="Female" onChange={(e) => { setGender(e.target.id) }} />
-                  <label for="Female">Female</label>
+                  <label htmlFor="Female">Female</label>
                   <input type="radio" name="radiogroup1" id="Other" onChange={(e) => { setGender(e.target.id) }} />
-                  <label for="Other">Other</label>
+                  <label htmlFor="Other">Other</label>
                 </div>
 
                 <div className="input_field checkbox_option">
                   <input type="checkbox" id="cb1" required/>
-                  <label for="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
+                  <label htmlFor="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
                 </div>
                 <div className="input_field checkbox_option">
                   <input type="checkbox" id="cb2" />
-                  <label for="cb2">I want to receive the newsletter</label>
+                  <label htmlFor="cb2">I want to receive the newsletter</label>
                 </div>
                 <input className="button" type="submit" value="Register" />
               </form>
