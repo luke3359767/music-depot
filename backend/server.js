@@ -16,7 +16,7 @@ connectDB();
 app.use(cors(
   {
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'https://music-depot.tech/',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 ));

@@ -135,14 +135,14 @@ const Playlist = () => {
   const [emailState, setEmail] = useState("99999@gmail.com");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/testemail/read")
+    axios.get("https://music-depot.tech/api/testemail/read")
     .then((response)=>{
       setreademail(response['data'][1]['_id'])
     })
   }, []);
 
   const updateEmail= (id) => {
-    axios.put("http://localhost:5000/testemail/update", {
+    axios.put("https://music-depot.tech/api/testemail/update", {
       id:id,
       newemail: "new@gmail.com",
     });
@@ -150,7 +150,7 @@ const Playlist = () => {
 
   const sendEmail = () => {
     axios
-      .post("http://localhost:5000/testemail/insert", {
+      .post("https://music-depot.tech/api/testemail/insert", {
         email: emailState,
       })
       .then(console.log("SUCCESS POST"))
