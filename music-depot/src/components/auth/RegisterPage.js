@@ -153,17 +153,17 @@ const Register = () => {
             />
           </div>
           {diffPassRender(diffPassword)}
-          <div className="row clearfix">
-            <div className="col_half">
-              <div className="input_field">
-                {" "}
-                <span>
-                  <BsFillPersonFill className="icon" />
-                </span>
-                <input type="text" name="name" placeholder="What do you want to be called?" required onChange={(e) => { setNickname(e.target.value) }} />
-              </div>
-            </div>
+        
+         
+          <div className="input_field">
+            {" "}
+            <span>
+              <BsFillPersonFill className="icon" />
+            </span>
+            <input type="text" name="name" placeholder="What do you want to be called?" required onChange={(e) => { setNickname(e.target.value) }} />
           </div>
+        
+       
           <div className="input_field radio_option">
             <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
             <label htmlFor="Male">Male</label>
