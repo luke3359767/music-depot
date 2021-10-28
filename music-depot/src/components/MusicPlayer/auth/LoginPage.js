@@ -17,7 +17,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 
 const Login = () => {
   const {state,dispatch}=useContext(StoreContext);
-  
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [expiredDay, setExpiredDay]= useState(1);
@@ -35,7 +35,8 @@ const Login = () => {
       password: password,
       expiredDay:expiredDay,
     }, {withCredentials:true}).then((res) => {
-      console.log(res)
+      dispatch({ type: "USER_LOGIN", user: res.data })
+      console.log(state)
 
       
     })

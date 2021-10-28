@@ -96,6 +96,9 @@ const reducer= (state,action)=>{
         case'SET_PLAYLIST':
             return {...state,currentPlaylist:action.playlistItem};
         
+        case'USER_LOGIN':
+            return {...state,user:action.user};
+        
     }
     return state
 }
