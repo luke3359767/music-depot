@@ -5,6 +5,8 @@ import { jsx } from '@emotion/react'
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import { useCookies} from "react-cookie";
+import React,{useContext} from 'react';
+import { StoreContext } from '../index'
 
 
 import './LoginPage.css'
@@ -14,6 +16,8 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 
 
 const Login = () => {
+  const {state,dispatch}=useContext(StoreContext);
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [expiredDay, setExpiredDay]= useState(1);
