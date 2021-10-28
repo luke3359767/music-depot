@@ -35,7 +35,7 @@ const Login = () => {
       password: password,
       expiredDay:expiredDay,
     }, {withCredentials:true}).then((res) => {
-      dispatch({ type: "USER_LOGIN", user: res.data })
+      dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
       console.log(state)
 
       

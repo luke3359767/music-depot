@@ -9,7 +9,7 @@ import Register from './auth/RegisterPage';
 import Login from './auth/LoginPage';
 import {css,jsx,Global} from "@emotion/react"
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"; 
+import { BrowserRouter as Router, Switch, Route ,Redirect } from "react-router-dom"; 
 
 
 export const StoreContext = createContext()
@@ -47,6 +47,7 @@ const DEFAULT_PLAYLIST='home';
 
 const initialState = {
   currentPlaylist: DEFAULT_PLAYLIST,
+  isLogin:false,
   mainList: {
     home: {},
     browse: {},
@@ -97,7 +98,7 @@ const reducer= (state,action)=>{
             return {...state,currentPlaylist:action.playlistItem};
         
         case'USER_LOGIN':
-            return {...state,user:action.user};
+            return {...state,user:action.user,isLogin:action.isLogin};
         
     }
     return state
@@ -119,12 +120,17 @@ const MusicPlayer=()=>{
           <Router>
             <Global styles={GlobalCSS} />
             <Route exact path="/">
-              <div className="MusicPlayer"  css={CSS}>
-                  <TopBar/>
-                  <SideBar/>
-                  <Content/>
-                  <PlayBar/>
-              </div>
+              {
+                state.isLogin?(
+                  <div className="MusicPlayer"  css={CSS}>
+                      <TopBar/>
+                      <SideBar/>
+                      <Content/>
+                      <PlayBar/>
+                  </div>
+
+                ):<Redirect to="/login" />
+              }
             </Route>
             <Route path="/register">
               <Register />
