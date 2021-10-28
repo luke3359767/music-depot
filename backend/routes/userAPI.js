@@ -140,23 +140,26 @@ router.post("/refresh", (req, res) => {
   
   })});
 
-router.post("/autologin",(req, res) => {
+  
+router.post("/autologin", (req, res) => {
+  //take the refresh token from user
   const refreshToken = req.cookies['refreshToken']
+  console.log(refreshToken)
+  //send error if there is no tocken or its invalid
   if (!refreshToken) return res.status(401).json("You are not auth !!!")
-  let User={}
+
   jwt.verify(refreshToken, refreshSecret, (err, user) => {
     err && console.log(err);
     const newAccessToken = generateJWT(user)
     const newRefreshToken = generateRefreshJWT(user)
-    User=user
     res.status(200).cookie('refreshToken', newRefreshToken,{
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000*30),
       secure: false, // set to true if your using https
       httpOnly: true,
       SameSite:"strict",
-    }).json({User});
-
-})})
+    }).json({newAccessToken:newAccessToken})
+  
+  })});
 
 router.post("/testToken",verify, (req, res)=>{
   res.status(200).json("success test token");
