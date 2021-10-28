@@ -140,6 +140,24 @@ router.post("/refresh", (req, res) => {
   
   })});
 
+router.post("/autologin",(req, res) => {
+  const refreshToken = req.cookies['refreshToken']
+  if (!refreshToken) return res.status(401).json("You are not auth !!!")
+  let User={}
+  jwt.verify(refreshToken, refreshSecret, (err, user) => {
+    err && console.log(err);
+    const newAccessToken = generateJWT(user)
+    const newRefreshToken = generateRefreshJWT(user)
+    User=user
+    res.status(200).cookie('refreshToken', newRefreshToken,{
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000*30),
+      secure: false, // set to true if your using https
+      httpOnly: true,
+      SameSite:"strict",
+    }).json(User);
+
+})})
+
 router.post("/testToken",verify, (req, res)=>{
   res.status(200).json("success test token");
 })
