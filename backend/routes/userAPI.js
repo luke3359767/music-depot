@@ -157,7 +157,7 @@ router.post("/autologin", (req, res) => {
       secure: false, // set to true if your using https
       httpOnly: true,
       SameSite:"strict",
-    }).json({newAccessToken:newAccessToken})
+    }).json({user})
   
   })});
 
