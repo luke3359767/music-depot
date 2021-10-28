@@ -8,7 +8,7 @@ import { useCookies} from "react-cookie";
 
 
 import './LoginPage.css'
-import logo from "../../image/logo.png"
+import logo from "../../../image/logo.png"
 import { BsFillPersonFill } from 'react-icons/bs';
 import { RiLockPasswordFill } from 'react-icons/ri';
 

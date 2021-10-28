@@ -6,7 +6,7 @@ import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 import './registerPage.css'
-import logo from "../../image/logo.png"
+import logo from "../../../image/logo.png"
 import { BsFillPersonFill } from 'react-icons/bs';
 import { IoMdMail } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
