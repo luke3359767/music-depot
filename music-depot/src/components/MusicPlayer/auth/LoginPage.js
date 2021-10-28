@@ -16,6 +16,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 
 
 const Login = () => {
+
   const {state,dispatch}=useContext(StoreContext);
 
   const [username, setUsername] = useState("");
@@ -37,7 +38,7 @@ const Login = () => {
     }, {withCredentials:true}).then((res) => {
       dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
       console.log(state)
-
+      history.push('/');
       
     })
       .catch((err) => {
