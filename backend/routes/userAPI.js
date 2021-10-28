@@ -152,12 +152,25 @@ router.post("/autologin", (req, res) => {
     err && console.log(err);
     const newAccessToken = generateJWT(user)
     const newRefreshToken = generateRefreshJWT(user)
-    res.status(200).cookie('refreshToken', newRefreshToken,{
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000*30),
-      secure: false, // set to true if your using https
-      httpOnly: true,
-      SameSite:"strict",
-    }).json({user})
+
+    User.findOne({ username:user.username}, function (err, user) {
+      if (!user) {
+          res.status(404).json("Invalid username or password(user)");
+      } else {
+        if (user.validPassword(req.body.password)) {
+         //   const accessToken = user.generateJWT();  //send to cookie
+         //   const refreshToken = user.generateRefreshJWT();  //send to memory
+          res.status(200).cookie('refreshToken', user.toAuthJSON().refreshToken, {
+            expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * req.body.expiredDay ),
+            secure: false, // set to true if your using https
+            httpOnly: true,
+            SameSite: "strict",
+          }).set("123","456").json(user.toAuthJSON());
+        } else {
+          res.status(404).json("Invalid username or password");
+        }
+      }
+    })
   
   })});
 
