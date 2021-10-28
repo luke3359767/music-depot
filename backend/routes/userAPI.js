@@ -144,21 +144,19 @@ router.post("/refresh", (req, res) => {
 router.post("/autologin", (req, res) => {
   //take the refresh token from user
   const refreshToken = req.cookies['refreshToken']
-  console.log(refreshToken)
-  //send error if there is no tocken or its invalid
   if (!refreshToken) return res.status(401).json("You are not auth !!!")
-
   jwt.verify(refreshToken, refreshSecret, (err, user) => {
     err && console.log(err);
     const newAccessToken = generateJWT(user)
     const newRefreshToken = generateRefreshJWT(user)
 
     User.findOne({ username:user.username}, function (err, us) {
-      if (!us) {
-          res.status(404).json("Invalid username or password(user)");
-      } else {
-          res.status(200).json(user.toAuthJSON()); 
-      }
+      res.status(200).json("OK");
+      // if (!us) {
+      //     res.status(404).json("Invalid username or password(user)");
+      // } else {
+      //     res.status(200).json(user.toAuthJSON()); 
+      // }
     })
   })});
 
