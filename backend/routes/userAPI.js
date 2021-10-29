@@ -144,6 +144,8 @@ router.post("/autologin", (req, res) => {
     const newRefreshToken = generateRefreshJWT(user)
 
     User.findOne({ username:user.username}, function (err, us) {
+
+      err&& res.clearCookie("refreshToken").json("not valid auth token")
       res.status(200).json(us.toAuthJSON()); 
       // if (!us) {
       //     res.status(404).json("Invalid username or password(user)");
