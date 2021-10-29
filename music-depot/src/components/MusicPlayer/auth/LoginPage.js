@@ -109,7 +109,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      ):<Redirect to="/login" />
+      ):<Redirect to="/" />
     }
   </div>
    
