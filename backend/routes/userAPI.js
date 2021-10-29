@@ -66,12 +66,12 @@ router.post("/login", (req, res) => {
        if (user.validPassword(req.body.password)) {
         //   const accessToken = user.generateJWT();  //send to cookie
         //   const refreshToken = user.generateRefreshJWT();  //send to memory
-         res.status(200).cookie('refreshToken', user.toAuthJSON().refreshToken, {
+         res.status(200).cookie('refreshToken', user.generateRefreshJWT(), {
            expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * req.body.expiredDay ),
            secure: false, // set to true if your using https
            httpOnly: true,
            SameSite: "strict",
-         }).set("123","456").json(user.toAuthJSON());
+         }).json(user.toAuthJSON());
        } else {
          res.status(404).json("Invalid username or password");
        }
@@ -123,7 +123,6 @@ const generateJWT = function (user) {
 router.post("/refresh", (req, res) => {
   //take the refresh token from user
   const refreshToken = req.cookies['refreshToken']
-  console.log(refreshToken)
   //send error if there is no tocken or its invalid
   if (!refreshToken) return res.status(401).json("You are not auth !!!")
 
@@ -131,13 +130,7 @@ router.post("/refresh", (req, res) => {
     err && console.log(err);
     const newAccessToken = generateJWT(user)
     const newRefreshToken = generateRefreshJWT(user)
-    res.status(200).cookie('refreshToken', newRefreshToken,{
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000*30),
-      secure: false, // set to true if your using https
-      httpOnly: true,
-      SameSite:"strict",
-    }).json({newAccessToken:newAccessToken})
-  
+    res.status(200).json({newAccessToken:newAccessToken})
   })});
 
   
@@ -151,7 +144,7 @@ router.post("/autologin", (req, res) => {
     const newRefreshToken = generateRefreshJWT(user)
 
     User.findOne({ username:user.username}, function (err, us) {
-      res.status(200).json(us.toAuthJSON()); 
+      res.status(200).json(us.()); 
       // if (!us) {
       //     res.status(404).json("Invalid username or password(user)");
       // } else {

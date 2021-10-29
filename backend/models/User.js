@@ -70,7 +70,6 @@ UserSchema.methods.generateRefreshJWT = function () {
             username: this.username,
             email: this.email,
             token: this.generateJWT(),
-            refreshToken:this.generateRefreshJWT(),
             bio: this.bio,
             image: this.image,
             nickname:this.nickname,
