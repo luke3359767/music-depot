@@ -129,7 +129,6 @@ router.post("/refresh", (req, res) => {
   jwt.verify(refreshToken, refreshSecret, (err, user) => {
     err && console.log(err);
     const newAccessToken = generateJWT(user)
-    const newRefreshToken = generateRefreshJWT(user)
     res.status(200).json({newAccessToken:newAccessToken})
   })});
 
@@ -138,22 +137,19 @@ router.post("/autologin", (req, res) => {
   //take the refresh token from user
   const refreshToken = req.cookies['refreshToken']
   if (!refreshToken) return res.status(401).json("You are not auth !!!")
-  jwt.verify(refreshToken, refreshSecret, (err, user) => {
-    err && console.log(err);
-    const newAccessToken = generateJWT(user)
-    const newRefreshToken = generateRefreshJWT(user)
+  try{
+    jwt.verify(refreshToken, refreshSecret, (err, user) => {
+      err && console.log(err);  
+      User.findOne({ username:user.username}, function (err, us) {
+  
+        res.status(200).json(us.toAuthJSON()); 
+      })
+    })  
+  }catch(e){
+    res.clearCookie("refreshToken").json("not valid auth token",e)
 
-    User.findOne({ username:user.username}, function (err, us) {
-
-      err&& res.clearCookie("refreshToken").json("not valid auth token")
-      res.status(200).json(us.toAuthJSON()); 
-      // if (!us) {
-      //     res.status(404).json("Invalid username or password(user)");
-      // } else {
-      //     res.status(200).json(user.toAuthJSON()); 
-      // }
-    })
-  })});
+  }
+  });
 
 router.post("/testToken",verify, (req, res)=>{
   res.status(200).json("success test token");
