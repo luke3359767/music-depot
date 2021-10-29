@@ -107,19 +107,14 @@ const reducer= (state,action)=>{
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
 
-    useEffect(()=>{
-        axios.get("https://music-depot.tech/api/")
-         .then((res) => {
-        console.log("connect to server!")    
-        })
-         .catch((err) => err);
-        
-        axios.post("https://music-depot.tech/api/userapi/autologin")
+    useEffect(async ()=>{
+        await axios.post("https://music-depot.tech/api/userapi/autologin")
           .then((res) => {
             dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
             console.log("Auto Login")    
           }).catch((err) => {err});
         // axios
+        console.log(state.isLogin)
     },[])
 
     return(
