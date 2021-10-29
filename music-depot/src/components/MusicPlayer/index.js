@@ -114,7 +114,6 @@ const MusicPlayer=()=>{
             console.log("Auto Login")    
           }).catch((err) => {err});
         // axios
-        console.log(state.isLogin)
     },[])
 
     return(
