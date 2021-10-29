@@ -11,6 +11,7 @@ const port = process.env.PORT || 5000; //Line 3
 const testapiRouter=require("./routes/testapi")
 const testdbapiRouter=require('./routes/testdbapi')
 const UserAPIRouter=require('./routes/userAPI')
+const playlistAPIRouter=require('./routes/playlistAPI')
 connectDB();
 
 app.use(cors(
@@ -174,3 +175,4 @@ app.get('/', (req, res) => res.send('Hello world!'));
 app.use("/testapi",testapiRouter)
 app.use("/testemail",testdbapiRouter)
 app.use("/userapi",UserAPIRouter)
+app.use("/playlistapi",playlistAPIRouter)
