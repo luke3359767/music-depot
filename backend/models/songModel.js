@@ -26,11 +26,7 @@ const playlistSchema = new mongoose.Schema({
   },
 });
 
-<<<<<<< HEAD
 // module.exports = mongoose.model("songSchema", songSchema);
-=======
-module.exports = mongoose.model("songSchema", songSchema);
->>>>>>> 87cc23600d11e3dd3e39c925bdb183deee565322
 module.exports = mongoose.model("playlistSchema", playlistSchema);
 
 // PlaylilstList:{
