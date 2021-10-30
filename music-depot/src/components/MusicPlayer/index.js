@@ -163,7 +163,7 @@ const MusicPlayer=()=>{
             <Global styles={GlobalCSS} />
             <Route exact path="/">
               {
-                isLogin.current?(
+                (isLogin.current)||(state.isLogin)?(
                   <div className="MusicPlayer"  css={CSS}>
                       <TopBar/>
                       <SideBar/>
