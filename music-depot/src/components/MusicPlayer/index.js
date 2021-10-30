@@ -138,7 +138,7 @@ const MusicPlayer=()=>{
     await axios.post("https://music-depot.tech/api/userapi/autologin")
     .then((res) => {
       dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
-      isLogin.current=false
+      isLogin.current=true
       console.log("Auto Login")    
     }).catch((err) => err);
     // axios
