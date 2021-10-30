@@ -140,6 +140,19 @@ const MusicPlayer=()=>{
       return Promise.reject(error);
     }
   );
+  useEffect(()=>{
+    if(isLogin){
+      const interval=setInterval(()=>{
+        let currentDate = new Date();
+        const decodedToken = jwt_decode(state.user.token);
+        if (decodedToken.exp * 1000 < currentDate.getTime()) {
+          const data =  refreshToken();
+          dispatch({ type: "REFRESH_TOKEN", token: data })
+          console.log('auto refresh token')}
+      },1*60*1000)
+    }
+  },[isLogin])
+  
 
     useEffect(async ()=>{
         await axios.post("https://music-depot.tech/api/userapi/autologin")
