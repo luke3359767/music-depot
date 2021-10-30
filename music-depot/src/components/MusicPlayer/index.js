@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useReducer,createContext,useEffect} from 'react';
+import React,{useReducer,createContext,useEffect,useRef} from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import PlayBar from './PlayBar';
@@ -109,6 +109,7 @@ const reducer= (state,action)=>{
 
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
+    const isLogin=useRef(false)
     const refreshToken = async () => {
       try {
         const res = await axios.post("https://music-depot.tech/api/userapi/refresh").than((r)=>{
@@ -144,6 +145,7 @@ const MusicPlayer=()=>{
         await axios.post("https://music-depot.tech/api/userapi/autologin")
           .then((res) => {
             dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
+            isLogin.current=false
             console.log("Auto Login")    
           }).catch((err) => err);
         // axios
@@ -155,7 +157,7 @@ const MusicPlayer=()=>{
             <Global styles={GlobalCSS} />
             <Route exact path="/">
               {
-                state.isLogin?(
+                isLogin?(
                   <div className="MusicPlayer"  css={CSS}>
                       <TopBar/>
                       <SideBar/>
