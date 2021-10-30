@@ -26,7 +26,8 @@ const playlistSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("songs", songSchema);
+// module.exports = mongoose.model("songSchema", songSchema);
+module.exports = mongoose.model("playlistSchema", playlistSchema);
 
 // PlaylilstList:{
 //   name:"favorite",
