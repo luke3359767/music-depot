@@ -4,12 +4,30 @@ const User = require("../models/User.js");
 const jwt= require('jsonwebtoken')
 const User = require("../models/User.js");
 
+const secret = "musicdepot";
+const refreshSecret = "topedcisum";
 
-router.get('/', (req, res)=>{
-  res.json({
-    status:'api works',
-    message:'welcome to use api'
-  });
+const verify = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, secret, (err, user) => {
+      if (err) {
+        return res.status(401).json("Token is not valid");
+      }
+
+      req.user = user;
+      console.log("this is the user: ", user);
+      next();
+    });
+  } else {
+    res.status(401).json("not auth");
+  }
+}
+
+router.post('/getplaylist',verify, (req, res)=>{
+  console.log(req.user)
 })
+
 
 module.exports = router;
