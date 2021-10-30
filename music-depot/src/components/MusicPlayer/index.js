@@ -158,9 +158,9 @@ const MusicPlayer=()=>{
     if(isLogin){
       const interval=setInterval(()=>{
         let currentDate = new Date();
-        console.log(state.user)
+        console.log(token.current)
         let token = Cookies.get('refreshToken')
-        const decodedToken = jwt_decode(token);
+        const decodedToken = jwt_decode(token.current);
         if (decodedToken.exp * 1000 < currentDate.getTime()) {
           const data =  refreshToken();
           dispatch({ type: "REFRESH_TOKEN", token: data })
