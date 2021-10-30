@@ -150,7 +150,6 @@ const MusicPlayer=()=>{
         axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
           console.log('auto refresh token')
-          console.log(state.user)
         });
 
       },10*60*1000)
