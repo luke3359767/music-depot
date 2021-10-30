@@ -1,8 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { StoreContext } from '../index'
 import { Global, css, jsx } from '@emotion/react'
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import './registerPage.css'
@@ -12,6 +13,7 @@ import { IoMdMail } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
 
 const Register = () => {
+  const { state, dispatch } = useContext(StoreContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -189,18 +191,20 @@ const Register = () => {
   }
 
   return (
-    <div className="wole-container">
-      <img src={logo} alt="no" />
+    <div>
+      {!state.isLogin?(
+        <div className="wole-container">
+          <img src={logo} alt="no" />
 
-      <div className="form_wrapper">
-        <div className="form_container">
-          <div className="title_container">
-            <h2>Sign Up</h2>
-          </div>
-          {
-            successfullyCreated(createSuccess)
-          }
-          {/* <div className="row clearfix">
+          <div className="form_wrapper">
+            <div className="form_container">
+              <div className="title_container">
+                <h2>Sign Up</h2>
+              </div>
+              {
+                successfullyCreated(createSuccess)
+              }
+              {/* <div className="row clearfix">
             <div className="">
               <form onSubmit={handleSubmit}>
                 <div className="input_field">
@@ -300,8 +304,10 @@ const Register = () => {
               <p>Already have an account? <Link to="/login">Log In</Link></p>
             </div>
           </div> */}
+            </div>
+          </div>
         </div>
-      </div>
+      ):<Redirect to="/" />}
     </div>
   );
 };
