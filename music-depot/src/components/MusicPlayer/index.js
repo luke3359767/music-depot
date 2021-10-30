@@ -110,6 +110,7 @@ const reducer= (state,action)=>{
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
     const isLogin=useRef(false)
+    const token=useRef()
     const refreshToken = async () => {
       try {
         const res = await axios.post("https://music-depot.tech/api/userapi/refresh").than((r)=>{
@@ -151,7 +152,7 @@ const MusicPlayer=()=>{
     }).catch((err) => err);
     // axios
   },[])
-  
+
   useEffect(()=>{
     if(isLogin){
       const interval=setInterval(()=>{
