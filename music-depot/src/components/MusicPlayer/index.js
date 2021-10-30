@@ -160,6 +160,8 @@ const MusicPlayer=()=>{
           const data =  refreshToken();
           dispatch({ type: "REFRESH_TOKEN", token: data })
           console.log('auto refresh token')
+          console.log(data)
+
       },1*60*1000)
     }
   },[isLogin])
