@@ -144,6 +144,7 @@ const MusicPlayer=()=>{
     if(isLogin){
       const interval=setInterval(()=>{
         let currentDate = new Date();
+        console.log(state.user.token)
         const decodedToken = jwt_decode(state.user.token);
         if (decodedToken.exp * 1000 < currentDate.getTime()) {
           const data =  refreshToken();
