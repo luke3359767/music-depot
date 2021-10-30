@@ -114,9 +114,7 @@ const MusicPlayer=()=>{
 
     const refreshToken = async () => {
       try {
-        const res = await axios.post("https://music-depot.tech/api/userapi/refresh").than((r)=>{
-          return r.data.newAccessToken;
-        })
+        const res = await
       
         return res;
       } catch (err) {
@@ -157,10 +155,12 @@ const MusicPlayer=()=>{
   useEffect(()=>{
     if(isLogin){
       const interval=setInterval(()=>{
-          const data =  refreshToken();
-          dispatch({ type: "REFRESH_TOKEN", token: data })
+        axios.post("https://music-depot.tech/api/userapi/refresh").than((r) => {
+          dispatch({ type: "REFRESH_TOKEN", token: r.data.newAccessToken })
           console.log('auto refresh token')
-          console.log(data)
+          console.log(r.data.newAccessToken)
+          
+        });
 
       },1*60*1000)
     }
