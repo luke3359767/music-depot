@@ -11,6 +11,7 @@ import {css,jsx,Global} from "@emotion/react"
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route ,Redirect } from "react-router-dom"; 
 import jwt_decode from "jwt-decode";
+import Cookies from 'js-cookie';
 
 
 export const StoreContext = createContext()
@@ -110,7 +111,7 @@ const reducer= (state,action)=>{
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
     const isLogin=useRef(false)
-    const token=useRef()
+
     const refreshToken = async () => {
       try {
         const res = await axios.post("https://music-depot.tech/api/userapi/refresh").than((r)=>{
@@ -123,24 +124,24 @@ const MusicPlayer=()=>{
       }
     };
 
-  const axiosJWT = axios.create();
+  // const axiosJWT = axios.create();
 
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let currentDate = new Date();
-      const decodedToken = jwt_decode(state.user.token);
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        const data = await refreshToken();
-        config.headers["authorization"] = "Bearer " + data;
-        dispatch({ type: "REFRESH_TOKEN",token: data })
-        console.log('auto refresh token')
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     let currentDate = new Date();
+  //     const decodedToken = jwt_decode(state.user.token);
+  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       const data = await refreshToken();
+  //       config.headers["authorization"] = "Bearer " + data;
+  //       dispatch({ type: "REFRESH_TOKEN",token: data })
+  //       console.log('auto refresh token')
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
   
   
   useEffect(async ()=>{
@@ -152,13 +153,14 @@ const MusicPlayer=()=>{
     }).catch((err) => err);
     // axios
   },[])
-
+  
   useEffect(()=>{
     if(isLogin){
       const interval=setInterval(()=>{
         let currentDate = new Date();
         console.log(state.user)
-        const decodedToken = jwt_decode(state.user.token);
+        let token = Cookies.get('refreshToken')
+        const decodedToken = jwt_decode(token);
         if (decodedToken.exp * 1000 < currentDate.getTime()) {
           const data =  refreshToken();
           dispatch({ type: "REFRESH_TOKEN", token: data })
