@@ -140,6 +140,18 @@ const MusicPlayer=()=>{
       return Promise.reject(error);
     }
   );
+  
+  
+  useEffect(async ()=>{
+    await axios.post("https://music-depot.tech/api/userapi/autologin")
+    .then((res) => {
+      dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
+      isLogin.current=false
+      console.log("Auto Login")    
+    }).catch((err) => err);
+    // axios
+  },[])
+  
   useEffect(()=>{
     if(isLogin){
       const interval=setInterval(()=>{
@@ -154,17 +166,6 @@ const MusicPlayer=()=>{
     }
   },[isLogin])
   
-
-    useEffect(async ()=>{
-        await axios.post("https://music-depot.tech/api/userapi/autologin")
-          .then((res) => {
-            dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
-            isLogin.current=false
-            console.log("Auto Login")    
-          }).catch((err) => err);
-        // axios
-    },[])
-
     return(
        <StoreContext.Provider value={{state,dispatch}}>
           <Router>
