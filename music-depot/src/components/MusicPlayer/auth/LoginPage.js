@@ -100,7 +100,7 @@ const Login = () => {
                     }}/>
                     <label htmlFor="cb1">Remember me</label>
                   </div>
-                  <input className="button" type="submit" value="Register" />
+                  <input className="button" type="submit" value="Login" />
                 </form>
                 <p>Forget password?  <Link to="/reset">Reset</Link></p>
                 <p>Do not have an account?  <Link to="/register">Register</Link></p>
