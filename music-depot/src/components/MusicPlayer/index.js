@@ -10,6 +10,7 @@ import Login from './auth/LoginPage';
 import {css,jsx,Global} from "@emotion/react"
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route ,Redirect } from "react-router-dom"; 
+import jwt_decode from "jwt-decode";
 
 
 export const StoreContext = createContext()
@@ -55,7 +56,7 @@ const initialState = {
   },
 
   user: {
-    
+
   },
   library:{
       favorite: {
@@ -100,19 +101,51 @@ const reducer= (state,action)=>{
         case'USER_LOGIN':
             return {...state,user:action.user,isLogin:action.isLogin};
         
+        case'REFRESH_TOKEN':
+            return{...state,user:{...state.user,token:action.token}}
     }
     return state
 }
 
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
+    const refreshToken = async () => {
+      try {
+        const res = await axios.post("https://music-depot.tech/api/userapi/refresh").than((r)=>{
+          return r.data.newAccessToken;
+        })
+      
+        return res;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+  const axiosJWT = axios.create();
+
+  axiosJWT.interceptors.request.use(
+    async (config) => {
+      let currentDate = new Date();
+      const decodedToken = jwt_decode(state.user.token);
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        const data = await refreshToken();
+        config.headers["authorization"] = "Bearer " + data;
+        dispatch({ type: "REFRESH_TOKEN",token: data })
+        console.log('auto refresh token')
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
     useEffect(async ()=>{
         await axios.post("https://music-depot.tech/api/userapi/autologin")
           .then((res) => {
             dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
             console.log("Auto Login")    
-          }).catch((err) => {err});
+          }).catch((err) => err);
         // axios
     },[])
 
