@@ -112,15 +112,7 @@ const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
     const isLogin=useRef(false)
 
-    const refreshToken = async () => {
-      try {
-        const res = await
-      
-        return res;
-      } catch (err) {
-        console.log(err);
-      }
-    };
+
 
   // const axiosJWT = axios.create();
 
@@ -159,7 +151,7 @@ const MusicPlayer=()=>{
           dispatch({ type: "REFRESH_TOKEN", token: r.data.newAccessToken })
           console.log('auto refresh token')
           console.log(r.data.newAccessToken)
-          
+
         });
 
       },1*60*1000)
