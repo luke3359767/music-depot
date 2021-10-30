@@ -148,10 +148,9 @@ const MusicPlayer=()=>{
     if(isLogin){
       const interval=setInterval(()=>{
         axios.post("https://music-depot.tech/api/userapi/refresh").than((r) => {
-          dispatch({ type: "REFRESH_TOKEN", token: r.data.newAccessToken })
+          // dispatch({ type: "REFRESH_TOKEN", token: r.data.newAccessToken })
           console.log('auto refresh token')
           console.log(r.data.newAccessToken)
-
         });
 
       },1*60*1000)
