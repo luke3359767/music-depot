@@ -51,7 +51,7 @@ UserSchema.methods.generateJWT = function() {
           username: this.username,
         },
         secret,
-        { expiresIn: "15s" }
+        { expiresIn: "15m" }
       );
     };
 UserSchema.methods.generateRefreshJWT = function () {

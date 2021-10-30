@@ -153,7 +153,7 @@ const MusicPlayer=()=>{
           console.log(state.user)
         });
 
-      },1*60*1000)
+      },10*60*1000)
     }
   },[isLogin])
   
