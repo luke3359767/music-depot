@@ -21,7 +21,7 @@ const verify = (req, res, next) => {
       next();
     });
   } else {
-    res.status(401).json("not auth").setHeader("authorization", req.headers.authorization);
+    res.status(401).json(authHeader).setHeader("authorization", req.headers.authorization);
   }
 }
 
