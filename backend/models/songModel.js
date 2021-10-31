@@ -13,16 +13,20 @@ const playlist = new mongoose.Schema({
   username: {type:String, unique: true},
   library:{
     favorite: {
-      album: "favorite.png",
+      album: { type: String, default: "favorite.jpg" },
       songs: [String],
     },
     recently: {
-      album: "sampleAlbum.jpg",
+      album: { type: String, default: "sampleAlbum.jpg" },
       songs: [String],
     },
   },
   mySongList: {
-    type: mongoose.Schema.Type.Mixed
+    songList: {
+      name: String,
+      album: { type: String, default: "sampleAlbum.jpg" },
+      songs: [String],
+    },
   },
 },{collection: "playlists"});
 playlist.methods.getList=()=>{
