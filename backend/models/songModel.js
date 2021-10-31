@@ -21,9 +21,7 @@ const playlist = new mongoose.Schema({
       songs: [String],
     },
   },
-  mySongList: {
-      type:mongoose.Schema.Types.Mixed
-  },
+  mySongList: {type:mongoose.Schema.Types.Mixed},
 },{collection: "playlists"});
 playlist.methods.getList=()=>{
   return{
