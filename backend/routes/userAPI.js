@@ -79,7 +79,7 @@ router.post("/register", (req, res) => {
   try {
     newUserPlaylist.save((err, user) => {
       if (err) {
-        res.status(403).json(err.errors);
+        res.status(402).json(err.errors);
       } else {
         res.status(200).json("Created initial list successfully");
       }
