@@ -21,7 +21,7 @@ const verify = (req, res, next) => {
       next();
     });
   } else {
-    res.status(401).json("not auth");
+    res.status(401).json("not auth", req.headers);
   }
 }
 
