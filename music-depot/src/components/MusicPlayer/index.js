@@ -112,26 +112,6 @@ const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
     const isLogin=useRef(false)
 
-
-
-  // const axiosJWT = axios.create();
-
-  // axiosJWT.interceptors.request.use(
-  //   async (config) => {
-  //     let currentDate = new Date();
-  //     const decodedToken = jwt_decode(state.user.token);
-  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
-  //       const data = await refreshToken();
-  //       config.headers["authorization"] = "Bearer " + data;
-  //       dispatch({ type: "REFRESH_TOKEN",token: data })
-  //       console.log('auto refresh token')
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
   
   
   useEffect(async ()=>{
