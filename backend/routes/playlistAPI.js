@@ -14,14 +14,14 @@ const verify = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, secret, (err, user) => {
       if (err) {
-        return res.status(401).json("Token is not valid");
+        return res.status(401).json("Token is not valid").setHeader("authorization", req.headers.authorization);
       }
       req.user = user;
       console.log("this is the user: ", user);
       next();
     });
   } else {
-    res.status(401).json(authHeader).setHeader("authorization", req.headers.authorization);
+    res.status(401).json("not auth");
   }
 }
 
