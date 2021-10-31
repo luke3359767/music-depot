@@ -70,7 +70,8 @@ router.post("/register", (req, res) => {
       },
     },
     mySongList: {
-      myPlaylist: {
+      songList: {
+        name:"myPlaylist",
         album: "sampleAlbum.jpg",
         songs: [],
       },
