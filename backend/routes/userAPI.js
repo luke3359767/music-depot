@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.js");
+const { playlistSchema } = require("../models/songModel.js")
 const passwordValidator = require("password-validator");
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
@@ -54,6 +55,39 @@ router.post("/register", (req, res) => {
   } catch (err) {
     console.error(`ERROR on ${err}`);
   }
+  const defaultdata={
+    username: req.body.registerInfo,
+    library: {
+      favorite: {
+        album: "favorite.png",
+        songs: [],
+      },
+      recently: {
+        album: "sampleAlbum.jpg",
+        songs: [],
+      },
+    },
+    mySongList: {
+      myPlaylist: {
+        album: "sampleAlbum.jpg",
+        songs: [],
+      },
+     
+    },
+  }
+  const newUserPlaylist=new playlistSchema(defaultdata);
+  try {
+    newUserPlaylist.save((err, user) => {
+      if (err) {
+        res.status(403).json(err.errors);
+      } else {
+        res.status(200).json("Created initial list successfully");
+      }
+    });
+  } catch (err) {
+    console.error(`ERROR on ${err}`);
+  }
+
 });
 
 

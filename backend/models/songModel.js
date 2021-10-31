@@ -11,11 +11,13 @@ const song = new mongoose.Schema({
 
 const playlist = new mongoose.Schema({
   username: {type:String, unique: true},
-  favorite: {
-    songs: [String],
-  },
-  recently: {
-    songs: [String],
+  library:{
+    favorite: {
+      songs: [String],
+    },
+    recently: {
+      songs: [String],
+    },
   },
   mySongList: {
     songList: {
@@ -24,12 +26,11 @@ const playlist = new mongoose.Schema({
       songs: [String],
     },
   },
-});
+},{collection: "playlists"});
 playlist.methods.getList=()=>{
   return{
     username: this.username,
-    favorite: this.favorite,
-    recently: this.recently,
+    library:this.library,
     mySongList: this.mySongList,
   }
 }
