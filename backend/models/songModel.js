@@ -22,7 +22,7 @@ const playlist = new mongoose.Schema({
     },
   },
   mySongList: {
-    
+    type: mongoose.Schema.Type.Mixed
   },
 },{collection: "playlists"});
 playlist.methods.getList=()=>{
