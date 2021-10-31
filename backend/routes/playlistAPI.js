@@ -25,7 +25,7 @@ const verify = (req, res, next) => {
 }
 
 router.post('/getplaylist',verify, (req, res)=>{
-  res.status(200).json(req.data)
+  res.status(200).json(req.user)
 })
 
 
