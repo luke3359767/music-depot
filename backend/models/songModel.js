@@ -23,9 +23,7 @@ const playlist = new mongoose.Schema({
   },
   mySongList: {
     songList: {
-      name: String,
-      album: { type: String, default: "sampleAlbum.jpg" },
-      songs: [String],
+      type:mongoose.Schema.Types.Mixed,
     },
   },
 },{collection: "playlists"});
