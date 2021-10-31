@@ -114,7 +114,7 @@ const reducer= (state,action)=>{
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
     const isLogin=useRef(false)
-    const refreshToken=useRef(null)
+    const accessToken=useRef(null)
 
   
   
@@ -123,6 +123,7 @@ const MusicPlayer=()=>{
     .then((res) => {
       dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
       isLogin.current=true
+      accessToken.current = res.data.token
       console.log("Auto Login")    
     }).catch((err) => err);
     // axios
@@ -133,7 +134,7 @@ const MusicPlayer=()=>{
       const interval=setInterval(()=>{
         axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
-          refreshToken.current = res.data.newAccessToken
+          accessToken.current = res.data.newAccessToken
           console.log('auto refresh token')
         });
 
@@ -144,8 +145,8 @@ const MusicPlayer=()=>{
   useEffect(() => {
     if (isLogin) {
       axios.post("https://music-depot.tech/api/playlistapi/getplaylist", {
-        headers: { authorization: `bearer ${refreshToken.current}`}
-      }).then((res) => { console.log(res) }).catch((err) => { console.log(refreshToken.current)})
+        headers: { authorization: `bearer ${accessToken.current}`}
+      }).then((res) => { console.log(res) }).catch((err) => { console.log(accessToken.current)})
     }
   },[isLogin])
   
