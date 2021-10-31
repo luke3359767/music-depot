@@ -56,7 +56,7 @@ router.post("/register", (req, res) => {
     console.error(`ERROR on ${err}`);
   }
   const defaultdata={
-    username: req.body.registerInfo,
+    username: req.body.registerInfo.username,
     library: {
       favorite: {
         album: "favorite.png",
