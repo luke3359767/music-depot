@@ -24,7 +24,7 @@ const verify = (req, res, next) => {
   }
 }
 
-router.post('/getplaylist', (req, res)=>{
+router.post('/getplaylist',verify, (req, res)=>{
   res.status(200).json(req.data)
 })
 
