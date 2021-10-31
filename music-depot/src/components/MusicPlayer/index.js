@@ -145,7 +145,7 @@ const MusicPlayer=()=>{
   useEffect(() => {
     if (isLogin) {
       axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
-        headers: { authorization: `bearer ${accessToken.current}`}
+        headers: { authorization: "bearer " +accessToken.current}
       }).then((res) => { console.log(res) }).catch((err) => { console.log(err.response)})
     }
   },[isLogin])
