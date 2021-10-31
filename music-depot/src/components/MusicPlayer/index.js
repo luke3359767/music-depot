@@ -146,7 +146,10 @@ const MusicPlayer=()=>{
     if (isLogin) {
       axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
         headers: { 'authorization': accessToken.current}
-      }).then((res) => { console.log(res) }).catch((err) => { console.log(err.response)})
+      }).then((res) => { console.log(res) }).catch((err) => { 
+        console.log(err.response) 
+        console.log(accessToken.current)
+      })
     }
   },[isLogin])
   
