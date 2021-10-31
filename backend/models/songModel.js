@@ -10,7 +10,7 @@ const song = new mongoose.Schema({
 });
 
 const playlist = new mongoose.Schema({
-  userID: {type:String, unique: true},
+  username: {type:String, unique: true},
   favorite: {
     songs: [String],
   },
@@ -25,6 +25,14 @@ const playlist = new mongoose.Schema({
     },
   },
 });
+playlist.methods.getList=()=>{
+  return{
+    username: this.username,
+    favorite: this.favorite,
+    recently: this.recently,
+    mySongList: this.mySongList,
+  }
+}
 
 const songSchema  = mongoose.model("songSchema", song);
 const playlistSchema = mongoose.model("playlistSchema", playlist );

@@ -26,7 +26,10 @@ const verify = (req, res, next) => {
 }
 
 router.post('/getplaylist',verify, (req, res)=>{
-  res.status(200).json(req.user)
+  playlistSchema.findOne({ username: req.user.username},(err,playlist)=>{
+    
+    res.status(200).json()
+  })
 })
 
 
