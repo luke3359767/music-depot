@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const songSchema = new mongoose.Schema({
+const song = new mongoose.Schema({
   _id: String ,
   name: String,
   artist: String,
@@ -9,7 +9,7 @@ const songSchema = new mongoose.Schema({
   length: String,
 });
 
-const playlistSchema = new mongoose.Schema({
+const playlist = new mongoose.Schema({
   userID: {type:String, unique: true},
   favorite: {
     songs: [String],
@@ -26,8 +26,9 @@ const playlistSchema = new mongoose.Schema({
   },
 });
 
-// module.exports = mongoose.model("songSchema", songSchema);
-module.exports = mongoose.model("playlistSchema", playlistSchema);
+const songSchema  = mongoose.model("songSchema", song);
+const playlistSchema = mongoose.model("playlistSchema", playlist );
+module.exports = { songSchema: songSchema, playlistSchema: playlistSchema }
 
 // PlaylilstList:{
 //   name:"favorite",
