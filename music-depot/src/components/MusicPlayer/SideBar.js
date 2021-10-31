@@ -40,7 +40,7 @@ const SideBar=({children})=>{
     const librarys = Object.keys(state.library);
     const playlists = Object.keys(state.mySongList);
     
-  const playlistRef = useRef(playlists);
+    const playlistRef=useRef(null);
    
 
     const addPlaylist = e=>{
