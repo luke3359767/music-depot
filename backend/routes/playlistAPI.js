@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt= require('jsonwebtoken')
 const User = require("../models/User.js");
+const {playlistSchema} = require("../models/songModel.js")
 
 const secret = "musicdepot";
 const refreshSecret = "topedcisum";
