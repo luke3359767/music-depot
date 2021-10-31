@@ -14,7 +14,7 @@ const verify = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, secret, (err, user) => {
       if (err) {
-        return res.status(401).json(req.headers.authorization).setHeader("authorization", req.headers.authorization);
+        return res.status(401).json("Token is not valid");
       }
       req.user = user;
       console.log("this is the user: ", user);
