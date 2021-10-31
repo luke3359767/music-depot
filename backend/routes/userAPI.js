@@ -39,6 +39,24 @@ router.post("/register", (req, res) => {
       });
   }
 
+
+
+  const newUser = new User(registerInfo);
+  newUser.setPassword(req.body.registerInfo.password);
+  try {
+    newUser.save((err, user) => {
+      if (err) {
+        res.status(403).json({
+          emailErr: err.errors.email?.message || null,
+          userErr: err.errors.username?.message || null,
+        });
+      } else {
+        res.status(200).json("Created user successfully");
+      }
+    });
+  } catch (err) {
+    console.error(`ERROR on ${err}`);
+  }
   const defaultdata = {
     username: req.body.registerInfo.username,
     library: {
@@ -71,24 +89,6 @@ router.post("/register", (req, res) => {
   } catch (err) {
     console.error(`ERROR on ${err}`);
   }
-  
-  const newUser = new User(registerInfo);
-  newUser.setPassword(req.body.registerInfo.password);
-  try {
-    newUser.save((err, user) => {
-      if (err) {
-        res.status(403).json({
-          emailErr: err.errors.email?.message || null,
-          userErr: err.errors.username?.message || null,
-        });
-      } else {
-        res.status(200).json("Created user successfully");
-      }
-    });
-  } catch (err) {
-    console.error(`ERROR on ${err}`);
-  }
-  
 
 });
 
