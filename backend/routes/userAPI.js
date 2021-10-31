@@ -39,23 +39,7 @@ router.post("/register", (req, res) => {
       });
   }
 
-  const newUser = new User(registerInfo);
-  newUser.setPassword(req.body.registerInfo.password);
-  try {
-    newUser.save((err, user) => {
-      if (err) {
-        res.status(403).json({
-          emailErr: err.errors.email?.message || null,
-          userErr: err.errors.username?.message || null,
-        });
-      } else {
-        res.status(200).json("Created user successfully");
-      }
-    });
-  } catch (err) {
-    console.error(`ERROR on ${err}`);
-  }
-  const defaultdata={
+  const defaultdata = {
     username: req.body.registerInfo.username,
     library: {
       favorite: {
@@ -72,10 +56,10 @@ router.post("/register", (req, res) => {
         album: "sampleAlbum.jpg",
         songs: [],
       },
-     
+
     },
   }
-  const newUserPlaylist=new playlistSchema(defaultdata);
+  const newUserPlaylist = new playlistSchema(defaultdata);
   try {
     newUserPlaylist.save((err, user) => {
       if (err) {
@@ -87,6 +71,24 @@ router.post("/register", (req, res) => {
   } catch (err) {
     console.error(`ERROR on ${err}`);
   }
+  
+  const newUser = new User(registerInfo);
+  newUser.setPassword(req.body.registerInfo.password);
+  try {
+    newUser.save((err, user) => {
+      if (err) {
+        res.status(403).json({
+          emailErr: err.errors.email?.message || null,
+          userErr: err.errors.username?.message || null,
+        });
+      } else {
+        res.status(200).json("Created user successfully");
+      }
+    });
+  } catch (err) {
+    console.error(`ERROR on ${err}`);
+  }
+  
 
 });
 
