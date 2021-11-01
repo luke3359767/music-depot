@@ -58,6 +58,7 @@ const SideBar=({children})=>{
                   dispatch({type:'ADD_PLAYLIST',playlistItem:list})
                   console.log(playlists)
                   console.log(list)
+                  console.log(list in playlists)
 
                   setState({...sidebarState,
                   modal:false,
