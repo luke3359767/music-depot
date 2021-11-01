@@ -37,7 +37,7 @@ router.post('/addplaylist',verify,(req, res)=>{
   playlistSchema.findOne({ username: req.user.username }, async (err, playlist) => {
 
     // playlist.mySongList[`${Object.keys(newPlaylist)[0]}`] == req.body.newPlaylist[`${Object.keys(newPlaylist)[0]}`]
-    playlist.mySongList['123'] == req.body.newPlaylist
+    await playlist.mySongList['123'] == req.body.newPlaylist
 
     await playlist.save()
     res.status(200).json(playlist)
