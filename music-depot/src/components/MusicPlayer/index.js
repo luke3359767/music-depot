@@ -113,46 +113,43 @@ const reducer= (state,action)=>{
 
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
-    const isLogin=useRef(false)
-    const accessToken=useRef(null)
 
   
   
   useEffect(()=>{
     (async function(){
       await axios.post("https://music-depot.tech/api/userapi/autologin")
-      .then((res) => {
-        dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
-        isLogin.current=true
-        accessToken.current = res.data.token
+      .then(async (res) => {
+        await dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
         console.log("Auto Login")    
       }).catch((err) => err);
     })()
   },[])
   
   useEffect(()=>{
-    if(isLogin.current){
+    if(state.isLogin){
       const interval=setInterval(()=>{
         axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
-          accessToken.current = res.data.newAccessToken
           console.log('auto refresh token')
         });
 
       },1*6*1000)
     }
-  },[isLogin.current])
+  }, [state.isLogin])
 
   useEffect(() => {
-    if (isLogin.current) {
-      axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
-        headers: { 'authorization': accessToken.current}
-      }).then((res) => { console.log(res) }).catch((err) => { 
-        console.log(err.response) 
-        console.log(accessToken.current)
-      })
+    if (state.isLogin) {
+      (async function(){
+        await axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
+          headers: { 'authorization': state.user.token}
+        }).then(async (res) => { console.log(res) }).catch((err) => { 
+          console.log(err.response) 
+          console.log(state.user)
+        })
+      })()
     }
-  },[isLogin.current])
+  }, [state.isLogin])
   
     return(
        <StoreContext.Provider value={{state,dispatch}}>
@@ -160,7 +157,7 @@ const MusicPlayer=()=>{
             <Global styles={GlobalCSS} />
             <Route exact path="/">
               {
-                (isLogin.current)||(state.isLogin)?(
+               (state.isLogin)?(
                   <div className="MusicPlayer"  css={CSS}>
                       <TopBar/>
                       <SideBar/>
