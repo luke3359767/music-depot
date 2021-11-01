@@ -57,6 +57,8 @@ const SideBar=({children})=>{
         }else{
                   dispatch({type:'ADD_PLAYLIST',playlistItem:list})
                   console.log(playlists)
+                  console.log(list)
+
                   setState({...sidebarState,
                   modal:false,
                   toast:"Your playlist was created successfully"
