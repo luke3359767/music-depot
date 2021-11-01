@@ -131,7 +131,7 @@ const MusicPlayer=()=>{
   },[])
   
   useEffect(()=>{
-    if(isLogin){
+    if(isLogin.current){
       const interval=setInterval(()=>{
         axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
@@ -141,10 +141,10 @@ const MusicPlayer=()=>{
 
       },1*6*1000)
     }
-  },[isLogin])
+  },[isLogin.current])
 
   useEffect(() => {
-    if (isLogin) {
+    if (isLogin.current) {
       axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
         headers: { 'authorization': accessToken.current}
       }).then((res) => { console.log(res) }).catch((err) => { 
@@ -152,7 +152,7 @@ const MusicPlayer=()=>{
         console.log(accessToken.current)
       })
     }
-  },[isLogin])
+  },[isLogin.current])
   
     return(
        <StoreContext.Provider value={{state,dispatch}}>
