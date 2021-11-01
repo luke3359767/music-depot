@@ -61,24 +61,10 @@ const initialState = {
 
   },
   library:{
-      favorite: {
-        album: "favorite.png",
-        songs: ["1111"],
-      },
-      recently: {
-        album: "sampleAlbum.jpg",
-        songs: ["1111"],
-      },
+
   },
   mySongList: {
-    TestList1: {
-      album: "sampleAlbum.jpg",
-      songs: ["1111"],
-    },
-    TestList2: {
-      album: "sampleAlbum.jpg",
-      songs: ["1111"],
-    },
+  
   },
 };
 
@@ -146,7 +132,6 @@ const MusicPlayer=()=>{
           headers: { 'authorization': "bearer "+state.user.token}
         }).then(async (res) => {
           await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library ,mySongList:res.data.mySongList})
-          await console.log(state)
 
           }).catch((err) => { 
           console.log(err.response) 
