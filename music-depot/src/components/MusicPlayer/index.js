@@ -50,6 +50,7 @@ const DEFAULT_PLAYLIST='home';
 const initialState = {
   currentPlaylist: DEFAULT_PLAYLIST,
   isLogin:false,
+  isListLoaded:false,
   mainList: {
     home: {},
     browse: {},
@@ -134,7 +135,7 @@ const MusicPlayer=()=>{
           console.log('auto refresh token')
         });
 
-      },1*6*1000)
+      },10*60*1000)
     }
   }, [state.isLogin])
 
@@ -143,7 +144,10 @@ const MusicPlayer=()=>{
       (async function(){
         await axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
           headers: { 'authorization': "bearer "+state.user.token}
-        }).then(async (res) => { console.log(res) }).catch((err) => { 
+        }).then(async (res) => {
+          await 
+           console.log(res)
+          }).catch((err) => { 
           console.log(err.response) 
           console.log(state.user)
         })
