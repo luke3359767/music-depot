@@ -148,7 +148,7 @@ const MusicPlayer=()=>{
         headers: { 'authorization': accessToken.current}
       }).then((res) => { console.log(res) }).catch((err) => { 
         console.log(err.response) 
-        console.log(accessToken.current)
+        console.log(state.user.token)
       })
     }
   },[isLogin])
