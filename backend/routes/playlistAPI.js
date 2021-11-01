@@ -36,9 +36,9 @@ router.post('/addplaylist',verify,(req, res)=>{
   const newPlaylist=req.body.newPlaylist
   playlistSchema.findOne({ username: req.user.username }, (err, playlist) => {
 
-  //   playlist.mySongList[`${Object.keys(newPlaylist)[0]}`] == req.body.newPlaylist[`${Object.keys(newPlaylist)[0]}`]
-  //   await playlistSchema.save()
-    res.status(200).json(playlist)
+    playlist.mySongList[`${Object.keys(newPlaylist)[0]}`] == req.body.newPlaylist[`${Object.keys(newPlaylist)[0]}`]
+    playlistSchema.save()
+    res.status(200).json("saved")
   })
 })
 
