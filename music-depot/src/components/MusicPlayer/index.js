@@ -107,7 +107,7 @@ const reducer= (state,action)=>{
             return{...state,user:{...state.user,token:action.token}}
         
         case 'LOAD_PLAYLIST':
-            return{...state,library:action.library,mySongList:action.mySongList}
+            return{...state,library:action.library,mySongList:action.mySongList,isListLoaded:true}
     }
     return state
 }
@@ -147,6 +147,7 @@ const MusicPlayer=()=>{
         }).then(async (res) => {
           await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library ,mySongList:res.data.mySongList})
           console.log(state)
+
           }).catch((err) => { 
           console.log(err.response) 
           console.log(state.user)
