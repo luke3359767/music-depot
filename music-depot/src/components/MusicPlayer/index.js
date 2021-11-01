@@ -118,15 +118,16 @@ const MusicPlayer=()=>{
 
   
   
-  useEffect(async ()=>{
-    await axios.post("https://music-depot.tech/api/userapi/autologin")
-    .then((res) => {
-      dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
-      isLogin.current=true
-      accessToken.current = res.data.token
-      console.log("Auto Login")    
-    }).catch((err) => err);
-    // axios
+  useEffect(()=>{
+    (async function(){
+      await axios.post("https://music-depot.tech/api/userapi/autologin")
+      .then((res) => {
+        dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
+        isLogin.current=true
+        accessToken.current = res.data.token
+        console.log("Auto Login")    
+      }).catch((err) => err);
+    })()
   },[])
   
   useEffect(()=>{
@@ -142,7 +143,7 @@ const MusicPlayer=()=>{
     }
   },[isLogin])
 
-  useEffect(async() => {
+  useEffect(() => {
     if (isLogin) {
       axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
         headers: { 'authorization': accessToken.current}
