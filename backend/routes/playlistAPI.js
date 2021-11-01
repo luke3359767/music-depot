@@ -38,7 +38,7 @@ router.post('/addplaylist',verify,(req, res)=>{
 
   //   playlist.mySongList[`${Object.keys(newPlaylist)[0]}`] == req.body.newPlaylist[`${Object.keys(newPlaylist)[0]}`]
   //   await playlistSchema.save()
-  console.log(newPlaylist)
+  res.status(200).json(newPlaylist)
   // })
 })
 
