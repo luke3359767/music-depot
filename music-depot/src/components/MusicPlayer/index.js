@@ -139,7 +139,7 @@ const MusicPlayer=()=>{
           console.log('auto refresh token')
         });
 
-      },10*60*1000)
+      },1*6*1000)
     }
   },[isLogin])
 
