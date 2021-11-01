@@ -43,9 +43,8 @@ const SideBar=({children})=>{
     const playlistRef=useRef(null);
    
 
-    const addPlaylist = e=>{
+    const addPlaylist = (e)=>{
         e.preventDefault()
-        
         const list=playlistRef.current.value
         if (list in playlists) {
           setState({
