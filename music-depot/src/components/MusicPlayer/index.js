@@ -131,8 +131,8 @@ const MusicPlayer=()=>{
   
   useEffect(()=>{
     if(isLogin){
-      const interval=setInterval(async ()=>{
-        await axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
+      const interval=setInterval(()=>{
+        axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
           accessToken.current = res.data.newAccessToken
           console.log('auto refresh token')
@@ -142,13 +142,13 @@ const MusicPlayer=()=>{
     }
   },[isLogin])
 
-  useEffect(() => {
+  useEffect(async() => {
     if (isLogin) {
       axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
         headers: { 'authorization': accessToken.current}
       }).then((res) => { console.log(res) }).catch((err) => { 
         console.log(err.response) 
-        console.log(state.user.token)
+        console.log(accessToken.current)
       })
     }
   },[isLogin])
