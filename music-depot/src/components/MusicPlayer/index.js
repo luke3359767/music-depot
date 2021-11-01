@@ -146,7 +146,7 @@ const MusicPlayer=()=>{
           headers: { 'authorization': "bearer "+state.user.token}
         }).then(async (res) => {
           await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library ,mySongList:res.data.mySongList})
-          console.log(state)
+          await console.log(state)
 
           }).catch((err) => { 
           console.log(err.response) 
