@@ -40,7 +40,7 @@ router.post('/addplaylist',verify,(req, res)=>{
     await playlist.mySongList== req.body.newPlaylist
 
     await playlist.save()
-    res.status(200).json(playlist)
+    res.status(200).json(playlist.mySongList)
   })
 })
 
