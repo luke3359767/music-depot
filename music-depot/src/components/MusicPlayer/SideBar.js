@@ -54,14 +54,14 @@ const SideBar=({children})=>{
             toast: "Your playlist is ALREADY existed",
           });
           return;
+        }else{
+                  dispatch({type:'ADD_PLAYLIST',playlistItem:list})
+                  
+                  setState({...sidebarState,
+                  modal:false,
+                  toast:"Your playlist was created successfully"
+                  })
         }
-
-        dispatch({type:'ADD_PLAYLIST',playlistItem:list})
-        
-        setState({...sidebarState,
-        modal:false,
-        toast:"Your playlist was created successfully"
-        })
         
     }
     const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
