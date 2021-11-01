@@ -73,7 +73,7 @@ const SideBar=({children})=>{
         <ul className="mainList">
           {mainLists.map((list) => (
             <li
-              keys={list}
+              key={list}
               className={list === state.currentPlaylist ? "active ll" : "ll"}
               onClick={() => {
                 dispatch({ type: "SET_PLAYLIST", playlistItem: list });
@@ -88,7 +88,7 @@ const SideBar=({children})=>{
           <li className="Title">Library</li>
           {librarys.map((list) => (
             <li
-              keys={list}
+              key={list}
               className={list === state.currentPlaylist ? "active ll" : "ll"}
               onClick={() => {
                 dispatch({ type: "SET_PLAYLIST", playlistItem: list });
@@ -104,7 +104,7 @@ const SideBar=({children})=>{
           <div className="scrollList">
             {playlists.map((list) => (
               <li
-                keys={list}
+                key={list}
                 className={
                   list === state.currentPlaylist ? "active ll pl" : "ll pl"
                 }
