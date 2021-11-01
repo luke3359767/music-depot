@@ -62,7 +62,7 @@ const SideBar=({children})=>{
         modal:false,
         toast:"Your playlist was created successfully"
         })
-        
+        console.log(state)
     }
     const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
     
