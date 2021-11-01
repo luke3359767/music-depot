@@ -142,7 +142,7 @@ const MusicPlayer=()=>{
     if (state.isLogin) {
       (async function(){
         await axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
-          headers: { 'authorization': state.user.token}
+          headers: { 'authorization': "bearer "+state.user.token}
         }).then(async (res) => { console.log(res) }).catch((err) => { 
           console.log(err.response) 
           console.log(state.user)
