@@ -131,8 +131,8 @@ const MusicPlayer=()=>{
   
   useEffect(()=>{
     if(isLogin){
-      const interval=setInterval(()=>{
-        axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
+      const interval=setInterval(async ()=>{
+        await axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
           accessToken.current = res.data.newAccessToken
           console.log('auto refresh token')
