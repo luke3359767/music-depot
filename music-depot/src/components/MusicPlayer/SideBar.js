@@ -46,7 +46,7 @@ const SideBar=({children})=>{
     const addPlaylist = (e)=>{
         e.preventDefault()
         const list=playlistRef.current.value
-        if (list in playlists) {
+      if (list in Object.keys(state.mySongList)) {
           setState({
             ...sidebarState,
             modal: false,
