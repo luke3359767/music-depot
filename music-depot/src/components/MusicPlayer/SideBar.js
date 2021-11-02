@@ -9,7 +9,8 @@ import {BiTimeFive} from 'react-icons/bi';
 import {FiRadio} from 'react-icons/fi';
 import {IoAddCircleOutline} from 'react-icons/io5';
 import {MdOutlineMusicNote} from 'react-icons/md';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -55,7 +56,19 @@ const SideBar=({children})=>{
           return;
         }
 
-        dispatch({type:'ADD_PLAYLIST',playlistItem:list})
+        // dispatch({type:'ADD_PLAYLIST',playlistItem:list})
+
+        (async function(){
+          await axios({ 
+            method:"POST",
+            url: 'https://music-depot.tech/api/playlistapi/addplaylist',
+            headers: { 'authorization': "bearer " + state.user.token },
+            data:{
+              playlistName:list,
+            }
+          }).then()
+    
+        })()
         
         setState({...sidebarState,
         modal:false,

@@ -33,12 +33,15 @@ router.post('/getplaylist',verify, (req, res)=>{
 })
 
 router.post('/addplaylist',verify,(req, res)=>{
-  const mySongList = req.body.mySongList
+  const playlistName = req.body.playlistName
   playlistSchema.findOne({ username: req.user.username },(err, playlist) => {
-    playlist.mySongList = mySongList
+    playlist.mySongList[playlistName] = {
+      album: "sampleAlbum.jpg",
+      songs: [],
+    }
     playlist.markModified('mySongList')
     playlist.save()
-    res.status(200).json(req.body.newPlaylist)
+    res.status(200).json(mySongList)
   
   })
 })
