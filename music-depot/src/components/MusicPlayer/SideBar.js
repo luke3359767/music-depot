@@ -56,7 +56,6 @@ const SideBar=({children})=>{
           return;
         }
 
-        // dispatch({type:'ADD_PLAYLIST',playlistItem:list})
 
         (async function(){
           await axios({ 
@@ -66,15 +65,20 @@ const SideBar=({children})=>{
             data:{
               playlistName:list,
             }
-          }).then()
+          }).then(async (res) => {
+            await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
+            // await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library, mySongList: res.data.mySongList })
+            setState({
+              ...sidebarState,
+              modal: false,
+              toast: "Your playlist was created successfully"
+            })
+            console.log(state)
+          })
     
         })()
         
-        setState({...sidebarState,
-        modal:false,
-        toast:"Your playlist was created successfully"
-        })
-        console.log(state)
+       
     }
     const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
     
