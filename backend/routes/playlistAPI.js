@@ -28,7 +28,7 @@ const verify = (req, res, next) => {
 router.post('/getplaylist',verify, (req, res)=>{
   playlistSchema.findOne({ username: req.user.username},(err,playlist)=>{
 
-    res.status(200).json(playlist)
+    res.status(200).json("Successfully Get Your Playlist")
   })
 })
 
@@ -41,7 +41,7 @@ router.post('/addplaylist',verify,(req, res)=>{
     }
     playlist.markModified('mySongList')
     playlist.save()
-    res.status(200).json(playlist.mySongList)
+    res.status(200).json("Your playlist was created successfully")
   
   })
 })
@@ -51,7 +51,7 @@ router.post('/deletePlaylist', verify, (req, res) => {
     delete playlist.mySongList[playlistName] 
     playlist.markModified('mySongList')
     playlist.save()
-    res.status(200).json(playlist.mySongList)
+    res.status(200).json("Your playlist was deleted successfully")
 
   })
 })
