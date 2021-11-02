@@ -45,6 +45,15 @@ router.post('/addplaylist',verify,(req, res)=>{
   
   })
 })
+router.post('/deletePlaylist', verify, (req, res) => {
+  const playlistName = req.body.playlistName
+  playlistSchema.findOne({ username: req.user.username }, (err, playlist) => {
+    delete playlist.mySongList[playlistName] 
+    playlist.markModified('mySongList')
+    playlist.save()
+    res.status(200).json(playlist.mySongList)
 
+  })
+})
 
 module.exports = router;
