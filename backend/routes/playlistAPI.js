@@ -40,7 +40,7 @@ router.post('/addplaylist',verify,(req, res)=>{
     // playlist.mySongList = newPlaylist
     playlist.markModified('mySongList')
     playlist.save()
-    res.status(200).json(`${ Object.keys(newPlaylist)[0]}`)
+    res.status(200).json(req.body.newPlaylist[`${Object.keys(newPlaylist)[0]}`])
   
   })
 })
