@@ -203,10 +203,10 @@ const Playlist = () => {
           <div className="left">
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
-          {/* <div className="right">
+          <div className="right">
             <button className="btn Play">P</button>
             <button className="btn D">D</button>
-          </div> */}
+          </div>
         </div>
          <table>
           <thead>
