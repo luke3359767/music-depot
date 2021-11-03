@@ -4,7 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
-
+import { FaPlay} from "react-icons/fa"
 function importAll(r) {
   let images = {};
   r.keys().map((item, index) => {
@@ -185,7 +185,7 @@ const Playlist = () => {
         </div>
         <div className="buttons">
           <div className="left">
-            <button className="btn Play">P</button>
+            <button className="btn Play"><FaPlay/></button>
             <button className="btn D">D</button>
           </div>
           {/* <div className="right">
