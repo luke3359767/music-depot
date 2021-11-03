@@ -143,7 +143,7 @@ const CSS = css`
     height: 55px;
     width: 55px;
     margin-top: 0px;
-    margin-left: 10px;
+    margin-left: 30px;
   }
 `;
 
