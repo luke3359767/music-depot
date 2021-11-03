@@ -129,6 +129,9 @@ const CSS = css`
     height: 60px;
     width: 60px;
   }
+  .play:hover ~ .D{
+        margin-left: 10px;
+  }
 `;
 
 const Playlist = () => {
