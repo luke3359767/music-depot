@@ -19,7 +19,8 @@ const images = importAll(
 
 const CSS = css`
   .icon{
-     vertical-align: -2px;
+     vertical-align: -5px;
+
   }
   .plHeaders {
     margin: 10px;
