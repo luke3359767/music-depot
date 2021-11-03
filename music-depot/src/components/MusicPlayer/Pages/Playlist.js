@@ -134,7 +134,7 @@ const CSS = css`
         margin-left: 29px;
   }
   .settingBtn{
-    background-color: #0f7cf1;
+    background-color: rgba(0, 0, 0, 0);;
     color: white;
     font-weight: bold;
     font-size: 13px;
@@ -217,7 +217,7 @@ const Playlist = () => {
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
           <div className="right">
-            <button className="settingBtn"><GoSettings/></button>
+            <button className="settingBtn"><GoSettings size={25}/></button>
           </div>
         </div>
          <table>
