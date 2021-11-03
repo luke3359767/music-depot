@@ -5,7 +5,7 @@ import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
 import { FaPlay} from "react-icons/fa"
-import { GoSettings} from "react-icons/go"
+import { GrMore} from "react-icons/gr"
 function importAll(r) {
   let images = {};
   r.keys().map((item, index) => {
@@ -217,7 +217,7 @@ const Playlist = () => {
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
           <div className="right">
-            <button className="settingBtn"><GoSettings size={25}/></button>
+            <button className="settingBtn"><GrMore size={25}/></button>
           </div>
         </div>
          <table>
