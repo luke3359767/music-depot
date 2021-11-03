@@ -185,7 +185,7 @@ const Playlist = () => {
         </div>
         <div className="buttons">
           <div className="left">
-            <button className="btn Play"><FaPlay/></button>
+            <button className="btn Play"><FaPlay size={40}/></button>
             <button className="btn D">D</button>
           </div>
           {/* <div className="right">
