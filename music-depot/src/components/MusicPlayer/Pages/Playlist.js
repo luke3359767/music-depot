@@ -130,7 +130,7 @@ const CSS = css`
     width: 60px;
   }
   .play:hover ~ .D{
-        margin-left: 20px;
+        margin-left: 25px;
   }
 `;
 
