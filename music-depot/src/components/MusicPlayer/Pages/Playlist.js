@@ -20,6 +20,7 @@ const images = importAll(
 const CSS = css`
   .icon{
      vertical-align: -5px;
+     
 
   }
   .plHeaders {
@@ -118,8 +119,16 @@ const CSS = css`
     width: 1x;
   }
   thead {
+    border-spacing: 10px;
   }
-  border-spacing: 10px;
+  .play{
+    transition: 0.1s ease;
+    
+  }
+  .play:hover{
+    height: 60px;
+    width: 60px;
+  }
 `;
 
 const Playlist = () => {
