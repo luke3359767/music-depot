@@ -143,7 +143,7 @@ const CSS = css`
     height: 55px;
     width: 55px;
     margin-top: 0px;
-    margin-left: 30px;
+    margin-left: 50px;
   }
 `;
 
@@ -217,7 +217,7 @@ const Playlist = () => {
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
           <div className="right">
-            <button className="settingBtn"><FiMoreHorizontal size={25}/></button>
+            <button className="settingBtn"><FiMoreHorizontal size={30}/></button>
           </div>
         </div>
          <table>
