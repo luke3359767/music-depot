@@ -18,6 +18,9 @@ const images = importAll(
 );
 
 const CSS = css`
+  .icon{
+     vertical-align: -2px;
+  }
   .plHeaders {
     margin: 10px;
     display: flex;
@@ -185,7 +188,7 @@ const Playlist = () => {
         </div>
         <div className="buttons">
           <div className="left">
-            <button className="btn Play"><FaPlay size={25}/></button>
+            <button className="btn Play"><FaPlay size={25} className="icon"/></button>
             <button className="btn D">D</button>
           </div>
           {/* <div className="right">
