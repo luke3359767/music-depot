@@ -219,6 +219,13 @@ const Playlist = () => {
           </div>
           <div className="right">
             <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
+            <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
+              <ul>
+                <li><a href="/messages">Messages</a></li>
+                <li><a href="/trips">Trips</a></li>
+                <li><a href="/saved">Saved</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
          <table>
