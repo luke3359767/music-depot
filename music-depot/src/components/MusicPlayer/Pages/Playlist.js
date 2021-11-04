@@ -221,9 +221,9 @@ const Playlist = () => {
             <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
             <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
               <ul>
-                <li><a href="/messages">Messages</a></li>
-                <li><a href="/trips">Trips</a></li>
-                <li><a href="/saved">Saved</a></li>
+                <li><a href="/">Rename</a></li>
+                <li><a href="/">Delete</a></li>
+                <li><a href="/">Other</a></li>
               </ul>
             </nav>
           </div>
