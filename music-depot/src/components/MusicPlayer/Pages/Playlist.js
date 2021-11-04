@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
@@ -157,8 +157,6 @@ const Playlist = () => {
       ? "library"
       : "mySongList";
       
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
 
       
 
@@ -219,14 +217,7 @@ const Playlist = () => {
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
           <div className="right">
-            <button className="settingBtn" onClick={setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
-            {/* <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
-              <ul>
-                <li><a href="/messages">Messages</a></li>
-                <li><a href="/trips">Trips</a></li>
-                <li><a href="/saved">Saved</a></li>
-              </ul>
-            </nav> */}
+            <button className="settingBtn"><FiMoreHorizontal size={35}/></button>
           </div>
         </div>
          <table>
