@@ -158,7 +158,6 @@ const Playlist = () => {
       : "mySongList";
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
 
       
 
@@ -219,7 +218,7 @@ const Playlist = () => {
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
           <div className="right">
-            <button className="settingBtn"><FiMoreHorizontal size={35}/></button>
+            <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
           </div>
         </div>
          <table>
