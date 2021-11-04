@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef} from "react";
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
@@ -156,7 +156,9 @@ const Playlist = () => {
     state.currentPlaylist === "favorite" || state.currentPlaylist === "recently"
       ? "library"
       : "mySongList";
-      
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+  const onClick = () => setIsActive(!isActive);
 
       
 
