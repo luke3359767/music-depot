@@ -160,33 +160,33 @@ const Playlist = () => {
 
       
 
-  const [reademail,setreademail]=useState();
-  const [emailState, setEmail] = useState("99999@gmail.com");
+  // const [reademail,setreademail]=useState();
+  // const [emailState, setEmail] = useState("99999@gmail.com");
 
-  useEffect(() => {
-    axios.get("https://music-depot.tech/api/testemail/read")
-    .then((response)=>{
-      setreademail(response['data'][1]['_id'])
-    })
-  }, []);
+  // useEffect(() => {
+  //   axios.get("https://music-depot.tech/api/testemail/read")
+  //   .then((response)=>{
+  //     setreademail(response['data'][1]['_id'])
+  //   })
+  // }, []);
 
-  const updateEmail= (id) => {
-    axios.put("https://music-depot.tech/api/testemail/update", {
-      id:id,
-      newemail: "new@gmail.com",
-    });
-  }
+  // const updateEmail= (id) => {
+  //   axios.put("https://music-depot.tech/api/testemail/update", {
+  //     id:id,
+  //     newemail: "new@gmail.com",
+  //   });
+  // }
 
-  const sendEmail = () => {
-    axios
-      .post("https://music-depot.tech/api/testemail/insert", {
-        email: emailState,
-      })
-      .then(console.log("SUCCESS POST"))
-      .catch((err) => {
-        console.error(`Unsuceess ${err}`);
-      });
-  };
+  // const sendEmail = () => {
+  //   axios
+  //     .post("https://music-depot.tech/api/testemail/insert", {
+  //       email: emailState,
+  //     })
+  //     .then(console.log("SUCCESS POST"))
+  //     .catch((err) => {
+  //       console.error(`Unsuceess ${err}`);
+  //     });
+  // };
 
 
 
