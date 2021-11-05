@@ -198,6 +198,15 @@ const Playlist = () => {
       : "mySongList";
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef,false);
+
+  const renameList=()=>{
+    console.log("renameList")
+  }
+
+  const deleteList = () => {
+    console.log("deleteList")
+  }
+
   
       
 
@@ -261,8 +270,8 @@ const Playlist = () => {
             <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
             <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
               <ul>
-                <li><a href="/">Rename</a></li>
-                <li><a href="/">Delete</a></li>
+                <li><a onClick={renameList}>Rename</a></li>
+                <li><a onClick={deleteList}>Delete</a></li>
                 <li><a href="/">Other</a></li>
               </ul>
             </nav>
