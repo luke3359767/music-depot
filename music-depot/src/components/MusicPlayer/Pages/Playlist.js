@@ -98,6 +98,7 @@ const CSS = css`
   color: #333333;
   padding: 15px 20px;
   display: block;
+  cursor:pointer;
 }
 
   .btn {
