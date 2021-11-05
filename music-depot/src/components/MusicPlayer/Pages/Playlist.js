@@ -2,6 +2,8 @@
 /** @jsx jsx */
 import React, { useContext, useState, useEffect, useRef} from "react";
 import { useDetectOutsideClick } from '../../../hooks/useDetectOutsideClick'
+import { useHistory } from 'react-router-dom';
+
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
@@ -189,6 +191,7 @@ const CSS = css`
 `;
 
 const Playlist = () => {
+  const history = useHistory();
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
@@ -207,6 +210,24 @@ const Playlist = () => {
 
   const deleteList = () => {
     console.log("deleteList")
+
+      (async function () {
+        await axios({
+          method: "POST",
+          url: 'https://music-depot.tech/api/playlistapi/deleteplaylist',
+          headers: { 'authorization': "bearer " + state.user.token },
+          data: {
+            playlistName: state.currentPlaylist,
+          }
+        }).then(async (res) => {
+          const deletedList=state.mySongList
+          await delete deletedList[state.currentPlaylist]
+          await dispatch({ type: 'DELETE_PLAYLIST', deletedList: deletedList })
+          history.push('/');
+         
+        })
+
+      })()
     setIsActive(false)
   }
 

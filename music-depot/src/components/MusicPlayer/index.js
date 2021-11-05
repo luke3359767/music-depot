@@ -94,6 +94,9 @@ const reducer= (state,action)=>{
         
         case 'LOAD_PLAYLIST':
             return{...state,library:action.library,mySongList:action.mySongList,isListLoaded:true}
+        case 'DELETE_PLAYLIST':
+            return {...state,mySongList:action.deletedList}
+        default: return null
        
     }
     return state
