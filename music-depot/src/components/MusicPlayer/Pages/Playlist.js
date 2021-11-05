@@ -197,6 +197,22 @@ const Playlist = () => {
       : "mySongList";
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
+        setIsActive(!isActive);
+      }
+      };
+
+    // If the item is active (ie open) then listen for clicks
+    if (isActive) {
+      window.addEventListener('click', pageClickEvent);
+    }
+    return () => {
+      window.removeEventListener('click', pageClickEvent);
+    }
+
+  }, [isActive]);
 
       
 
