@@ -202,10 +202,12 @@ const Playlist = () => {
 
   const renameList=()=>{
     console.log("renameList")
+    setIsActive(false)
   }
 
   const deleteList = () => {
     console.log("deleteList")
+    setIsActive(false)
   }
 
   
