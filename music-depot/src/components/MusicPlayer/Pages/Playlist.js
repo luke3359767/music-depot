@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { useContext, useState, useEffect, useRef} from "react";
+import { useDetectOutsideClick } from '../../../hooks/useDetectOutsideClick'
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
@@ -196,24 +197,8 @@ const Playlist = () => {
       ? "library"
       : "mySongList";
   const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
-  useEffect(() => {
-    const pageClickEvent = (e) => {
-      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
-        setIsActive(!isActive);
-      }
-      };
-
-    // If the item is active (ie open) then listen for clicks
-    if (isActive) {
-      window.addEventListener('click', pageClickEvent);
-    }
-    return () => {
-      window.removeEventListener('click', pageClickEvent);
-    }
-
-  }, [isActive]);
-
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef,false);
+  
       
 
   // const [reademail,setreademail]=useState();
