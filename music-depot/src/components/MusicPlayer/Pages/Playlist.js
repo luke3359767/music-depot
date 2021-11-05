@@ -220,7 +220,7 @@ const Playlist = () => {
         }).then(async (res) => {
           const deletedList=state.mySongList
           await delete deletedList[state.currentPlaylist]
-          await dispatch({ type: 'DELETE_PLAYLIST', deletedList: deletedList })
+          dispatch({ type: 'DELETE_PLAYLIST', deletedList: deletedList })
           history.push('/');
          
         })
