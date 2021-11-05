@@ -269,7 +269,7 @@ const Playlist = () => {
           <img
             src={
               images[state[whereIsPlaylist][state.currentPlaylist]["album"]]
-      
+              .default
             }
             className="album"
           />
