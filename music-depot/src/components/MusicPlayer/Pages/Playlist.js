@@ -218,9 +218,17 @@ const Playlist = () => {
             playlistName: state.currentPlaylist,
           }
         }).then(async (res) => {
-          const deletedList=state.mySongList
-          await delete deletedList[state.currentPlaylist]
-          dispatch({ type: 'DELETE_PLAYLIST', deletedList: deletedList })
+          (async function () {
+            await axios.post("https://music-depot.tech/api/playlistapi/getplaylist", {}, {
+              headers: { 'authorization': "bearer " + state.user.token }
+            }).then(async (res) => {
+              await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library, mySongList: res.data.mySongList })
+
+            }).catch((err) => {
+              console.log(err.response)
+              console.log(state.user)
+            })
+          })()
           history.push('/');
          
         })
