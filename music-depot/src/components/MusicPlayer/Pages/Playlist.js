@@ -270,7 +270,7 @@ const Playlist = () => {
             src={
               images[state[whereIsPlaylist][state.currentPlaylist]["album"]]
       
-            } default="sampleabum.png"
+            }
             className="album"
           />
           <div className="Header-content">
