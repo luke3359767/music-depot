@@ -219,8 +219,7 @@ const Playlist = () => {
           }
         }).then(async (res) => {
           
-          history.push('/');
-         
+          dispatch({ type: "SET_PLAYLIST", playlistItem: "home" });
         })
 
       })()
