@@ -209,8 +209,6 @@ const Playlist = () => {
   }
 
   const deleteList = () => {
-    console.log("deleteList")
-
       (async function () {
         await axios({
           method: "POST",
