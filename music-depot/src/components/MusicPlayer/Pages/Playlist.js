@@ -220,7 +220,7 @@ const Playlist = () => {
         }).then(async (res) => {
           
           dispatch({ type: "SET_PLAYLIST", playlistItem: "home" });
-          if (!(Object.keys(state.mySongList).length === 0 && (state.mySongList).constructor === Object)){
+          if (!(Object.keys(res.data.mySongList).length === 0 && (res.data.mySongList).constructor === Object)){
             console.log("deleted")
             dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
           }
