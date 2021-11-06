@@ -51,7 +51,7 @@ router.post('/deletePlaylist', verify, (req, res) => {
     delete playlist.mySongList[playlistName] 
     playlist.markModified('mySongList')
     playlist.save()
-    res.status(200).json("Your playlist was deleted successfully")
+    res.status(200).json(playlist)
 
   })
 })
