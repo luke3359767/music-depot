@@ -92,8 +92,8 @@ const reducer= (state,action)=>{
         case'REFRESH_TOKEN':
             return{...state,user:{...state.user,token:action.token}}
         
-        case 'LOAD_PLAYLIST':
-            return{...state,library:action.library,mySongList:action.mySongList,isListLoaded:true}
+        case 'LOAD_LIBRARY':
+            return{...state,library:action.library}
         case 'LOAD_MYSONGLIST':
             return { ...state, mySongList: action.mySongList }
 
@@ -131,12 +131,15 @@ const MusicPlayer=()=>{
   }, [state.isLogin])
 
   useEffect(() => {
-    if (state.isLogin && !(Object.keys(state.mySongList).length === 0 && (state.mySongList).constructor === Object)) {
+    if (state.isLogin ) {
       (async function(){
         await axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
           headers: { 'authorization': "bearer "+state.user.token}
         }).then(async (res) => {
-          await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library ,mySongList:res.data.mySongList})
+          await dispatch({ type: "LOAD_LIBRARY", library: res.data.library})
+          if (!(Object.keys(state.mySongList).length === 0 && (state.mySongList).constructor === Object)){
+            await dispatch({ type: "LOAD_MYSONGLIST",mySongList:res.data.mySongList})
+          }
           
           }).catch((err) => { 
           console.log(err.response) 
