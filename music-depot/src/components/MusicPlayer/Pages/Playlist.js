@@ -221,7 +221,7 @@ const Playlist = () => {
           
           dispatch({ type: "SET_PLAYLIST", playlistItem: "home" });
           if (!(Object.keys(state.mySongList).length === 0 && (state.mySongList).constructor === Object)){
-
+            console.log("deleted")
             dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
           }
         })
