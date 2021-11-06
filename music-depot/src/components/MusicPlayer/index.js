@@ -131,7 +131,7 @@ const MusicPlayer=()=>{
   }, [state.isLogin])
 
   useEffect(() => {
-    if (state.isLogin) {
+    if (state.isLogin && !(Object.keys(state.mySongList).length === 0 && (state.mySongList).constructor === Object)) {
       (async function(){
         await axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
           headers: { 'authorization': "bearer "+state.user.token}
