@@ -291,16 +291,21 @@ const Playlist = () => {
           <div className="left">
             <button className="btn play"><FaPlay size={25} className="icon"/></button>
           </div>
-          <div className="right">
-            <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
-            <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
-              <ul>
-                <li><a onClick={renameList}>Rename</a></li>
-                <li><a onClick={deleteList}>Delete</a></li>
-                <li><a href="/">Other</a></li>
-              </ul>
-            </nav>
-          </div>
+          {
+            !(state.currentPlaylist == "favorite" || state.currentPlaylist == "recently")?
+              <div className="right">
+                <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
+                <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
+                  <ul>
+                    <li><a onClick={renameList}>Rename</a></li>
+                    <li><a onClick={deleteList}>Delete</a></li>
+                    <li><a href="/">Other</a></li>
+                  </ul>
+                </nav>
+              </div>
+              
+            :{}
+          }
         </div>
          <table>
           <thead>
