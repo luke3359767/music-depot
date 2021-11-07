@@ -70,7 +70,7 @@ const CSS = css`
   border-radius: 8px;
   position: absolute;
   top: 250px;
-  right: 50px;
+  right: 70px;
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
