@@ -150,17 +150,6 @@ const SideBar=({children})=>{
         </p>
 
         <Modal show={modalState} close={handleModal}>
-          <ToastContainer
-            position="top-center"
-            autoClose={2500}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
           <form onSubmit={addPlaylist}>
             <div className="content-wrap">
               <div className="modalTitle">New Playlist</div>
@@ -177,6 +166,17 @@ const SideBar=({children})=>{
             </div>
           </form>
         </Modal>
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
 
         {/* <Toast
           toast={sidebarState.toast}
