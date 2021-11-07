@@ -294,7 +294,7 @@ const Playlist = () => {
           {
             state.currentPlaylist != "favorite" && state.currentPlaylist != "recently"?
              ( <div className="right">
-                <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
+                <span className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></span>
                 <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
                   <ul>
                     <li><a onClick={renameList}>Rename</a></li>
