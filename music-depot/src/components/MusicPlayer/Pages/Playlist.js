@@ -72,7 +72,7 @@ const CSS = css`
   top: 250px;
   right: 70px;
   width: 300px;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
