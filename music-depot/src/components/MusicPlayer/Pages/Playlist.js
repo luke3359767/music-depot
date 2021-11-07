@@ -62,7 +62,7 @@ const CSS = css`
   .right {
     margin-left: auto;
     margin-right: 0;
-    position: relative;
+    // position: relative;
 
   }
   .menu {
