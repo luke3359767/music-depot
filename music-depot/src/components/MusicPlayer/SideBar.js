@@ -48,10 +48,11 @@ const SideBar=({children})=>{
     const playlistRef=useRef(null);
    
 
-    const addPlaylist = async(e)=>{
+    const addPlaylist = (e)=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
+        (async()=>{
           await toast("Wow so easy !")
           // setState({
           //   ...sidebarState,
@@ -59,6 +60,7 @@ const SideBar=({children})=>{
           //   toast: "Your playlist is ALREADY existed",
           // });
          setModelState(false)
+        })()
           return;
         }
 
