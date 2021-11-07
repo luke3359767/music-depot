@@ -59,6 +59,7 @@ const SideBar=({children})=>{
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
+          transition: "Slide",
         });
           // setState({
           //   ...sidebarState,
