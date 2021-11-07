@@ -77,7 +77,7 @@ const SideBar=({children})=>{
             }
           }).then(async (res) => {
             await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-            toast.success('Your playlist was created successfully!', {
+            toast.success('Created successfully!', {
               position: "top-center",
               autoClose: 2000,
               hideProgressBar: false,
