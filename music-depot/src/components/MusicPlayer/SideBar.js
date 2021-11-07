@@ -51,11 +51,10 @@ const SideBar=({children})=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
-          // setState({
-          //   ...sidebarState,
-          //   modal: false,
-          //   toast: "Your playlist is ALREADY existed",
-          // });
+          setState({
+            ...sidebarState,
+            modal: false,
+          });
           toast("Wow so easy !")
           return;
         }
@@ -147,7 +146,17 @@ const SideBar=({children})=>{
         </p>
 
         <Modal show={sidebarState.modal} close={handleModal}>
-          <ToastContainer />
+          <ToastContainer
+            position="top-center"
+            autoClose={2500}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <form onSubmit={addPlaylist}>
             <div className="content-wrap">
               <div className="modalTitle">New Playlist</div>
