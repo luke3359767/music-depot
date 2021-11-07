@@ -69,8 +69,8 @@ const CSS = css`
   background: #ffffff;
   border-radius: 8px;
   position: absolute;
-  top: 200px;
-  right: 0;
+  top: 250px;
+  right: 50px;
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
