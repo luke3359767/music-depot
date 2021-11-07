@@ -40,14 +40,9 @@ const SideBar=({children})=>{
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library);
     const playlists = useRef([]);
-  useEffect(() => {
-    if ((state.mySongList == null || state.mySongList == undefined)) {
-      playlists.current = []
-    } else {
-      playlists.current = Object.keys(state.mySongList)
-    }
-  }, [])
+
     useEffect(() => {
+      console.log("loading list")
       if ((state.mySongList == null || state.mySongList == undefined)){
         playlists.current = []
       }else{
