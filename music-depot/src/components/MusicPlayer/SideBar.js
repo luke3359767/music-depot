@@ -39,7 +39,6 @@ const SideBar=({children})=>{
     const { state, dispatch } = useContext(StoreContext)    
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library);
-    console.log(state)
     const playlists = Object.keys(state.mySongList)||[];
     
     
