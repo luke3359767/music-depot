@@ -136,6 +136,7 @@ const MusicPlayer=()=>{
         await axios.post("https://music-depot.tech/api/playlistapi/getplaylist",{}, {
           headers: { 'authorization': "bearer "+state.user.token}
         }).then(async (res) => {
+          console.log(res.data)
           await dispatch({ type: "LOAD_LIBRARY", library: res.data.library})
           if (!(Object.keys(state.mySongList).length === 0 && (state.mySongList).constructor === Object)){
             await dispatch({ type: "LOAD_MYSONGLIST",mySongList:res.data.mySongList})
