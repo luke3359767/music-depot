@@ -59,7 +59,7 @@ const SideBar=({children})=>{
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          transition: "Slide",
+          
         });
           // setState({
           //   ...sidebarState,
@@ -184,6 +184,7 @@ const SideBar=({children})=>{
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          transition={"Slide"}
         />
 
         {/* <Toast
