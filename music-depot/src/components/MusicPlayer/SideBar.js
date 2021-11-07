@@ -52,15 +52,20 @@ const SideBar=({children})=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
-        (async()=>{
-          await toast("Wow so easy !")
+        toast.error('Your playlist is ALREADY existed!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
           // setState({
           //   ...sidebarState,
           //   modal: false,
           //   toast: "Your playlist is ALREADY existed",
           // });
          setModelState(false)
-        })()
           return;
         }
 
@@ -170,7 +175,7 @@ const SideBar=({children})=>{
         </Modal>
         <ToastContainer
           position="top-center"
-          autoClose={2500}
+          autoClose={2000}
           hideProgressBar={false}
           newestOnTop
           closeOnClick
