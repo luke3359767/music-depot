@@ -48,11 +48,11 @@ const SideBar=({children})=>{
     const playlistRef=useRef(null);
    
 
-    const addPlaylist = (e)=>{
+    const addPlaylist = async(e)=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
-          toast("Wow so easy !")
+          await toast("Wow so easy !")
           // setState({
           //   ...sidebarState,
           //   modal: false,
