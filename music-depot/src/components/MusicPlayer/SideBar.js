@@ -39,7 +39,14 @@ const SideBar=({children})=>{
     const { state, dispatch } = useContext(StoreContext)    
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library);
-    const playlists = useRef(Object.keys(state.mySongList) || []);
+    const playlists = useRef([]);
+  useEffect(() => {
+    if ((state.mySongList == null || state.mySongList == undefined)) {
+      playlists.current = []
+    } else {
+      playlists.current = Object.keys(state.mySongList)
+    }
+  }, [])
     useEffect(() => {
       if ((state.mySongList == null || state.mySongList == undefined)){
         playlists.current = []
