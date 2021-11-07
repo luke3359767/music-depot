@@ -22,11 +22,12 @@ import Toast from "./Toast";
 const SideBar=({children})=>{
     const history = useHistory();
     
-    const [sidebarState,setState]=useState({
-        modal:false,
-        toast:'',
-    })
+    // const [sidebarState,setState]=useState({
+    //     modal:false,
+    //     toast:'',
+    // })
 
+    const [modalState,setModelState]= useState(false)
     
     const iconlist={
         home:<AiOutlineHome className="icon"/>,
@@ -51,12 +52,13 @@ const SideBar=({children})=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
-        toast("Wow so easy !")
-          setState({
-            ...sidebarState,
-            modal: false,
-            toast: "Your playlist is ALREADY existed",
-          });
+          toast("Wow so easy !")
+          // setState({
+          //   ...sidebarState,
+          //   modal: false,
+          //   toast: "Your playlist is ALREADY existed",
+          // });
+         setModelState(false)
           return;
         }
 
@@ -71,18 +73,20 @@ const SideBar=({children})=>{
             }
           }).then(async (res) => {
             await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-            setState({
-              ...sidebarState,
-              modal: false,
-              toast: "Your playlist was created successfully"
-            })
+            // setState({
+            //   ...sidebarState,
+            //   modal: false,
+            //   toast: "Your playlist was created successfully"
+            // })
+            setModelState(false)
           })
     
         })()
         
        
     }
-    const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
+    // const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
+  const handleModal = () => setModelState(!modalState)
     
     return (
       <div className="SideBar" css={CSS}>
@@ -139,13 +143,13 @@ const SideBar=({children})=>{
         <p
           className="addList"
           onClick={() => {
-            setState({ ...sidebarState, modal: true });
+            setModelState(true)
           }}
         >
           {iconlist["addList"]} Add New Playlist
         </p>
 
-        <Modal show={sidebarState.modal} close={handleModal}>
+        <Modal show={modalState} close={handleModal}>
           <ToastContainer
             position="top-center"
             autoClose={2500}
@@ -174,10 +178,10 @@ const SideBar=({children})=>{
           </form>
         </Modal>
 
-        <Toast
+        {/* <Toast
           toast={sidebarState.toast}
           close={() => setState({ ...sidebarState, toast: "" })}
-        />
+        /> */}
       </div>
     );
 }
