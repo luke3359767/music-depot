@@ -51,11 +51,11 @@ const SideBar=({children})=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
-          // setState({
-          //   ...sidebarState,
-          //   modal: false,
-          //   toast: "Your playlist is ALREADY existed",
-          // });
+          setState({
+            ...sidebarState,
+            modal: false,
+            toast: "Your playlist is ALREADY existed",
+          });
           toast("Wow so easy !")
           return;
         }
@@ -71,7 +71,6 @@ const SideBar=({children})=>{
             }
           }).then(async (res) => {
             await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-            // await dispatch({ type: "LOAD_PLAYLIST", library: res.data.library, mySongList: res.data.mySongList })
             setState({
               ...sidebarState,
               modal: false,
