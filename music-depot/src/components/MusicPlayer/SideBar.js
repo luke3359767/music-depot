@@ -148,6 +148,7 @@ const SideBar=({children})=>{
 
         <Modal show={sidebarState.modal} close={handleModal}>
           <form onSubmit={addPlaylist}>
+          <ToastContainer />
             <div className="content-wrap">
               <div className="modalTitle">New Playlist</div>
               <input
