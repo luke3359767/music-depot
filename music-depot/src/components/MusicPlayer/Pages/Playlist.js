@@ -102,7 +102,18 @@ const CSS = css`
   display: block;
   cursor:pointer;
 }
-
+.settingBtn{
+    background-color: rgba(0, 0, 0, 0);;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    height: 55px;
+    width: 55px;
+    margin-top: 0px;
+    margin-left: 70px;
+  }
   .btn {
     background-color: #0f7cf1;
     color: white;
@@ -176,18 +187,7 @@ const CSS = css`
   .play:hover ~ .D{
         margin-left: 29px;
   }
-  .settingBtn{
-    background-color: rgba(0, 0, 0, 0);;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    border: none;
-    cursor: pointer;
-    height: 55px;
-    width: 55px;
-    margin-top: 0px;
-    margin-left: 70px;
-  }
+  
 `;
 
 const Playlist = () => {
