@@ -11,7 +11,7 @@ import {IoAddCircleOutline} from 'react-icons/io5';
 import {MdOutlineMusicNote} from 'react-icons/md';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -184,6 +184,7 @@ const SideBar=({children})=>{
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          transition={Slide}
         />
 
         {/* <Toast
