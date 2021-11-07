@@ -69,7 +69,7 @@ const CSS = css`
   background: #ffffff;
   border-radius: 8px;
   position: absolute;
-  top: 60px;
+  top: 200px;
   right: 0;
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
