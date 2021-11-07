@@ -52,7 +52,7 @@ const SideBar=({children})=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
-        toast.error('Your playlist is ALREADY existed!', {
+        toast.error('This playlist is already existed!', {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -61,11 +61,7 @@ const SideBar=({children})=>{
           draggable: true,
           
         });
-          // setState({
-          //   ...sidebarState,
-          //   modal: false,
-          //   toast: "Your playlist is ALREADY existed",
-          // });
+       
          setModelState(false)
           return;
         }
@@ -81,11 +77,15 @@ const SideBar=({children})=>{
             }
           }).then(async (res) => {
             await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-            // setState({
-            //   ...sidebarState,
-            //   modal: false,
-            //   toast: "Your playlist was created successfully"
-            // })
+            toast.success('This playlist is already existed!', {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+
+            });
             setModelState(false)
           })
     
