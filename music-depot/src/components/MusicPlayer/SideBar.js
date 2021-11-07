@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useState,useRef,useContext} from 'react';
+import React, { useState, useRef, useContext, useEffect} from 'react';
 import {css,jsx} from "@emotion/react"
 import { StoreContext } from './index'
 import logo from '../../image/logo.png';
@@ -39,7 +39,12 @@ const SideBar=({children})=>{
     const { state, dispatch } = useContext(StoreContext)    
     const mainLists = Object.keys(state.mainList)
     const librarys = Object.keys(state.library);
-    const playlists = Object.keys(state.mySongList)||[];
+    const playlists = useRef(Object.keys(state.mySongList) || []);
+    useEffect(() => {
+      if ((state.mySongList == null || state.mySongList == undefined) && (playlists.current!==[])){
+        playlists.current = []
+      }
+    }, [state.mySongList])
     
     const playlistRef=useRef(null);
    
@@ -117,7 +122,7 @@ const SideBar=({children})=>{
         <ul className="playlist">
           <li className="Title">playlists</li>
           <div className="scrollList">
-            {playlists.map((list) => (
+            {playlists.current.map((list) => (
               <li
                 key={list}
                 className={
