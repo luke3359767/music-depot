@@ -51,12 +51,12 @@ const SideBar=({children})=>{
         e.preventDefault()
         const list=playlistRef.current.value
       if (state.mySongList.hasOwnProperty(list)) {
+        toast("Wow so easy !")
           setState({
             ...sidebarState,
             modal: false,
             toast: "Your playlist is ALREADY existed",
           });
-          toast("Wow so easy !")
           return;
         }
 
