@@ -184,7 +184,7 @@ const SideBar=({children})=>{
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          transition={"Slide"}
+          transition={"slide"}
         />
 
         {/* <Toast
