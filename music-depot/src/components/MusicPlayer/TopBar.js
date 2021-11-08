@@ -22,7 +22,7 @@ border:1px solid #fff;
     display:flex;
 }
 .nickname {
-    margin: auto 0;
+    margin: auto 5px;
     width: 50%;
 }
 
