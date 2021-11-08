@@ -36,7 +36,7 @@ const TopBar=()=>{
         <div className="TopBar" css={CSS}>
             <div className="searchBar"></div>
             <div className="profileBar">
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 38, height: 38 }}/>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 35, height: 35 }}/>
                 <span className="nickname">{state.user.nickname}</span>
             </div>
             
