@@ -12,7 +12,7 @@ position:absolute;
 width: calc(100% - 200px);
 height:50px;
 left:200px;
-padding-top:10px;
+padding-top:5px;
 background:#191530;
 border:1px solid #fff;
 .profileBar {
