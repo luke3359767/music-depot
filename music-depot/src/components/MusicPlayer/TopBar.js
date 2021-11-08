@@ -18,7 +18,7 @@ padding-top:5px;
 background:#191530;
 border:1px solid #fff;
 .profileBar {
-    width:100px;
+    width:150px;
     display:flex;
 }
 .nickname {
