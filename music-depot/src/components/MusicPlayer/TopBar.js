@@ -1,7 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React from 'react';
+import React, {useContext} from 'react';
 import {css,jsx} from "@emotion/react"
+import { StoreContext } from "../MusicPlayer/index";
+
 
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -16,21 +18,21 @@ padding-top:5px;
 background:#191530;
 border:1px solid #fff;
 .profileBar {
-    background:white;
     width:100px;
-    border-radius: 50%;
+    display:flex;
 }
 
 `
 
 const TopBar=()=>{
+    const { state, dispatch } = useContext(StoreContext);
+
     return(
         <div className="TopBar" css={CSS}>
             <div className="searchBar"></div>
             <div className="profileBar">
-                <Stack direction="row" spacing={2}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </Stack>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <span>{state.user.nickname}</span>
             </div>
             
 
