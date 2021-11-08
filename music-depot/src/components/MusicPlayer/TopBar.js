@@ -17,6 +17,7 @@ background:#191530;
 border:1px solid #fff;
 .profileBar {
     background:white;
+    width:100px;
 }
 
 `
