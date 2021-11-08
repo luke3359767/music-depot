@@ -9,7 +9,7 @@ import Register from './auth/RegisterPage';
 import Login from './auth/LoginPage';
 import {css,jsx,Global} from "@emotion/react"
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route ,Redirect } from "react-router-dom"; 
+import { BrowserRouter as Router, Switch, Route ,Redirect,useHistory } from "react-router-dom"; 
 import jwt_decode from "jwt-decode";
 import Cookies from 'js-cookie';
 
@@ -105,6 +105,8 @@ const reducer= (state,action)=>{
 
 const MusicPlayer=()=>{
     const [state,dispatch] =useReducer(reducer,initialState)
+    const history = useHistory();
+
 
   
   
@@ -114,7 +116,7 @@ const MusicPlayer=()=>{
       .then(async (res) => {
         await dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
         console.log("Auto Login")    
-      }).catch((err) => err);
+      }).catch((err) => history.push("/login"));
     })()
   },[])
   
@@ -124,6 +126,8 @@ const MusicPlayer=()=>{
         axios.post("https://music-depot.tech/api/userapi/refresh").then((res) => {
           dispatch({ type: "REFRESH_TOKEN", token: res.data.newAccessToken})
           console.log('auto refresh token')
+        }).catch((err)=>{
+
         });
 
       },10*60*1000)

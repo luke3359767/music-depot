@@ -14,10 +14,10 @@ border:1px solid #fff;
 
 `
 
-const TopBar=({children})=>{
+const TopBar=()=>{
     return(
         <div className="TopBar" css={CSS}>
-            {children}
+            
         </div>
     );
 }
