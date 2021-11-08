@@ -15,6 +15,10 @@ left:200px;
 padding:20px;  
 background:#191530;
 border:1px solid #fff;
+.profileBar{
+    display: block;
+    float:left;
+}
 
 `
 
