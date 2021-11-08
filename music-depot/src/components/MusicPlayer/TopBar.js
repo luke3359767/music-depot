@@ -20,6 +20,7 @@ border:1px solid #fff;
 .profileBar {
     width:150px;
     display:flex;
+    float:right;
 }
 .nickname {
     margin: auto 5px;
