@@ -16,9 +16,7 @@ padding-top:5px;
 background:#191530;
 border:1px solid #fff;
 .profileBar {
-
-    display: block;
-    float:left;
+    background:white;
 }
 
 `
