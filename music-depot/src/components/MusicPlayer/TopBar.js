@@ -21,6 +21,10 @@ border:1px solid #fff;
     width:100px;
     display:flex;
 }
+.nickname {
+    margin: auto;
+    width: 50%;
+}
 
 `
 
@@ -32,7 +36,7 @@ const TopBar=()=>{
             <div className="searchBar"></div>
             <div className="profileBar">
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                <span>{state.user.nickname}</span>
+                <span className="nickname">{state.user.nickname}</span>
             </div>
             
 
