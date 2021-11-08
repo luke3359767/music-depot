@@ -12,10 +12,11 @@ position:absolute;
 width: calc(100% - 200px);
 height:50px;
 left:200px;
-padding:20px;  
+  
 background:#191530;
 border:1px solid #fff;
-.profileBar{
+.profileBar {
+
     display: block;
     float:left;
 }
