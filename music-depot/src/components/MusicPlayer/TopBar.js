@@ -26,6 +26,7 @@ background:#191530;
     display:flex;
     width:auto;
     cursor: pointer;
+    height:50px;
 
 
 }
