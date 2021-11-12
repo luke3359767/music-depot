@@ -33,7 +33,7 @@ border:1px solid #fff;
 const TopBar=()=>{
     const { state, dispatch } = useContext(StoreContext);
     // const userNickname = state.user.nickname
-    const userNickname = "AAAAAAAAAAAAA"
+    const userNickname = "AAAAAAAAAAAAAAAAAAAA"
 
     return(
         <div className="TopBar" css={CSS}>
