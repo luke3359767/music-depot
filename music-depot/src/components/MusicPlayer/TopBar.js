@@ -25,6 +25,7 @@ border:1px solid #fff;
 .profileButton{
         display:flex;
         border:1px solid #fff;
+        width:auto;
 
 
 }
