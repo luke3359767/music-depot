@@ -35,7 +35,7 @@ background:#191530;
 
 }
 .nickname {
-    margin: auto 5px;
+    margin: auto 0;
     width: 50%;
 }
 
