@@ -22,6 +22,8 @@ border:1px solid #fff;
     display:flex;
     float:right;
     max-width:200px;
+    border:1px solid #fff;
+
 }
 .nickname {
     margin: auto 5px;
