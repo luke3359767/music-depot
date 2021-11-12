@@ -32,13 +32,15 @@ border:1px solid #fff;
 
 const TopBar=()=>{
     const { state, dispatch } = useContext(StoreContext);
+    // const userNickname = state.user.nickname
+    const userNickname = "llllllllllllll"
 
     return(
         <div className="TopBar" css={CSS}>
             <div className="searchBar"></div>
             <div className="profileBar">
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 35, height: 35 }}/>
-                <span className="nickname">{state.user.nickname.length > 13 ? (state.user.nickname.slice(0,10)+"...") : (state.user.nickname)}</span>
+                <span className="nickname">{userNickname.length > 12 ? (userNickname.slice(0,10)+"...") : (userNickname)}</span>
             </div>
             
 
