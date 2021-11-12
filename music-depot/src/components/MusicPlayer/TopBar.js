@@ -21,6 +21,7 @@ border:1px solid #fff;
     width:200px;
     display:flex;
     float:right;
+    max-width:200px;
 }
 .nickname {
     margin: auto 5px;
@@ -37,7 +38,7 @@ const TopBar=()=>{
             <div className="searchBar"></div>
             <div className="profileBar">
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 35, height: 35 }}/>
-                <span className="nickname">{state.user.nickname}</span>
+                <span className="nickname">{state.user.nickname.length > 13 ? (state.user.nickname.slice(0,10)+"...") : (state.user.nickname)}</span>
             </div>
             
 
