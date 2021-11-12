@@ -14,6 +14,7 @@ position:absolute;
 width: calc(100% - 200px);
 height:50px;
 left:200px;
+margin-top5px;
 background:#191530;
 .profileBar {
     width:190px;
@@ -22,7 +23,6 @@ background:#191530;
 
 }
 .profileButton{
-    height:50px;
     display:flex;
     width:auto;
     cursor: pointer;
@@ -35,7 +35,7 @@ background:#191530;
 
 }
 .nickname {
-    margin: auto 0;
+    margin: auto 5px;
     width: 50%;
 }
 
