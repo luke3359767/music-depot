@@ -23,10 +23,15 @@ background:#191530;
 
 }
 .profileButton{
-        display:flex;
-        width:auto;
-        cursor: pointer;
+    display:flex;
+    width:auto;
+    cursor: pointer;
 
+
+}
+.profileButton:hover{
+
+    background:#110e24;
 
 }
 .nickname {
