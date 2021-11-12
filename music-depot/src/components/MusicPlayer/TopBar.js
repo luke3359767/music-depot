@@ -14,12 +14,12 @@ position:absolute;
 width: calc(100% - 200px);
 height:50px;
 left:200px;
-padding-top:5px;
+margin-top:5px;
 background:#191530;
 .profileBar {
     width:190px;
     float:right;
-    padding-top:5px;
+    margin-top:5px;
 
 }
 .profileButton{
