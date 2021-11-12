@@ -26,6 +26,7 @@ border:1px solid #fff;
         display:flex;
         border:1px solid #fff;
         width:auto;
+        cursor: pointer;
 
 
 }
