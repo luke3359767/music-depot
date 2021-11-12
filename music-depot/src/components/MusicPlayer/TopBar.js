@@ -16,7 +16,6 @@ height:50px;
 left:200px;
 padding-top:5px;
 background:#191530;
-border:1px solid #fff;
 .profileBar {
     width:190px;
     float:right;
@@ -24,7 +23,6 @@ border:1px solid #fff;
 }
 .profileButton{
         display:flex;
-        border:1px solid #fff;
         width:auto;
         cursor: pointer;
 
