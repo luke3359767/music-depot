@@ -39,8 +39,10 @@ const TopBar=()=>{
         <div className="TopBar" css={CSS}>
             <div className="searchBar"></div>
             <div className="profileBar">
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 35, height: 35 }}/>
-                <span className="nickname">{userNickname.length > 15 ? (userNickname.slice(0,14)+"...") : (userNickname)}</span>
+                <div className="profileButton">
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 35, height: 35 }}/>
+                    <span className="nickname">{userNickname.length > 15 ? (userNickname.slice(0,14)+"...") : (userNickname)}</span>
+                </div>
             </div>
             
 
