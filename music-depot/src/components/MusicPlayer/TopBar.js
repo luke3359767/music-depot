@@ -18,10 +18,9 @@ padding-top:5px;
 background:#191530;
 border:1px solid #fff;
 .profileBar {
-    width:200px;
+    width:190px;
     display:flex;
     float:right;
-    max-width:200px;
     border:1px solid #fff;
 
 }
