@@ -19,6 +19,7 @@ background:#191530;
 .profileBar {
     width:190px;
     float:right;
+    padding-top:5px;
 
 }
 .profileButton{
