@@ -39,7 +39,10 @@ background:#191530;
     margin: auto 5px;
     width: 50%;
 }
+Avatar{
+        margin: auto 0px;
 
+}
 `
 
 const TopBar=()=>{
