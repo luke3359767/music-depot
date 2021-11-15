@@ -116,7 +116,7 @@ const MusicPlayer=()=>{
       .then(async (res) => {
         await dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
         console.log("Auto Login")    
-      }).catch((err) => await dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:false}));
+      }).catch((err) => dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:false}));
     })()
   },[])
   
