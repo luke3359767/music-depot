@@ -116,7 +116,7 @@ const MusicPlayer=()=>{
       .then(async (res) => {
         await dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:true})
         console.log("Auto Login")    
-      }).catch((err) => dispatch({ type: "USER_LOGIN", user: res.data ,isLogin:false}));
+      }).catch((err) => history.push("/login"));
     })()
   },[])
   
@@ -155,7 +155,6 @@ const MusicPlayer=()=>{
   
     return(
        <StoreContext.Provider value={{state,dispatch}}>
-          <Router>
             <Global styles={GlobalCSS} />
             <Route exact path="/">
               {
@@ -176,7 +175,6 @@ const MusicPlayer=()=>{
             <Route path="/login">
               <Login/>
             </Route>
-          </Router>
        </StoreContext.Provider>
     );
 }
