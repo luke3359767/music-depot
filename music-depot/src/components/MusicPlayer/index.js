@@ -155,7 +155,6 @@ const MusicPlayer=()=>{
   
     return(
        <StoreContext.Provider value={{state,dispatch}}>
-          <Router>
             <Global styles={GlobalCSS} />
             <Route exact path="/">
               {
@@ -176,7 +175,6 @@ const MusicPlayer=()=>{
             <Route path="/login">
               <Login/>
             </Route>
-          </Router>
        </StoreContext.Provider>
     );
 }

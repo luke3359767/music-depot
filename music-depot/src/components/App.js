@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import {jsx } from '@emotion/react'
 import MusicPlayer from './MusicPlayer'
+import { BrowserRouter as Router, Switch, Route ,Redirect,useHistory } from "react-router-dom"; 
 
 
 /**
@@ -9,7 +10,9 @@ import MusicPlayer from './MusicPlayer'
  */
 
 const App = () => (
-      <MusicPlayer />
+      <Router>
+            <MusicPlayer />
+      </Router>
 );
 
 
