@@ -1,14 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useContext, useState, useEffect, useRef} from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { useDetectOutsideClick } from '../../../hooks/useDetectOutsideClick'
 import { useHistory } from 'react-router-dom';
 
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
 import axios from "axios";
-import { FaPlay} from "react-icons/fa"
-import { FiMoreHorizontal} from "react-icons/fi"
+import { FaPlay } from "react-icons/fa"
+import { FiMoreHorizontal } from "react-icons/fi"
 function importAll(r) {
   let images = {};
   r.keys().map((item, index) => {
@@ -201,52 +201,52 @@ const Playlist = () => {
       ? "library"
       : "mySongList";
   const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef,false);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
-  const renameList=()=>{
+  const renameList = () => {
     console.log("renameList")
     setIsActive(false)
   }
 
   const deleteList = () => {
-      (async function () {
-        await axios({
-          method: "POST",
-          url: 'https://music-depot.tech/api/playlistapi/deleteplaylist',
-          headers: { 'authorization': "bearer " + state.user.token },
-          data: {
-            playlistName: state.currentPlaylist,
-          }
-        }).then(async (res) => {
-          
-          dispatch({ type: "SET_PLAYLIST", playlistItem: "home" });
-          if (res.data.mySongList !== undefined){
-            console.log("deleted")
-            dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
-          }else{
-            dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
-          }
-        })
+    (async function () {
+      await axios({
+        method: "POST",
+        url: 'https://music-depot.ca/api/playlistapi/deleteplaylist',
+        headers: { 'authorization': "bearer " + state.user.token },
+        data: {
+          playlistName: state.currentPlaylist,
+        }
+      }).then(async (res) => {
 
-      })()
+        dispatch({ type: "SET_PLAYLIST", playlistItem: "home" });
+        if (res.data.mySongList !== undefined) {
+          console.log("deleted")
+          dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
+        } else {
+          dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
+        }
+      })
+
+    })()
     setIsActive(false)
   }
 
-  
-      
+
+
 
   // const [reademail,setreademail]=useState();
   // const [emailState, setEmail] = useState("99999@gmail.com");
 
   // useEffect(() => {
-  //   axios.get("https://music-depot.tech/api/testemail/read")
+  //   axios.get("https://music-depot.ca/api/testemail/read")
   //   .then((response)=>{
   //     setreademail(response['data'][1]['_id'])
   //   })
   // }, []);
 
   // const updateEmail= (id) => {
-  //   axios.put("https://music-depot.tech/api/testemail/update", {
+  //   axios.put("https://music-depot.ca/api/testemail/update", {
   //     id:id,
   //     newemail: "new@gmail.com",
   //   });
@@ -254,7 +254,7 @@ const Playlist = () => {
 
   // const sendEmail = () => {
   //   axios
-  //     .post("https://music-depot.tech/api/testemail/insert", {
+  //     .post("https://music-depot.ca/api/testemail/insert", {
   //       email: emailState,
   //     })
   //     .then(console.log("SUCCESS POST"))
@@ -274,12 +274,12 @@ const Playlist = () => {
           <img
             src={
               images[state[whereIsPlaylist][state.currentPlaylist]["album"]]
-              .default
+                .default
             }
             className="album"
           />
           <div className="Header-content">
-            <h4>{whereIsPlaylist=='mySongList'?'playlist':'library'}</h4>
+            <h4>{whereIsPlaylist == 'mySongList' ? 'playlist' : 'library'}</h4>
             <h1 className="plTitle">
               {whereIsPlaylist === "library"
                 ? Capitalize(state.currentPlaylist)
@@ -289,12 +289,12 @@ const Playlist = () => {
         </div>
         <div className="buttons">
           <div className="left">
-            <button className="btn play"><FaPlay size={25} className="icon"/></button>
+            <button className="btn play"><FaPlay size={25} className="icon" /></button>
           </div>
           {
-            state.currentPlaylist != "favorite" && state.currentPlaylist != "recently"?
-             ( <div className="right">
-                <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35}/></button>
+            state.currentPlaylist != "favorite" && state.currentPlaylist != "recently" ?
+              (<div className="right">
+                <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35} /></button>
                 <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
                   <ul>
                     <li><a onClick={renameList}>Rename</a></li>
@@ -303,10 +303,10 @@ const Playlist = () => {
                   </ul>
                 </nav>
               </div>)
-            :<div/>
+              : <div />
           }
         </div>
-         <table>
+        <table>
           <thead>
             <tr>
               <td className="number">#</td>
@@ -318,7 +318,7 @@ const Playlist = () => {
           <tbody>
 
           </tbody>
-         </table>
+        </table>
       </div>
     </div>
   );

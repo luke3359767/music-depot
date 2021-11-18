@@ -38,13 +38,13 @@ const Register = () => {
       return;
     }
 
-    const res = await axios.post("https://music-depot.tech/api/userapi/register", {
+    const res = await axios.post("https://music-depot.ca/api/userapi/register", {
       registerInfo: {
         username: username,
         email: email,
         password: password,
         nickname: nickname,
-        gender:gender,
+        gender: gender,
 
       }
     }).then((res) => setcreateSuccess(true))
@@ -59,8 +59,8 @@ const Register = () => {
           } else if (err.response.status == 403) {
             console.log(err.response.data)
             setPasswordErr(false);
-            if (err.response.data.emailErr!==null) { setUsedEmailErr(true) } else { setUsedEmailErr(false)}
-            if (err.response.data.userErr !== null) { setUsedUserErr(true) } else { setUsedUserErr(false)}
+            if (err.response.data.emailErr !== null) { setUsedEmailErr(true) } else { setUsedEmailErr(false) }
+            if (err.response.data.userErr !== null) { setUsedUserErr(true) } else { setUsedUserErr(false) }
             // Object.keys(err.response.data).map((key) => key == "emailErr" ?: setUsedUserErr(true))
           }
         }
@@ -80,14 +80,14 @@ const Register = () => {
       if (key == 'digits') return (<p className="warning">The password should have at least 1 digit</p>)
     })) : null
   }
-  const usedUserErrRender=(d)=>{
+  const usedUserErrRender = (d) => {
     return d ? (<p className="warning">The username is invalid</p>) : null
   }
-  const usedEmailErrRender=(d)=>{
+  const usedEmailErrRender = (d) => {
     return d ? (<p className="warning">The email has been used. Alrealy register? <Link to="/login">Log In</Link></p>) : null
   }
 
-  const successfullyCreated=(d)=>{
+  const successfullyCreated = (d) => {
     return (d) ? (<h1>Created Account Successfully. Please <Link to="/login">Log In</Link></h1>) : (<div className="row clearfix">
       <div className="">
         <form onSubmit={handleSubmit}>
@@ -155,8 +155,8 @@ const Register = () => {
             />
           </div>
           {diffPassRender(diffPassword)}
-        
-         
+
+
           <div className="input_field">
             {" "}
             <span>
@@ -164,8 +164,8 @@ const Register = () => {
             </span>
             <input type="text" name="name" placeholder="What do you want to be called?" required onChange={(e) => { setNickname(e.target.value) }} />
           </div>
-        
-       
+
+
           <div className="input_field radio_option">
             <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
             <label htmlFor="Male">Male</label>
@@ -192,7 +192,7 @@ const Register = () => {
 
   return (
     <div>
-      {!state.isLogin?(
+      {!state.isLogin ? (
         <div className="wole-container">
           <img src={logo} alt="no" />
 
@@ -307,7 +307,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-      ):<Redirect to="/" />}
+      ) : <Redirect to="/" />}
     </div>
   );
 };

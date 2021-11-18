@@ -1,28 +1,28 @@
 const express = require('express'); //Line 1
 const connectDB = require('./config/db');
-const cors= require('cors');
-const morgan=require('morgan');
+const cors = require('cors');
+const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
 
 const app = express(); //Line 2
 const port = process.env.PORT || 5000; //Line 3
 // require('./models/User');
 
-const testapiRouter=require("./routes/testapi")
-const testdbapiRouter=require('./routes/testdbapi')
-const UserAPIRouter=require('./routes/userAPI')
-const playlistAPIRouter=require('./routes/playlistAPI')
+const testapiRouter = require("./routes/testapi")
+const testdbapiRouter = require('./routes/testdbapi')
+const UserAPIRouter = require('./routes/userAPI')
+const playlistAPIRouter = require('./routes/playlistAPI')
 connectDB();
 
 app.use(cors(
   {
     credentials: true,
-    origin: 'https://music-depot.tech/',
+    origin: 'https://music-depot.ca/',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 ));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Content-Type', 'application/json;charset=UTF-8')
   res.header('Access-Control-Allow-Credentials', true)
   res.header(
@@ -44,7 +44,7 @@ app.use(cookieParser());
 
 
 
-const jwt= require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 const users = [
   {
@@ -61,94 +61,94 @@ const users = [
   },
 ];
 
-let refreshTokens=[]
+let refreshTokens = []
 
-app.post("/api/refresh",(req,res)=>{
+app.post("/api/refresh", (req, res) => {
   //take the refresh token from user
-  const refreshToken=req.body.token 
+  const refreshToken = req.body.token
   //send error if there is no tocken or its invalid
-  if(!refreshToken) return res.status(401).json("You are not auth !!!")
-  if(!refreshTokens.includes(refreshToken)){
+  if (!refreshToken) return res.status(401).json("You are not auth !!!")
+  if (!refreshTokens.includes(refreshToken)) {
     return res.status(403).json("RefreshToken is invalid");
   }
-  jwt.verify(refreshToken, "myRefreshSecretKey",(err,user)=>{
+  jwt.verify(refreshToken, "myRefreshSecretKey", (err, user) => {
     err && console.log(err);
-    refreshTokens=refreshTokens.filter(token=>token!==refreshToken);
-    const newAccessToken=generateAccessToken(user)
-    const newRefreshToken=generateRefreshToken(user)
+    refreshTokens = refreshTokens.filter(token => token !== refreshToken);
+    const newAccessToken = generateAccessToken(user)
+    const newRefreshToken = generateRefreshToken(user)
     refreshTokens.push(newRefreshToken);
     res.status(200).json({
-      accessToken:newAccessToken,refreshToken :newRefreshToken
+      accessToken: newAccessToken, refreshToken: newRefreshToken
     })
   });
 
   //if everything is ok, create a new one, refresh
 })
 
-const generateAccessToken=(user)=>{
-    return jwt.sign({id:user.id,isAdmin:user.isAdmin},"mySecretKey",{expiresIn:"30s"})
-         
+const generateAccessToken = (user) => {
+  return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretKey", { expiresIn: "30s" })
+
 }
 
-const generateRefreshToken=(user)=>{
-    return jwt.sign(
-            { id: user.id, isAdmin: user.isAdmin },
-            "myRefreshSecretKey",
-          );
-         
+const generateRefreshToken = (user) => {
+  return jwt.sign(
+    { id: user.id, isAdmin: user.isAdmin },
+    "myRefreshSecretKey",
+  );
+
 }
 
 
-app.post("/api/login",(req, res)=>{
-    const {username,password}=req.body;
-    const user=users.find(u=>{
-        return u.username===username &&u.password===password
-    })
-    if(user){
-      const accessToken = generateAccessToken(user);
-      const refreshToken=generateRefreshToken(user);
-      refreshTokens.push(refreshToken)
-       res.json({
-         username: user.username,
-         isAdmin: user.isAdmin,
-         accessToken,
-         refreshToken
-       });
-    }else{
-        res.status(400).json("Username or password incorrect")
-    }
+app.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find(u => {
+    return u.username === username && u.password === password
+  })
+  if (user) {
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+    refreshTokens.push(refreshToken)
+    res.json({
+      username: user.username,
+      isAdmin: user.isAdmin,
+      accessToken,
+      refreshToken
+    });
+  } else {
+    res.status(400).json("Username or password incorrect")
+  }
 })
 
-const verify=(req,res,next)=>{
-  const authHeader= req.headers.authorization
-  if(authHeader){
-    const token=authHeader.split(" ")[1]
-    jwt.verify(token, "mySecretKey",(err,user)=>{
-      if(err){
+const verify = (req, res, next) => {
+  const authHeader = req.headers.authorization
+  if (authHeader) {
+    const token = authHeader.split(" ")[1]
+    jwt.verify(token, "mySecretKey", (err, user) => {
+      if (err) {
         return res.status(403).json("Token is not valid");
       }
 
-      req.user=user;
-      console.log("this is the user: ",user)
+      req.user = user;
+      console.log("this is the user: ", user)
       next();
 
     });
-  }else{
+  } else {
     res.status(401).json("not auth");
   }
 }
 
 app.post("/api/logout", verify, (req, res) => {
   const refreshToken = req.body.token;
-  refreshTokens = refreshTokens.filter((token)=>{token !== refreshToken});
+  refreshTokens = refreshTokens.filter((token) => { token !== refreshToken });
   res.status(200).json("You logout successfully");
 });
 
 
-app.delete("/api/users/:userId",verify,(req, res)=>{
-  if(req.user.id===req.params.userId || req.user.isAdmin){
+app.delete("/api/users/:userId", verify, (req, res) => {
+  if (req.user.id === req.params.userId || req.user.isAdmin) {
     res.status(200).json("deleted successfully");
-  }else{
+  } else {
     res.status(403).json("you are not allow to delete the user")
   }
 })
@@ -169,10 +169,10 @@ app.delete("/api/users/:userId",verify,(req, res)=>{
 
 
 app.listen(port, () =>
-    console.log(`Listening on port ${port}`)); 
+  console.log(`Listening on port ${port}`));
 
 app.get('/', (req, res) => res.send('Hello world!'));
-app.use("/testapi",testapiRouter)
-app.use("/testemail",testdbapiRouter)
-app.use("/userapi",UserAPIRouter)
-app.use("/playlistapi",playlistAPIRouter)
+app.use("/testapi", testapiRouter)
+app.use("/testemail", testdbapiRouter)
+app.use("/userapi", UserAPIRouter)
+app.use("/playlistapi", playlistAPIRouter)

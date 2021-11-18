@@ -1,15 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React,{useState,useRef,useContext} from 'react';
-import {css,jsx} from "@emotion/react"
+import React, { useState, useRef, useContext } from 'react';
+import { css, jsx } from "@emotion/react"
 import { StoreContext } from './index'
 import logo from '../../image/logo.png';
-import { AiOutlineHome,AiOutlineSearch,AiOutlineStar } from 'react-icons/ai';
-import {BiTimeFive} from 'react-icons/bi';
-import {FiRadio} from 'react-icons/fi';
-import {IoAddCircleOutline} from 'react-icons/io5';
-import {MdOutlineMusicNote} from 'react-icons/md';
-import {useHistory} from 'react-router-dom';
+import { AiOutlineHome, AiOutlineSearch, AiOutlineStar } from 'react-icons/ai';
+import { BiTimeFive } from 'react-icons/bi';
+import { FiRadio } from 'react-icons/fi';
+import { IoAddCircleOutline } from 'react-icons/io5';
+import { MdOutlineMusicNote } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,180 +19,180 @@ import 'react-toastify/dist/ReactToastify.css';
 import Modal from "./Modal";
 import Toast from "./Toast";
 
-const SideBar=({children})=>{
-    const history = useHistory();
-    
-    // const [sidebarState,setState]=useState({
-    //     modal:false,
-    //     toast:'',
-    // })
+const SideBar = ({ children }) => {
+  const history = useHistory();
 
-    const [modalState,setModelState]= useState(false)
-    
-    const iconlist={
-        home:<AiOutlineHome className="icon"/>,
-        browse:<AiOutlineSearch className="icon"/>,
-        radio: <FiRadio className="icon"/>,
-        favorite: <AiOutlineStar className="icon"/>,
-        recently:<BiTimeFive  className="icon"/>,
-        addList: <IoAddCircleOutline size={20} className="Big-icon"/>,
-        
-        
+  // const [sidebarState,setState]=useState({
+  //     modal:false,
+  //     toast:'',
+  // })
+
+  const [modalState, setModelState] = useState(false)
+
+  const iconlist = {
+    home: <AiOutlineHome className="icon" />,
+    browse: <AiOutlineSearch className="icon" />,
+    radio: <FiRadio className="icon" />,
+    favorite: <AiOutlineStar className="icon" />,
+    recently: <BiTimeFive className="icon" />,
+    addList: <IoAddCircleOutline size={20} className="Big-icon" />,
+
+
+  }
+  const { state, dispatch } = useContext(StoreContext)
+  const mainLists = Object.keys(state.mainList)
+  const librarys = Object.keys(state.library);
+  const playlists = Object.keys(state.mySongList) || [];
+
+
+  const playlistRef = useRef(null);
+
+
+  const addPlaylist = (e) => {
+    e.preventDefault()
+    const list = playlistRef.current.value
+    if (state.mySongList.hasOwnProperty(list)) {
+      toast.error('This playlist is already existed!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+      });
+
+      setModelState(false)
+      return;
     }
-    const { state, dispatch } = useContext(StoreContext)    
-    const mainLists = Object.keys(state.mainList)
-    const librarys = Object.keys(state.library);
-    const playlists = Object.keys(state.mySongList)||[];
-    
-    
-    const playlistRef=useRef(null);
-   
 
-    const addPlaylist = (e)=>{
-        e.preventDefault()
-        const list=playlistRef.current.value
-      if (state.mySongList.hasOwnProperty(list)) {
-        toast.error('This playlist is already existed!', {
+
+    (async function () {
+      await axios({
+        method: "POST",
+        url: 'https://music-depot.ca/api/playlistapi/addplaylist',
+        headers: { 'authorization': "bearer " + state.user.token },
+        data: {
+          playlistName: list,
+        }
+      }).then(async (res) => {
+        await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
+        toast.success('Created successfully!', {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          
+
         });
-       
-         setModelState(false)
-          return;
-        }
+        setModelState(false)
+      })
+
+    })()
 
 
-        (async function(){
-          await axios({ 
-            method:"POST",
-            url: 'https://music-depot.tech/api/playlistapi/addplaylist',
-            headers: { 'authorization': "bearer " + state.user.token },
-            data:{
-              playlistName:list,
-            }
-          }).then(async (res) => {
-            await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-            toast.success('Created successfully!', {
-              position: "top-center",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-
-            });
-            setModelState(false)
-          })
-    
-        })()
-        
-       
-    }
-    // const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
+  }
+  // const handleModal=()=>setState({...sidebarState,modal:!sidebarState.modal})
   const handleModal = () => setModelState(!modalState)
-    
-    return (
-      <div className="SideBar" css={CSS}>
-        <img src={logo} />
 
-        <ul className="mainList">
-          {mainLists.map((list) => (
+  return (
+    <div className="SideBar" css={CSS}>
+      <img src={logo} />
+
+      <ul className="mainList">
+        {mainLists.map((list) => (
+          <li
+            key={list}
+            className={list === state.currentPlaylist ? "active ll" : "ll"}
+            onClick={() => {
+              dispatch({ type: "SET_PLAYLIST", playlistItem: list });
+            }}
+          >
+            {iconlist[list]} {list}
+          </li>
+        ))}
+      </ul>
+
+      <ul className="library">
+        <li className="Title">Library</li>
+        {librarys.map((list) => (
+          <li
+            key={list}
+            className={list === state.currentPlaylist ? "active ll" : "ll"}
+            onClick={() => {
+              dispatch({ type: "SET_PLAYLIST", playlistItem: list });
+            }}
+          >
+            {iconlist[list]} {list}
+          </li>
+        ))}
+      </ul>
+
+      <ul className="playlist">
+        <li className="Title">playlists</li>
+        <div className="scrollList">
+          {playlists.map((list) => (
             <li
               key={list}
-              className={list === state.currentPlaylist ? "active ll" : "ll"}
+              className={
+                list === state.currentPlaylist ? "active ll pl" : "ll pl"
+              }
               onClick={() => {
                 dispatch({ type: "SET_PLAYLIST", playlistItem: list });
               }}
             >
-              {iconlist[list]} {list}
+              <MdOutlineMusicNote className="icon" /> {list}
             </li>
           ))}
-        </ul>
+        </div>
+      </ul>
 
-        <ul className="library">
-          <li className="Title">Library</li>
-          {librarys.map((list) => (
-            <li
-              key={list}
-              className={list === state.currentPlaylist ? "active ll" : "ll"}
-              onClick={() => {
-                dispatch({ type: "SET_PLAYLIST", playlistItem: list });
-              }}
-            >
-              {iconlist[list]} {list}
-            </li>
-          ))}
-        </ul>
+      <p
+        className="addList"
+        onClick={() => {
+          setModelState(true)
+        }}
+      >
+        {iconlist["addList"]} Add New Playlist
+      </p>
 
-        <ul className="playlist">
-          <li className="Title">playlists</li>
-          <div className="scrollList">
-            {playlists.map((list) => (
-              <li
-                key={list}
-                className={
-                  list === state.currentPlaylist ? "active ll pl" : "ll pl"
-                }
-                onClick={() => {
-                  dispatch({ type: "SET_PLAYLIST", playlistItem: list });
-                }}
-              >
-                <MdOutlineMusicNote className="icon" /> {list}
-              </li>
-            ))}
+      <Modal show={modalState} close={handleModal}>
+        <form onSubmit={addPlaylist}>
+          <div className="content-wrap">
+            <div className="modalTitle">New Playlist</div>
+            <input
+              type="text"
+              placeholder="My Playlist"
+              required
+              ref={playlistRef}
+            />
+            <br />
+            <button type="submit" className="btn">
+              Create
+            </button>
           </div>
-        </ul>
+        </form>
+      </Modal>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Slide}
+      />
 
-        <p
-          className="addList"
-          onClick={() => {
-            setModelState(true)
-          }}
-        >
-          {iconlist["addList"]} Add New Playlist
-        </p>
-
-        <Modal show={modalState} close={handleModal}>
-          <form onSubmit={addPlaylist}>
-            <div className="content-wrap">
-              <div className="modalTitle">New Playlist</div>
-              <input
-                type="text"
-                placeholder="My Playlist"
-                required
-                ref={playlistRef}
-              />
-              <br />
-              <button type="submit" className="btn">
-                Create
-              </button>
-            </div>
-          </form>
-        </Modal>
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          transition={Slide}
-        />
-
-        {/* <Toast
+      {/* <Toast
           toast={sidebarState.toast}
           close={() => setState({ ...sidebarState, toast: "" })}
         /> */}
-      </div>
-    );
+    </div>
+  );
 }
 
 
