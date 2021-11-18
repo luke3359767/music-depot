@@ -367,7 +367,7 @@ const Playlist = () => {
                 variant="contained"
                 disableElevation
                 onClick={handleClick}
-                endIcon={<KeyboardArrowDownIcon />}><FiMoreHorizontal size={35} /></button>
+                ><FiMoreHorizontal size={35} /></button>
                 <StyledMenu
                   id="demo-customized-menu"
                   MenuListProps={{
