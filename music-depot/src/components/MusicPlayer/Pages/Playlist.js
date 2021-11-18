@@ -360,7 +360,14 @@ const Playlist = () => {
           {
             state.currentPlaylist != "favorite" && state.currentPlaylist != "recently" ?
               (<div className="right">
-                <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35} /></button>
+                <button className="settingBtn"  
+                aria-controls="demo-customized-menu"
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                variant="contained"
+                disableElevation
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}><FiMoreHorizontal size={35} /></button>
                 <StyledMenu
                   id="demo-customized-menu"
                   MenuListProps={{
