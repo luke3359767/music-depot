@@ -356,6 +356,34 @@ const Playlist = () => {
         <div className="buttons">
           <div className="left">
             <button className="btn play"><FaPlay size={25} className="icon" /></button>
+
+            <StyledMenu
+              id="demo-customized-menu"
+              MenuListProps={{
+                'aria-labelledby': 'demo-customized-button',
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose} disableRipple>
+                <EditIcon />
+                Edit
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <FileCopyIcon />
+                Duplicate
+              </MenuItem>
+              <Divider sx={{ my: 0.5 }} />
+              <MenuItem onClick={handleClose} disableRipple>
+                <ArchiveIcon />
+                Archive
+              </MenuItem>
+              <MenuItem onClick={handleClose} disableRipple>
+                <MoreHorizIcon />
+                More
+              </MenuItem>
+            </StyledMenu>
           </div>
           {/* {
             state.currentPlaylist != "favorite" && state.currentPlaylist != "recently" ?
@@ -371,33 +399,6 @@ const Playlist = () => {
               </div>)
               : <div />
           } */}
-          <StyledMenu
-            id="demo-customized-menu"
-            MenuListProps={{
-              'aria-labelledby': 'demo-customized-button',
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose} disableRipple>
-              <EditIcon />
-              Edit
-            </MenuItem>
-            <MenuItem onClick={handleClose} disableRipple>
-              <FileCopyIcon />
-              Duplicate
-            </MenuItem>
-            <Divider sx={{ my: 0.5 }} />
-            <MenuItem onClick={handleClose} disableRipple>
-              <ArchiveIcon />
-              Archive
-            </MenuItem>
-            <MenuItem onClick={handleClose} disableRipple>
-              <MoreHorizIcon />
-              More
-            </MenuItem>
-          </StyledMenu>
         </div>
         <table>
           <thead>
