@@ -356,49 +356,49 @@ const Playlist = () => {
         <div className="buttons">
           <div className="left">
             <button className="btn play"><FaPlay size={25} className="icon" /></button>
-
-            <StyledMenu
-              id="demo-customized-menu"
-              MenuListProps={{
-                'aria-labelledby': 'demo-customized-button',
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose} disableRipple>
-                <EditIcon />
-                Edit
-              </MenuItem>
-              <MenuItem onClick={handleClose} disableRipple>
-                <FileCopyIcon />
-                Duplicate
-              </MenuItem>
-              <Divider sx={{ my: 0.5 }} />
-              <MenuItem onClick={handleClose} disableRipple>
-                <ArchiveIcon />
-                Archive
-              </MenuItem>
-              <MenuItem onClick={handleClose} disableRipple>
-                <MoreHorizIcon />
-                More
-              </MenuItem>
-            </StyledMenu>
           </div>
-          {/* {
+          {
             state.currentPlaylist != "favorite" && state.currentPlaylist != "recently" ?
               (<div className="right">
                 <button className="settingBtn" onClick={() => setIsActive(!isActive)}><FiMoreHorizontal size={35} /></button>
-                <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
+                <StyledMenu
+                  id="demo-customized-menu"
+                  MenuListProps={{
+                    'aria-labelledby': 'demo-customized-button',
+                  }}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <EditIcon />
+                    Edit
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <FileCopyIcon />
+                    Duplicate
+                  </MenuItem>
+                  <Divider sx={{ my: 0.5 }} />
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <ArchiveIcon />
+                    Archive
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} disableRipple>
+                    <MoreHorizIcon />
+                    More
+                  </MenuItem>
+                </StyledMenu>
+                
+                {/* <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
                   <ul>
                     <li><a onClick={renameList}>Rename</a></li>
                     <li><a onClick={deleteList}>Delete</a></li>
                     <li><a href="/">Other</a></li>
                   </ul>
-                </nav>
+                </nav> */}
               </div>)
               : <div />
-          } */}
+          }
         </div>
         <table>
           <thead>
