@@ -284,7 +284,7 @@ const Playlist = () => {
           playlistName: state.currentPlaylist,
         }
       }).then(async (res) => {
-
+        setAnchorEl(null);
         dispatch({ type: "SET_PLAYLIST", playlistItem: "home" });
         if (res.data.mySongList !== undefined) {
           console.log("deleted")
@@ -379,11 +379,11 @@ const Playlist = () => {
                 >
                   <MenuItem onClick={handleClose} disableRipple>
                     <EditIcon />
-                    Edit
+                    Rename
                   </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
+                  <MenuItem onClick={deleteList} disableRipple>
                     <FileCopyIcon />
-                    Duplicate
+                    Delete
                   </MenuItem>
                   <Divider sx={{ my: 0.5 }} />
                   <MenuItem onClick={handleClose} disableRipple>
