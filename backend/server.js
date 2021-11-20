@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use(morgan("dev"));
 app.use(cookieParser());
-
+app.use('/img', express.static(path.join(__dirname, '..', 'src', 'image')))
 
 
 
