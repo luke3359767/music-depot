@@ -3,6 +3,7 @@
 import React, {useContext} from 'react';
 import {css,jsx} from "@emotion/react"
 import { StoreContext } from "../MusicPlayer/index";
+import axios from 'axios';
 
 
 import Stack from '@mui/material/Stack';
@@ -66,6 +67,21 @@ const TopBar=()=>{
         setAnchorEl(null);
     };
 
+    const handleLogout=()=>{
+        (async function () {
+            await axios({
+                method: "POST",
+                url: 'https://music-depot.ca/api/playlistapi/logout',
+                headers: { 'authorization': "bearer " + state.user.token },
+            }).then(async (res) => {
+                await dispatch({ type: 'USER_LOGOUT'})
+
+            })
+
+        })()
+
+    }
+
     return(
         <div className="TopBar" css={CSS}>
             <div className="searchBar"></div>
@@ -122,7 +138,7 @@ const TopBar=()=>{
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>

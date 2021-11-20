@@ -89,6 +89,8 @@ const reducer = (state, action) => {
     case 'USER_LOGIN':
       return { ...state, user: action.user, isLogin: action.isLogin };
 
+    case 'USER_LOGOUT':
+      return { ...state, isLogin: false, user:{}}
     case 'REFRESH_TOKEN':
       return { ...state, user: { ...state.user, token: action.token } }
 
@@ -96,7 +98,7 @@ const reducer = (state, action) => {
       return { ...state, library: action.library }
     case 'LOAD_MYSONGLIST':
       return { ...state, mySongList: action.mySongList }
-
+    
     default: return null
 
   }
