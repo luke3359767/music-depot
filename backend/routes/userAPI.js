@@ -17,8 +17,6 @@ router.post("/register", (req, res) => {
     .has()
     .uppercase() // Must have uppercase letters
     .has()
-    .symbols()
-    .has()
     .lowercase() // Must have lowercase letters
     .has()
     .digits() // Must have at least 2 digits

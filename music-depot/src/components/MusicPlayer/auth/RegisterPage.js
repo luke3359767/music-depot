@@ -76,7 +76,6 @@ const Register = () => {
       if (key == 'min') return (<p className="warning">The password should have at least 8 letters</p>)
       if (key == 'max') return (<p className="warning">The password should less than 20 letters</p>)
       if (key == 'uppercase') return (<p className="warning">The password should have at least 1 uppercase</p>)
-      if (key == 'symbols') return (<p className="warning">The password should have at least 1 symbol</p>)
       if (key == 'digits') return (<p className="warning">The password should have at least 1 digit</p>)
     })) : null
   }
@@ -204,106 +203,6 @@ const Register = () => {
               {
                 successfullyCreated(createSuccess)
               }
-              {/* <div className="row clearfix">
-            <div className="">
-              <form onSubmit={handleSubmit}>
-                <div className="input_field">
-                  {" "}
-                  <span>
-                    <BsFillPersonFill className="icon" />
-                  </span>
-                  <input
-                    type="username"
-                    name="username"
-                    placeholder="Username"
-                    required
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </div>
-                {usedUserErrRender(usedUserErr)}
-                <div className="input_field">
-                  {" "}
-                  <span>
-                    <IoMdMail className="icon" />
-                  </span>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                  {usedEmailErrRender(usedEmailErr)}
-                <div className="input_field">
-                  {" "}
-                  <span>
-                    <RiLockPasswordFill className="icon" />
-                  </span>
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                {passwordErrRender(passwordErr)}
-                <div className="input_field">
-                  {" "}
-                  <span>
-                    <RiLockPasswordFill className="icon" />
-                  </span>
-                  <input
-                    className={password !== rePassword ? "diffPassword" : ""}
-                    type="Password"
-                    name="rePassword"
-                    placeholder="Re-type Password"
-                    required
-                    onChange={(e) => {
-                      setRePassword(e.target.value)
-                      if (password !== e.target.value) {
-                        setDiffPassword(true);
-                      } else {
-                        setDiffPassword(false);
-                      }
-                    }}
-                  />
-                </div>
-                {diffPassRender(diffPassword)}
-                <div className="row clearfix">
-                  <div className="col_half">
-                    <div className="input_field">
-                      {" "}
-                      <span>
-                        <BsFillPersonFill className="icon" />
-                      </span>
-                      <input type="text" name="name" placeholder="What do you want to be called?" required onChange={(e) => { setNickname(e.target.value)}} />
-                    </div>
-                  </div>
-                </div>
-                <div className="input_field radio_option">
-                  <input type="radio" name="radiogroup1" id="Male" required onChange={(e) => { setGender(e.target.id) }} />
-                  <label htmlFor="Male">Male</label>
-                  <input type="radio" name="radiogroup1" id="Female" onChange={(e) => { setGender(e.target.id) }} />
-                  <label htmlFor="Female">Female</label>
-                  <input type="radio" name="radiogroup1" id="Other" onChange={(e) => { setGender(e.target.id) }} />
-                  <label htmlFor="Other">Other</label>
-                </div>
-
-                <div className="input_field checkbox_option">
-                  <input type="checkbox" id="cb1" required/>
-                  <label htmlFor="cb1">I agree with <Link to="/terms">terms and conditions</Link></label>
-                </div>
-                <div className="input_field checkbox_option">
-                  <input type="checkbox" id="cb2" />
-                  <label htmlFor="cb2">I want to receive the newsletter</label>
-                </div>
-                <input className="button" type="submit" value="Register" />
-              </form>
-              <p>Already have an account? <Link to="/login">Log In</Link></p>
-            </div>
-          </div> */}
             </div>
           </div>
         </div>
