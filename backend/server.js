@@ -35,7 +35,6 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use('/img', express.static(path.join(__dirname, '..', 'src', 'image')))
 
 
 
@@ -176,3 +175,4 @@ app.use("/testapi", testapiRouter)
 app.use("/testemail", testdbapiRouter)
 app.use("/userapi", UserAPIRouter)
 app.use("/playlistapi", playlistAPIRouter)
+// app.use('/img', express.static(path.join(__dirname, '..', 'src', 'image')))
