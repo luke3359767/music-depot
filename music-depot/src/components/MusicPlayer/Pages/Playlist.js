@@ -21,6 +21,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function importAll(r) {
@@ -381,7 +382,7 @@ const Playlist = () => {
                     Rename
                   </MenuItem>
                   <MenuItem onClick={deleteList} disableRipple>
-                    <FileCopyIcon />
+                    <DeleteIcon />
                     Delete
                   </MenuItem>
                   <Divider sx={{ my: 0.5 }} />
