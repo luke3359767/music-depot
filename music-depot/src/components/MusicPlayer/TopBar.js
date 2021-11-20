@@ -4,6 +4,7 @@ import React, {useContext} from 'react';
 import {css,jsx} from "@emotion/react"
 import { StoreContext } from "../MusicPlayer/index";
 import axios from 'axios';
+import {useHistory } from "react-router-dom";
 
 
 import Stack from '@mui/material/Stack';
@@ -55,6 +56,7 @@ background:#191530;
 `
 
 const TopBar=()=>{
+    const history = useHistory();
     const { state, dispatch } = useContext(StoreContext);
     const userNickname = state.user.nickname
 
@@ -75,6 +77,7 @@ const TopBar=()=>{
                 headers: { 'authorization': "bearer " + state.user.token },
             }).then(async (res) => {
                 await dispatch({ type: 'USER_LOGOUT'})
+                history.push('/login')
 
             })
 
