@@ -365,7 +365,6 @@ const Playlist = () => {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 variant="contained"
-                disableElevation
                 onClick={handleClick}
                 ><FiMoreHorizontal size={35} /></button>
                 <StyledMenu
