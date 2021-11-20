@@ -71,7 +71,7 @@ const TopBar=()=>{
         (async function () {
             await axios({
                 method: "POST",
-                url: 'https://music-depot.ca/api/playlistapi/logout',
+                url: 'https://music-depot.ca/api/userapi/logout',
                 headers: { 'authorization': "bearer " + state.user.token },
             }).then(async (res) => {
                 await dispatch({ type: 'USER_LOGOUT'})
