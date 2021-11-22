@@ -128,14 +128,18 @@ const TopBar=()=>{
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
+                <MenuItem onClick={() => {
+                    dispatch({ type: "SET_PLAYLIST", playlistItem: "Profile" });
+                }}>
                     <Avatar /> Profile
                 </MenuItem>
                 <MenuItem>
                     <Avatar /> My account
                 </MenuItem>
                 <Divider />
-                <MenuItem>
+                <MenuItem onClick={() => {
+                    dispatch({ type: "SET_PLAYLIST", playlistItem: "Setting" });
+                }}>
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
