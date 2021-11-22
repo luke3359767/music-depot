@@ -7,6 +7,10 @@ import Browse from './Pages/Browse';
 import Home from './Pages/Home';
 import Playlist from './Pages/Playlist';
 import Radio from './Pages/Radio';
+import Setting from './Pages/Setting';
+import Profile from './Pages/Profile';
+
+
 
 const CSS=css`    
 top:0;
@@ -33,6 +37,10 @@ const Content=()=>{
                 return <Radio/>
             case'browse':
                 return <Browse/>
+            case 'Profile':
+                return <Profile/>
+            case 'Setting':
+                return <Setting/>
             default: return <Playlist/>
             
         }
