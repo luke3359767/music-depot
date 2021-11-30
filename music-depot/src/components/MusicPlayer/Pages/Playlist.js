@@ -309,6 +309,7 @@ const Playlist = () => {
   
   const playlistRef = useRef(null);
   const renamePlaylist = (e) => {
+    setIsActive(false)
     e.preventDefault()
     const list = playlistRef.current.value
     if (state.mySongList.hasOwnProperty(list)) {
@@ -351,7 +352,7 @@ const Playlist = () => {
 
     })()
 
-
+    
   }
 
 
