@@ -3,6 +3,8 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { useDetectOutsideClick } from '../../../hooks/useDetectOutsideClick'
 import { useHistory } from 'react-router-dom';
+import Modal from "../Modal";
+
 
 import { css, jsx } from "@emotion/react";
 import { StoreContext } from "../index";
@@ -202,6 +204,53 @@ const CSS = css`
   .play:hover ~ .D{
         margin-left: 29px;
   }
+  form {
+    button {
+      background-color: #0f7cf1;
+      color: white;
+      padding: 12.5px 30px;
+      border-radius: 25px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+    }
+    .modalTitle {
+      margin: 0;
+      margin-bottom: 35px;
+    }
+    input {
+      margin-bottom: 20px;
+      height: 35px;
+      padding-left: 8px;
+      font-size: 16px;
+      width: 100%;
+      color: black;
+    }
+    .content-wrap {
+      margin: 0 auto;
+      max-width: 250px;
+      text-align: center;
+    }
+  }
+  .scrollList {
+    padding-top: 5px;
+    height: 130px;
+    overflow-y: scroll;
+  }
+  .scrollList::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scrollList::-webkit-scrollbar-track {
+    background: #rgb(255, 255, 255, 0); /* color of the tracking area */
+  }
+
+  .scrollList::-webkit-scrollbar-thumb {
+    background-color: blue; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid #282248; /* creates padding around scroll thumb */
+  }
   
 `;
 
@@ -269,11 +318,56 @@ const Playlist = () => {
       : "mySongList";
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const [modalState, setModelState] = useState(false)
+  const handleModal = () => setModelState(!modalState)
+  
+  const playlistRef = useRef(null);
+  const renamePlaylist = (e) => {
+    e.preventDefault()
+    const list = playlistRef.current.value
+    if (state.mySongList.hasOwnProperty(list)) {
+      toast.error('This playlist is already existed!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
 
-  const renameList = () => {
-    console.log("renameList")
-    setIsActive(false)
+      });
+
+      setModelState(false)
+      return;
+    }
+
+
+    (async function () {
+      await axios({
+        method: "POST",
+        url: 'https://music-depot.ca/api/playlistapi/addplaylist',
+        headers: { 'authorization': "bearer " + state.user.token },
+        data: {
+          playlistName: list,
+        }
+      }).then(async (res) => {
+        await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
+        toast.success('Created successfully!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+
+        });
+        setModelState(false)
+      })
+
+    })()
+
+
   }
+
 
   const deleteList = () => {
     (async function () {
@@ -377,7 +471,7 @@ const Playlist = () => {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose} disableRipple>
+                  <MenuItem onClick={handleModal} disableRipple>
                     <EditIcon />
                     Rename
                   </MenuItem>
@@ -421,6 +515,23 @@ const Playlist = () => {
           </tbody>
         </table>
       </div>
+      <Modal show={modalState} close={handleModal}>
+        <form onSubmit={renamePlaylist}>
+          <div className="content-wrap">
+            <div className="modalTitle">Rename Playlist</div>
+            <input
+              type="text"
+              placeholder="My Playlist"
+              required
+              ref={playlistRef}
+            />
+            <br />
+            <button type="submit" className="btn">
+              Rename
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
