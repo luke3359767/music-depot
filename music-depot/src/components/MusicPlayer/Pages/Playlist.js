@@ -234,23 +234,7 @@ const CSS = css`
       text-align: center;
     }
   }
-  .scrollList {
-    padding-top: 5px;
-    height: 130px;
-    overflow-y: scroll;
-  }
-  .scrollList::-webkit-scrollbar {
-    width: 5px;
-  }
-  .scrollList::-webkit-scrollbar-track {
-    background: #rgb(255, 255, 255, 0); /* color of the tracking area */
-  }
-
-  .scrollList::-webkit-scrollbar-thumb {
-    background-color: blue; /* color of the scroll thumb */
-    border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid #282248; /* creates padding around scroll thumb */
-  }
+  
   
 `;
 
