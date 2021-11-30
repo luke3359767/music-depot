@@ -303,13 +303,12 @@ const Playlist = () => {
       ? "library"
       : "mySongList";
   const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [modalState, setModelState] = useState(false)
   const handleModal = () => setModelState(!modalState)
   
   const playlistRef = useRef(null);
   const renamePlaylist = (e) => {
-    setIsActive(false)
+    setAnchorEl(null);
     e.preventDefault()
     const list = playlistRef.current.value
     if (state.mySongList.hasOwnProperty(list)) {
@@ -377,7 +376,6 @@ const Playlist = () => {
       })
 
     })()
-    setIsActive(false)
   }
 
 
