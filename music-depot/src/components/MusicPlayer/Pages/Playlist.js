@@ -12,6 +12,8 @@ import axios from "axios";
 import { FaPlay } from "react-icons/fa"
 import { FiMoreHorizontal } from "react-icons/fi"
 
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
