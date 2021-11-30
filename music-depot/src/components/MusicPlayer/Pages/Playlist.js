@@ -204,36 +204,36 @@ const CSS = css`
   .play:hover ~ .D{
         margin-left: 29px;
   }
-  form {
-    button {
-      background-color: #0f7cf1;
-      color: white;
-      padding: 12.5px 30px;
-      border-radius: 25px;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 13px;
-      border: none;
-      cursor: pointer;
-    }
-    .modalTitle {
-      margin: 0;
-      margin-bottom: 35px;
-    }
-    input {
-      margin-bottom: 20px;
-      height: 35px;
-      padding-left: 8px;
-      font-size: 16px;
-      width: 100%;
-      color: black;
-    }
-    .content-wrap {
-      margin: 0 auto;
-      max-width: 250px;
-      text-align: center;
-    }
+  
+  .modelbtn {
+    background-color: #0f7cf1;
+    color: white;
+    padding: 12.5px 30px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
   }
+  .modalTitle {
+    margin: 0;
+    margin-bottom: 35px;
+  }
+  input {
+    margin-bottom: 20px;
+    height: 35px;
+    padding-left: 8px;
+    font-size: 16px;
+    width: 100%;
+    color: black;
+  }
+  .content-wrap {
+    margin: 0 auto;
+    max-width: 250px;
+    text-align: center;
+  }
+  
   
   
 `;
@@ -510,7 +510,7 @@ const Playlist = () => {
               ref={playlistRef}
             />
             <br />
-            <button type="submit" className="btn">
+            <button type="submit" className="modelbtn">
               Rename
             </button>
           </div>
