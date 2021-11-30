@@ -304,11 +304,12 @@ const Playlist = () => {
       : "mySongList";
   const dropdownRef = useRef(null);
   const [modalState, setModelState] = useState(false)
-  const handleModal = () => setModelState(!modalState)
-  
+  const handleModal = () => {
+    setModelState(!modalState)
+    setAnchorEl(null)}
+    
   const playlistRef = useRef(null);
   const renamePlaylist = (e) => {
-    setAnchorEl(null);
     e.preventDefault()
     const list = playlistRef.current.value
     if (state.mySongList.hasOwnProperty(list)) {
@@ -456,7 +457,8 @@ const Playlist = () => {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleModal} disableRipple>
+                  <MenuItem onClick={
+                    handleModal} disableRipple>
                     <EditIcon />
                     Rename
                   </MenuItem>
