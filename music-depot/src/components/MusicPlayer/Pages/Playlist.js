@@ -328,7 +328,7 @@ const Playlist = () => {
     }
 
     deleteList()
-    
+    //  Change add playlist to COPY playlist
     axios({
         method: "POST",
         url: 'https://music-depot.ca/api/playlistapi/addplaylist',
