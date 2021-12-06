@@ -346,29 +346,29 @@ const Playlist = () => {
           dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
         }
       })
-      // await axios({
-      //   method: "POST",
-      //   url: 'https://music-depot.ca/api/playlistapi/addplaylist',
-      //   headers: { 'authorization': "bearer " + state.user.token },
-      //   data: {
-      //     playlistName: list,
-      //   }
-      // }).then(async (res) => {
-      //   await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-      //   dispatch({ type: "SET_PLAYLIST", playlistItem: list });
-      //   toast.success('Rename successfully!', {
-      //     position: "top-center",
-      //     autoClose: 2000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
+    //   // await axios({
+    //   //   method: "POST",
+    //   //   url: 'https://music-depot.ca/api/playlistapi/addplaylist',
+    //   //   headers: { 'authorization': "bearer " + state.user.token },
+    //   //   data: {
+    //   //     playlistName: list,
+    //   //   }
+    //   // }).then(async (res) => {
+    //   //   await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
+    //   //   dispatch({ type: "SET_PLAYLIST", playlistItem: list });
+    //   //   toast.success('Rename successfully!', {
+    //   //     position: "top-center",
+    //   //     autoClose: 2000,
+    //   //     hideProgressBar: false,
+    //   //     closeOnClick: true,
+    //   //     pauseOnHover: true,
+    //   //     draggable: true,
 
-      //   });
+    //   //   });
         setModelState(false)
-      })
+    //   })
 
-    })()
+    // })()
 
     
   }
