@@ -329,23 +329,23 @@ const Playlist = () => {
 
 
     (async function () {   
-      await axios({
-        method: "POST",
-        url: 'https://music-depot.ca/api/playlistapi/deleteplaylist',
-        headers: { 'authorization': "bearer " + state.user.token },
-        data: {
-          playlistName: state.currentPlaylist,
-        }
-      }).then(async (res) => {
-        setAnchorEl(null);
-        dispatch({ type: "SET_PLAYLIST", playlistItem: list });
-        if (res.data.mySongList !== undefined) {
-          console.log("deleted")
-          dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
-        } else {
-          dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
-        }
-      })
+      // await axios({
+      //   method: "POST",
+      //   url: 'https://music-depot.ca/api/playlistapi/deleteplaylist',
+      //   headers: { 'authorization': "bearer " + state.user.token },
+      //   data: {
+      //     playlistName: state.currentPlaylist,
+      //   }
+      // }).then(async (res) => {
+      //   setAnchorEl(null);
+      //   dispatch({ type: "SET_PLAYLIST", playlistItem: list });
+      //   if (res.data.mySongList !== undefined) {
+      //     console.log("deleted")
+      //     dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
+      //   } else {
+      //     dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
+      //   }
+      // })
     //   // await axios({
     //   //   method: "POST",
     //   //   url: 'https://music-depot.ca/api/playlistapi/addplaylist',
