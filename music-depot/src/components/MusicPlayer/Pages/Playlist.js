@@ -313,7 +313,7 @@ const Playlist = () => {
     e.preventDefault()
     const list = playlistRef.current.value
     if (state.mySongList.hasOwnProperty(list)) {
-      toast.error('This playlist is already existed!', {
+      toast.error('This playlist name is already existed!', {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -328,7 +328,15 @@ const Playlist = () => {
     }
 
 
-    (async function () {
+    (async function () {   
+      await axios({
+        method: "POST",
+        url: 'https://music-depot.ca/api/playlistapi/deleteplaylist',
+        headers: { 'authorization': "bearer " + state.user.token },
+        data: {
+          playlistName: state.currentPlaylist,
+        }
+      })
       await axios({
         method: "POST",
         url: 'https://music-depot.ca/api/playlistapi/addplaylist',
@@ -337,8 +345,17 @@ const Playlist = () => {
           playlistName: list,
         }
       }).then(async (res) => {
+            setAnchorEl(null);
+            // dispatch({ type: "SET_PLAYLIST", playlistItem: list });
+            if (res.data.mySongList !== undefined) {
+              console.log("deleted")
+              dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
+            } else {
+              dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
+            }
+          }).then(async (res) => {
         await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
-        toast.success('Created successfully!', {
+        toast.success('Rename successfully!', {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -508,7 +525,7 @@ const Playlist = () => {
             <div className="modalTitle">Rename Playlist</div>
             <input
               type="text"
-              placeholder="My Playlist"
+              placeholder=""
               required
               ref={playlistRef}
             />
