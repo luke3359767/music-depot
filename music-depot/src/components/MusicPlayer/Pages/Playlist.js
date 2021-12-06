@@ -336,6 +336,15 @@ const Playlist = () => {
         data: {
           playlistName: state.currentPlaylist,
         }
+      }).then(async (res) => {
+        setAnchorEl(null);
+        dispatch({ type: "SET_PLAYLIST", playlistItem: list });
+        if (res.data.mySongList !== undefined) {
+          console.log("deleted")
+          dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
+        } else {
+          dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
+        }
       })
       await axios({
         method: "POST",
@@ -345,16 +354,8 @@ const Playlist = () => {
           playlistName: list,
         }
       }).then(async (res) => {
-            setAnchorEl(null);
-            // dispatch({ type: "SET_PLAYLIST", playlistItem: list });
-            if (res.data.mySongList !== undefined) {
-              console.log("deleted")
-              dispatch({ type: "LOAD_MYSONGLIST", mySongList: res.data.mySongList })
-            } else {
-              dispatch({ type: "LOAD_MYSONGLIST", mySongList: {} })
-            }
-          }).then(async (res) => {
         await dispatch({ type: 'ADD_PLAYLIST', playlistItem: list })
+        dispatch({ type: "SET_PLAYLIST", playlistItem: list });
         toast.success('Rename successfully!', {
           position: "top-center",
           autoClose: 2000,
