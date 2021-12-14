@@ -23,7 +23,7 @@ const Develop = () => {
                     await dispatch({ type: "USER_LOGIN", user: res.data, isLogin: true })
                     console.log("Auto Login")
                 }).catch((err) => history.push("/login"));
-            if (!state.username =="luke3359767"){
+            if (state.username !=="luke3359767"){
                 history.push("/")
             }
         })()
