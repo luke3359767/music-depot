@@ -42,6 +42,7 @@ const Develop = () => {
             expiredDay: expiredDay,
         }, { withCredentials: true }).then(async (res) => {
             await dispatch({ type: "USER_LOGIN", user: res.data, isLogin: true })
+            console.log(state.user)
 
         })
             .catch((err) => {
