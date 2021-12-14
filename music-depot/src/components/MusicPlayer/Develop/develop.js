@@ -32,11 +32,11 @@ const Develop = () => {
     return (
         <div>
             {/* { */}
-                    // state.user.username==="luke3359767"?(
+                    {/* state.user.username==="luke3359767"?( */}
                     <div className="wole-container">
                         Welcome, developer!
                     </div>
-                    // ): <Redirect to="/12345"/>
+                    {/* ): <Redirect to="/12345"/> */}
                 
             {/* } */}
         </div>
