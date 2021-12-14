@@ -7,6 +7,7 @@ import PlayBar from './PlayBar';
 import Content from './Content';
 import Register from './auth/RegisterPage';
 import Login from './auth/LoginPage';
+import Develop from './Develop/develop';
 import { css, jsx, Global } from "@emotion/react"
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
@@ -177,6 +178,10 @@ const MusicPlayer = () => {
       <Route path="/login">
         <Login />
       </Route>
+      <Route path="/develop">
+        <Develop />
+      </Route>
+
     </StoreContext.Provider>
   );
 }
