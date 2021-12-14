@@ -14,14 +14,6 @@ const Develop = () => {
 
     const { state, dispatch } = useContext(StoreContext);
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [expiredDay, setExpiredDay] = useState(1);
-
-
-    const [loginErr, setloginErr] = useState(false);
-
-
     let history = useHistory();
 
     useEffect(() => {
@@ -34,35 +26,19 @@ const Develop = () => {
         })()
     }, [])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const res = await axios.post("https://music-depot.ca/api/userapi/login", {
-            username: username,
-            password: password,
-            expiredDay: expiredDay,
-        }, { withCredentials: true }).then(async (res) => {
-            await dispatch({ type: "USER_LOGIN", user: res.data, isLogin: true })
-            console.log(state.user)
-
-        })
-            .catch((err) => {
-                setloginErr(true);
-                console.log(err.response)
-            })
-    };
-
+  
   
 
     return (
         <div>
-            {
-                    state.user.username==="luke3359767"?(
+            {/* { */}
+                    // state.user.username==="luke3359767"?(
                     <div className="wole-container">
                         Welcome, developer!
                     </div>
-                    ): <Redirect to="/12345"/>
+                    // ): <Redirect to="/12345"/>
                 
-            }
+            {/* } */}
         </div>
 
     )
