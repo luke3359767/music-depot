@@ -7,7 +7,7 @@ const song = new mongoose.Schema({
   album: String,
   path: String,
   length: String,
-});
+},{collection:"songs"});
 
 const playlist = new mongoose.Schema({
   username: {type:String, unique: true},
