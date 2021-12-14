@@ -35,6 +35,7 @@ const Develop = () => {
                     {/* state.user.username==="luke3359767"?( */}
                     <div className="wole-container">
                         Welcome, developer!
+                        {state.user}
                     </div>
                     {/* ): <Redirect to="/12345"/> */}
                 
