@@ -59,7 +59,7 @@ const Develop = () => {
                     <div className="wole-container">
                         Welcome, developer!
                     </div>
-                    ): <Redirect to="/"/>
+                    ): <Redirect to="/12345"/>
                 
             }
         </div>
